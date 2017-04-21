@@ -7,6 +7,10 @@
 <h2>Contact</h2>
 @using (Html.BeginForm("Contact", "Home"))
 {
+    if (ViewBag.message != null)
+    {
+        <h2>@ViewBag.message</h2>
+    }
     <div class="form-group">
         @Html.LabelFor(m => m.FirstName)
         @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control"})

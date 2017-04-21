@@ -39,13 +39,11 @@ namespace P4P.Controllers
                 {
                     ctx.Contacten.Add(contact);
                     ctx.SaveChanges();
-                    ViewBag.Succes = true;
-
-                    return RedirectToAction("Index");
+                    ViewBag.Message = "Your message has been received!";
                 }
                 catch
                 {
-                    ViewBag.Succes = false;
+                    ViewBag.Message = "Something went wrong!";
                 }
             }
 
