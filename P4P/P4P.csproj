@@ -161,8 +161,14 @@
     <Compile Include="Migrations\201704191540434_AddRequirementsToContacts.Designer.cs">
       <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705242348520_AddCategories.cs" />
+    <Compile Include="Migrations\201705242348520_AddCategories.Designer.cs">
+      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Hoofdcategorie.cs" />
+    <Compile Include="Models\Subcategorie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +242,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704191540434_AddRequirementsToContacts.resx">
       <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705242348520_AddCategories.resx">
+      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
