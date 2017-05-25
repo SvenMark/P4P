@@ -173,8 +173,17 @@
     <Compile Include="Migrations\201705250000213_AddProducts.Designer.cs">
       <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.cs" />
+    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.Designer.cs">
+      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.cs" />
+    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.Designer.cs">
+      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Favorietenlijst.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Hoofdcategorie.cs" />
     <Compile Include="Models\Product.cs" />
@@ -261,6 +270,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705250000213_AddProducts.resx">
       <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705250009437_AddFavorietenlijsts.resx">
+      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.resx">
+      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -13,6 +13,8 @@ namespace P4P.Models
         public Hoofdcategorie Hoofdcategorie { get; set; }
         public Subcategorie Subcategorie { get; set; }
 
+        public virtual ICollection<Favorietenlijst> Favorietenlijsts { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Naam { get; set; }
