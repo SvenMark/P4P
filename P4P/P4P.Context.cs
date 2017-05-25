@@ -7,5 +7,7 @@ namespace P4P
         public DbSet<Contact> Contacten { get; set; }
         public DbSet<Hoofdcategorie> Hoofdcategories { get; set; }
         public DbSet<Subcategorie> Subcategories { get; set; }
+        public DbSet<Gebruiker> Gebruikers { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }

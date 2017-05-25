@@ -165,9 +165,19 @@
     <Compile Include="Migrations\201705242348520_AddCategories.Designer.cs">
       <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705242354400_AddGebruikers.cs" />
+    <Compile Include="Migrations\201705242354400_AddGebruikers.Designer.cs">
+      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705250000213_AddProducts.cs" />
+    <Compile Include="Migrations\201705250000213_AddProducts.Designer.cs">
+      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Hoofdcategorie.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Subcategorie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -245,6 +255,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705242348520_AddCategories.resx">
       <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705242354400_AddGebruikers.resx">
+      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705250000213_AddProducts.resx">
+      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
