@@ -29,6 +29,7 @@ namespace P4P.Controllers
             return View();
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Contact(Contact contact)
         {
