@@ -15,7 +15,6 @@ namespace P4P.Models
         [StringLength(255)]
         public string Voornaam { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Tussenvoegsel { get; set; }
 
@@ -49,11 +48,13 @@ namespace P4P.Models
         public string Woonplaats { get; set; }
 
         [StringLength(255)]
+        [MinLength(8)]
         public string Wachtwoord { get; set; }
 
         [StringLength(255)]
+        public string LoginToken { get; set; }
+
+        [StringLength(255)]
         public string Token { get; set; }
-
-
     }
 }

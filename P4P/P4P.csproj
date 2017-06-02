@@ -181,6 +181,14 @@
     <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.Designer.cs">
       <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706021007041_Add LoginToken.cs" />
+    <Compile Include="Migrations\201706021007041_Add LoginToken.Designer.cs">
+      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706021035383_IDK.cs" />
+    <Compile Include="Migrations\201706021035383_IDK.Designer.cs">
+      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Favorietenlijst.cs" />
@@ -210,6 +218,8 @@
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Compile Include="P4P.Context.cs" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -276,6 +286,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.resx">
       <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021007041_Add LoginToken.resx">
+      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021035383_IDK.resx">
+      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
