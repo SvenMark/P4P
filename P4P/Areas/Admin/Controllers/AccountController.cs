@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using P4P.Models;
@@ -33,9 +34,12 @@ namespace P4P.Areas.Admin.Controllers
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 try
                 {
+                    if (gebruiker.Wachtwoord == null)
+                        gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
-                    ViewBag.Message = "Your account has been created!";
+                    
+                    return RedirectToAction("Index");
                 }
                 catch
                 {
