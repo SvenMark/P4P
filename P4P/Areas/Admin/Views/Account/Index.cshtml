@@ -1,7 +1,22 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
 }
 
 <h2>Dashboard</h2>
 
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.Registratie != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function() {
+                toastr.success("Registratie succesvol");
+            });
+        </script>
+    }
+
+
+}

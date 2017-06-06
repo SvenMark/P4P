@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using P4P.Models;
 
 namespace P4P.Areas.Admin.Controllers
@@ -13,6 +15,9 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
+            ViewBag.Registratie = null;
+            if (Request.QueryString["reg_success"] == "True")
+                ViewBag.Registratie = "True";
             return View();
         }
 
@@ -27,7 +32,7 @@ namespace P4P.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(Gebruiker gebruiker)
+        public bool Register(Gebruiker gebruiker)
         {
             using (var ctx = new P4PContext())
             {
@@ -38,16 +43,15 @@ namespace P4P.Areas.Admin.Controllers
                         gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
-                    
-                    return RedirectToAction("Index");
+
+                    //TODO: Send email
+                    return true;
                 }
                 catch
                 {
-                    ViewBag.Message = "Something went wrong!";
+                    return false;
                 }
             }
-
-            return View();
         }
     }
 }

@@ -56,5 +56,9 @@ namespace P4P.Models
 
         [StringLength(255)]
         public string Token { get; set; }
+
+        [Required]
+        [StringLength(255)]
+        public string Rol { get; set; }
     }
 }
