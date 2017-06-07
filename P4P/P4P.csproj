@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\GMailer.cs" />
     <Compile Include="Migrations\201704191537340_AddContactsToDB.cs" />
     <Compile Include="Migrations\201704191537340_AddContactsToDB.Designer.cs">
       <DependentUpon>201704191537340_AddContactsToDB.cs</DependentUpon>
