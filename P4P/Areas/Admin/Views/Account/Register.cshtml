@@ -74,27 +74,5 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-    
-    <script type="text/javascript">
-        var frm = $('#registerForm');
-
-        frm.submit(function (e) {
-
-            e.preventDefault();
-
-            $.ajax({
-                type: frm.attr('method'),
-                url: frm.attr('action'),
-                data: frm.serialize(),
-                success: function () {
-                    location.href = "/Admin?reg_success=True";
-                },
-                error: function () {
-                    toastr.error("Overwachte error!");
-                },
-            });
-        });
-    </script>
-    
 }
 

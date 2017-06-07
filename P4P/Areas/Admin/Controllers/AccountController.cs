@@ -15,9 +15,6 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            ViewBag.Registratie = null;
-            if (Request.QueryString["reg_success"] == "True")
-                ViewBag.Registratie = "True";
             return View();
         }
 
@@ -39,6 +36,9 @@ namespace P4P.Areas.Admin.Controllers
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 try
                 {
+                    //admin registratie
+                    gebruiker.Wachtwoord = BCrypt.Net.BCrypt.HashPassword("Lemmesmash", 13);
+
                     gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
