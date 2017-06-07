@@ -63,6 +63,6 @@ namespace P4P.Areas.Admin.Controllers
             }
         }
 
-        //TODO: edit(rechten), delete gebruiker
+        //edit(rechten), delete gebruiker
     }
 }

@@ -26,6 +26,6 @@ namespace P4P.Controllers
                 return View(favorietenlijst);
             }
         }
-        //TODO: New, Edit, Delete, Save(controller voor opslaan van voorgaande acties), Add_product, removeproduct, editproduct?
+        //New, Edit, Delete, Save(controller voor opslaan van voorgaande acties), Add_product, removeproduct, editproduct?
     }
 }

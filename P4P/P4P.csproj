@@ -151,8 +151,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AanbiedingController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtikelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategorieController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MeldingController.cs" />
     <Compile Include="Controllers\FavorietenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +200,14 @@
     <Compile Include="P4P.Context.cs" />
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Aanbieding\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Aanbieding\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Melding\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Melding\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Artikel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artikel\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
