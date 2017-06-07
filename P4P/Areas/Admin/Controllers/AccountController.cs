@@ -34,11 +34,11 @@ namespace P4P.Areas.Admin.Controllers
                 try
                 {
                     //admin registratie
-                    gebruiker.Wachtwoord = Auth.HashPassword("Lemmesmash");
+                    gebruiker.Wachtwoord = Auth.Hash("Lemmesmash");
 
                     //normale registratie(bij admin creatie dit uitcommenten)
                     string loginToken = Auth.Getlogintoken();
-                    gebruiker.LoginToken = Auth.HashPassword(loginToken);
+                    gebruiker.LoginToken = Auth.Hash(loginToken);
 
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();

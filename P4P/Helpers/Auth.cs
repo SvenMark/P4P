@@ -12,9 +12,14 @@ namespace P4P.Helpers
             return Convert.ToBase64String(Guid.NewGuid().ToByteArray());
         }
 
-        public static string HashPassword(string password)
+        public static string Hash(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password, 13);
+        }
+
+        public static bool VerifyHash(string password, string hash)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hash);
         }
     }
 }
