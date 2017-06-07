@@ -52,7 +52,7 @@ namespace P4P.Areas.Admin.Controllers
                     GMailer mailer = new GMailer();
                     mailer.ToEmail = gebruiker.Emailadres;
                     mailer.Subject = "Loginlink";
-                    mailer.Body =
+                    mailer.Body = 
                         "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: <br> <a href=http://localhost:60565/account/login?token=" +
                         gebruiker.LoginToken + ">Inloggen</a>";
                     mailer.IsHtml = true;

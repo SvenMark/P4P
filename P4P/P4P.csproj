@@ -157,45 +157,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\GMailer.cs" />
-    <Compile Include="Migrations\201704191537340_AddContactsToDB.cs" />
-    <Compile Include="Migrations\201704191537340_AddContactsToDB.Designer.cs">
-      <DependentUpon>201704191537340_AddContactsToDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704191540434_AddRequirementsToContacts.cs" />
-    <Compile Include="Migrations\201704191540434_AddRequirementsToContacts.Designer.cs">
-      <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705242348520_AddCategories.cs" />
-    <Compile Include="Migrations\201705242348520_AddCategories.Designer.cs">
-      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705242354400_AddGebruikers.cs" />
-    <Compile Include="Migrations\201705242354400_AddGebruikers.Designer.cs">
-      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250000213_AddProducts.cs" />
-    <Compile Include="Migrations\201705250000213_AddProducts.Designer.cs">
-      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.cs" />
-    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.Designer.cs">
-      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.cs" />
-    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.Designer.cs">
-      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706021007041_Add LoginToken.cs" />
-    <Compile Include="Migrations\201706021007041_Add LoginToken.Designer.cs">
-      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706021035383_IDK.cs" />
-    <Compile Include="Migrations\201706021035383_IDK.Designer.cs">
-      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706070946560_AddAanbiedingen.cs" />
-    <Compile Include="Migrations\201706070946560_AddAanbiedingen.Designer.cs">
-      <DependentUpon>201706070946560_AddAanbiedingen.cs</DependentUpon>
+    <Compile Include="Migrations\201706071404463_Backup.cs" />
+    <Compile Include="Migrations\201706071404463_Backup.Designer.cs">
+      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
@@ -209,9 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf">
-      <DependentUpon>P4P.P4PContext.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -277,35 +239,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704191537340_AddContactsToDB.resx">
-      <DependentUpon>201704191537340_AddContactsToDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704191540434_AddRequirementsToContacts.resx">
-      <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705242348520_AddCategories.resx">
-      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705242354400_AddGebruikers.resx">
-      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250000213_AddProducts.resx">
-      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250009437_AddFavorietenlijsts.resx">
-      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.resx">
-      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706021007041_Add LoginToken.resx">
-      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706021035383_IDK.resx">
-      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706070946560_AddAanbiedingen.resx">
-      <DependentUpon>201706070946560_AddAanbiedingen.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706071404463_Backup.resx">
+      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,13 +7,13 @@ namespace P4P.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddFavorietenlijsts : IMigrationMetadata
+    public sealed partial class Backup : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFavorietenlijsts));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Backup));
         
         string IMigrationMetadata.Id
         {
-            get { return "201705250009437_AddFavorietenlijsts"; }
+            get { return "201706071404463_Backup"; }
         }
         
         string IMigrationMetadata.Source
