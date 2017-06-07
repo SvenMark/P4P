@@ -159,6 +159,7 @@
     <Compile Include="Areas\Admin\Controllers\MeldingController.cs" />
     <Compile Include="Controllers\FavorietenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfielController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -236,6 +237,10 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Favorieten\Index.cshtml" />
     <Content Include="Views\Favorieten\Details.cshtml" />
+    <Content Include="Views\Profiel\Index.cshtml" />
+    <Content Include="Views\Profiel\Gegevens.cshtml" />
+    <Content Include="Views\Profiel\Bedrijf.cshtml" />
+    <Content Include="Views\Profiel\Contactpersonen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
