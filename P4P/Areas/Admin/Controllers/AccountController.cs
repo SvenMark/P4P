@@ -39,8 +39,7 @@ namespace P4P.Areas.Admin.Controllers
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 try
                 {
-                    if (gebruiker.Wachtwoord == null)
-                        gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                    gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
 

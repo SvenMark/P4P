@@ -36,12 +36,6 @@
         @Html.ValidationMessageFor(m => m.Emailadres)
     </div>
     <div class="form-group">
-        <h3>Wachtwoord is optioneel, zonder wachtwoord word een inlog link verzonden waarna de gebruiker een wachtwoord moet instellen.</h3>
-        @Html.LabelFor(m => m.Wachtwoord)
-        @Html.TextBoxFor(m => m.Wachtwoord, new {@class = "form-control", type = "password"})
-        @Html.ValidationMessageFor(m => m.Wachtwoord)
-    </div>
-    <div class="form-group">
         @Html.LabelFor(m => m.Bedrijfsnaam)
         @Html.TextBoxFor(m => m.Bedrijfsnaam, new {@class = "form-control"})
         @Html.ValidationMessageFor(m => m.Bedrijfsnaam)
