@@ -54,7 +54,7 @@ namespace P4P.Areas.Admin.Controllers
                     mailer.Subject = "Loginlink";
                     mailer.Body =
                         "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: <br> <a href=http://localhost:60565/account/login?token=" +
-                        gebruiker.LoginToken + ">Verify</a>";
+                        gebruiker.LoginToken + ">Inloggen</a>";
                     mailer.IsHtml = true;
                     mailer.Send();
                     return true;
