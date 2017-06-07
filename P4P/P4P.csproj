@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\GMailer.cs" />
     <Compile Include="Migrations\201706071404463_Backup.cs" />
     <Compile Include="Migrations\201706071404463_Backup.Designer.cs">
@@ -191,8 +192,7 @@
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Compile Include="P4P.Context.cs" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

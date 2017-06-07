@@ -19,18 +19,14 @@ namespace P4P.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Register()
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public bool Register(Gebruiker gebruiker)
+        [ValidateAntiForgeryToken]
+        public bool Create(Gebruiker gebruiker)
         {
             using (var ctx = new P4PContext())
             {
@@ -38,10 +34,11 @@ namespace P4P.Areas.Admin.Controllers
                 try
                 {
                     //admin registratie
-//                    gebruiker.Wachtwoord = BCrypt.Net.BCrypt.HashPassword("Lemmesmash", 13);
+                    gebruiker.Wachtwoord = Auth.HashPassword("Lemmesmash");
 
                     //normale registratie(bij admin creatie dit uitcommenten)
-                    gebruiker.LoginToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+                    string loginToken = Auth.Getlogintoken();
+                    gebruiker.LoginToken = Auth.HashPassword(loginToken);
 
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
@@ -52,9 +49,9 @@ namespace P4P.Areas.Admin.Controllers
                     GMailer mailer = new GMailer();
                     mailer.ToEmail = gebruiker.Emailadres;
                     mailer.Subject = "Loginlink";
-                    mailer.Body = 
-                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: <br> <a href=http://localhost:60565/account/login?token=" +
-                        gebruiker.LoginToken + ">Inloggen</a>";
+                    mailer.Body =
+                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/account/login?token=" +
+                        loginToken;
                     mailer.IsHtml = true;
                     mailer.Send();
                     return true;
