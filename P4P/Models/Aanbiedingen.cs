@@ -8,11 +8,11 @@ namespace P4P.Models
 {
     public class Aanbiedingen
     {
-        [Key]
+        public int Id { get; set; }
+
         public Product ProductId { get; set; }
 
         [Required]
-        [StringLength(255)]
         public double Prijs { get; set; }
 
         [Required]

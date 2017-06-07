@@ -189,6 +189,10 @@
     <Compile Include="Migrations\201706021035383_IDK.Designer.cs">
       <DependentUpon>201706021035383_IDK.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706070946560_AddAanbiedingen.cs" />
+    <Compile Include="Migrations\201706070946560_AddAanbiedingen.Designer.cs">
+      <DependentUpon>201706070946560_AddAanbiedingen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Contact.cs" />
@@ -200,6 +204,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\P4P.P4PContext.mdf" />
+    <Content Include="App_Data\P4P.P4PContext_log.ldf">
+      <DependentUpon>P4P.P4PContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -247,7 +255,6 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -292,6 +299,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706021035383_IDK.resx">
       <DependentUpon>201706021035383_IDK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706070946560_AddAanbiedingen.resx">
+      <DependentUpon>201706070946560_AddAanbiedingen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
