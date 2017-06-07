@@ -45,9 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
-      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -192,11 +189,8 @@
     <Compile Include="Migrations\201706021035383_IDK.Designer.cs">
       <DependentUpon>201706021035383_IDK.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706060843484_AddRolToGebruikers.cs" />
-    <Compile Include="Migrations\201706060843484_AddRolToGebruikers.Designer.cs">
-      <DependentUpon>201706060843484_AddRolToGebruikers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Favorietenlijst.cs" />
     <Compile Include="Models\Gebruiker.cs" />
@@ -206,17 +200,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\toastr.css" />
-    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="LICENSE.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -230,8 +219,6 @@
     <Compile Include="P4P.Context.cs" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -243,8 +230,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\toastr.js" />
-    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,7 +247,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Code\" />
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -307,9 +292,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706021035383_IDK.resx">
       <DependentUpon>201706021035383_IDK.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706060843484_AddRolToGebruikers.resx">
-      <DependentUpon>201706060843484_AddRolToGebruikers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
