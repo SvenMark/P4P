@@ -38,7 +38,7 @@ namespace P4P.Areas.Admin.Controllers
 
                     //normale registratie(bij admin creatie dit uitcommenten)
                     string loginToken = Auth.Getlogintoken();
-                    gebruiker.LoginToken = Auth.Hash(loginToken);
+                    gebruiker.Token = Auth.Hash(loginToken);
 
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();

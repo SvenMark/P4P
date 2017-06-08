@@ -33,10 +33,6 @@ namespace P4P.Models
 
         [Required]
         [StringLength(255)]
-        public string Bedrijfsnaam { get; set; }
-
-        [Required]
-        [StringLength(255)]
         public string Adres { get; set; }
 
         [Required]
@@ -50,9 +46,6 @@ namespace P4P.Models
         [StringLength(255)]
         [MinLength(8)]
         public string Wachtwoord { get; set; }
-
-        [StringLength(255)]
-        public string LoginToken { get; set; }
 
         [StringLength(255)]
         public string Token { get; set; }
