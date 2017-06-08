@@ -53,5 +53,8 @@ namespace P4P.Models
         [Required]
         [StringLength(255)]
         public string Rol { get; set; }
+
+        public Bedrijf Bedrijf { get; set; }
+
     }
 }
