@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using P4P.Models;
 
 namespace P4P.Controllers
 {
@@ -8,6 +9,18 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Gebruiker gebruiker)
+        {
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Gegevens()

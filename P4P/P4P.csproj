@@ -253,6 +253,7 @@
     <Content Include="Views\Winkel\Quickorder.cshtml" />
     <Content Include="Views\Winkel\Details.cshtml" />
     <Content Include="Views\Bestel\Index.cshtml" />
+    <Content Include="Views\Profiel\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
