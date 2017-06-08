@@ -13,5 +13,6 @@ namespace P4P
         public DbSet<Aanbiedingen> Aanbiedingen { get; set; }
         public DbSet<Melding> Meldingen { get; set; }
         public DbSet<Bedrijf> Bedrijven { get; set; }
+        public DbSet<Bestelling> Bestellingen { get; set; }
     }
 }
