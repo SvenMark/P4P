@@ -175,12 +175,17 @@
     <Compile Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.Designer.cs">
       <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706080932304_AddMeldingenToDb.cs" />
+    <Compile Include="Migrations\201706080932304_AddMeldingenToDb.Designer.cs">
+      <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Favorietenlijst.cs" />
     <Compile Include="Models\Gebruiker.cs" />
     <Compile Include="Models\Hoofdcategorie.cs" />
+    <Compile Include="Models\Melding.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Subcategorie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.resx">
       <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706080932304_AddMeldingenToDb.resx">
+      <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
