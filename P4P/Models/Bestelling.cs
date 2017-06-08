@@ -26,5 +26,7 @@ namespace P4P.Models
         public string Opmerking { get; set; }
 
         public bool Afgerond { get; set; }
+
+        public virtual ICollection<Product> Producten { get; set; }
     }
 }

@@ -203,6 +203,10 @@
     <Compile Include="Migrations\201706080957238_AddAfgerondToBestelling.Designer.cs">
       <DependentUpon>201706080957238_AddAfgerondToBestelling.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.cs" />
+    <Compile Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.Designer.cs">
+      <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706080957238_AddAfgerondToBestelling.resx">
       <DependentUpon>201706080957238_AddAfgerondToBestelling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.resx">
+      <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
