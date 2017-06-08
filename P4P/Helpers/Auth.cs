@@ -9,7 +9,7 @@ namespace P4P.Helpers
     {
         public static string Getlogintoken()
         {
-            return Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+            return Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("/", "").Replace("+", "");
         }
 
         public static string Hash(string password)

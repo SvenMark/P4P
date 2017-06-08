@@ -14,10 +14,17 @@ namespace P4P
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "StringQuery",
+                "WinkelQuery",
                 "Winkel/{action}/{q}",
                 new {controller = "Winkel", action = "Index", q = UrlParameter.Optional},
                 new[] {"P4P.Controllers"}
+            );
+
+            routes.MapRoute(
+                "ProfielToken",
+                "Profiel/{action}/{token}",
+                new { controller = "Profiel", action = "Index", token = UrlParameter.Optional },
+                new[] { "P4P.Controllers" }
             );
 
             routes.MapRoute(

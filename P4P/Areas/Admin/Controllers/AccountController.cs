@@ -33,12 +33,8 @@ namespace P4P.Areas.Admin.Controllers
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 try
                 {
-                    //admin registratie
-                    //gebruiker.Wachtwoord = Auth.Hash("Lemmesmash");
-
-                    //normale registratie(bij admin creatie dit uitcommenten)
-                    string loginToken = Auth.Getlogintoken();
-                    gebruiker.Token = Auth.Hash(loginToken);
+                    gebruiker.Wachtwoord = Auth.Hash("dHq548d6k,dewoe@!;cne");
+                    gebruiker.Token = Auth.Getlogintoken();
 
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
@@ -50,8 +46,8 @@ namespace P4P.Areas.Admin.Controllers
                     mailer.ToEmail = gebruiker.Emailadres;
                     mailer.Subject = "Loginlink";
                     mailer.Body =
-                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/Home/Login/" +
-                        loginToken;
+                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/Profiel/Login/" +
+                        gebruiker.Token;
                     mailer.IsHtml = true;
                     mailer.Send();
                     return true;
