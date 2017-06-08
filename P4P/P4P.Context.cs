@@ -10,5 +10,6 @@ namespace P4P
         public DbSet<Gebruiker> Gebruikers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Favorietenlijst> Favorietenlijsts { get; set; }
+        public DbSet<Aanbiedingen> Aanbiedingen { get; set; }
     }
 }

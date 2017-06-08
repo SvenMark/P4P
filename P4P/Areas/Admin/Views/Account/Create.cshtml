@@ -1,0 +1,73 @@
+﻿@model P4P.Models.Gebruiker
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+@using (Html.BeginForm("Create", "Account", FormMethod.Post, new { id = "registerForm" }))
+{
+    if (ViewBag.message != null)
+    {
+        <h2>@ViewBag.message</h2>
+    }
+    <div class="form-group">
+        @Html.LabelFor(m => m.Voornaam)
+        @Html.TextBoxFor(m => m.Voornaam, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Voornaam)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Tussenvoegsel)
+        @Html.TextBoxFor(m => m.Tussenvoegsel, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Tussenvoegsel)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Achternaam)
+        @Html.TextBoxFor(m => m.Achternaam, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Achternaam)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Telefoonnummer)
+        @Html.TextBoxFor(m => m.Telefoonnummer, new {@class = "form-control", type = "tel"})
+        @Html.ValidationMessageFor(m => m.Telefoonnummer)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Emailadres)
+        @Html.TextBoxFor(m => m.Emailadres, new {@class = "form-control", type = "email"})
+        @Html.ValidationMessageFor(m => m.Emailadres)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Adres)
+        @Html.TextBoxFor(m => m.Adres, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Adres)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Postcode)
+        @Html.TextBoxFor(m => m.Postcode, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Postcode)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Woonplaats)
+        @Html.TextBoxFor(m => m.Woonplaats, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Woonplaats)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Rol)
+        @Html.DropDownListFor(m => m.Rol,
+            new List<SelectListItem>
+            {
+                new SelectListItem {Value = "Gebruiker", Text = "Gebruiker"},
+                new SelectListItem {Value = "Admin", Text = "Admin"},
+            },
+            new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Rol)
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Register</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

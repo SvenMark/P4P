@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
+      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -148,46 +151,29 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AanbiedingController.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArtikelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategorieController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MeldingController.cs" />
+    <Compile Include="Controllers\BestelController.cs" />
+    <Compile Include="Controllers\FavorietenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProfielController.cs" />
+    <Compile Include="Controllers\WinkelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704191537340_AddContactsToDB.cs" />
-    <Compile Include="Migrations\201704191537340_AddContactsToDB.Designer.cs">
-      <DependentUpon>201704191537340_AddContactsToDB.cs</DependentUpon>
+    <Compile Include="Helpers\Auth.cs" />
+    <Compile Include="Helpers\GMailer.cs" />
+    <Compile Include="Migrations\201706071404463_Backup.cs" />
+    <Compile Include="Migrations\201706071404463_Backup.Designer.cs">
+      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704191540434_AddRequirementsToContacts.cs" />
-    <Compile Include="Migrations\201704191540434_AddRequirementsToContacts.Designer.cs">
-      <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705242348520_AddCategories.cs" />
-    <Compile Include="Migrations\201705242348520_AddCategories.Designer.cs">
-      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705242354400_AddGebruikers.cs" />
-    <Compile Include="Migrations\201705242354400_AddGebruikers.Designer.cs">
-      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250000213_AddProducts.cs" />
-    <Compile Include="Migrations\201705250000213_AddProducts.Designer.cs">
-      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.cs" />
-    <Compile Include="Migrations\201705250009437_AddFavorietenlijsts.Designer.cs">
-      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.cs" />
-    <Compile Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.Designer.cs">
-      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706021007041_Add LoginToken.cs" />
-    <Compile Include="Migrations\201706021007041_Add LoginToken.Designer.cs">
-      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706021035383_IDK.cs" />
-    <Compile Include="Migrations\201706021035383_IDK.Designer.cs">
-      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
+    <Compile Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs" />
+    <Compile Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.Designer.cs">
+      <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
@@ -200,6 +186,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\P4P.P4PContext.mdf" />
+    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -217,8 +205,16 @@
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Compile Include="P4P.Context.cs" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Aanbieding\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Aanbieding\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Melding\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Melding\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Artikel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Artikel\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -245,9 +241,20 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Favorieten\Index.cshtml" />
+    <Content Include="Views\Favorieten\Details.cshtml" />
+    <Content Include="Views\Profiel\Index.cshtml" />
+    <Content Include="Views\Profiel\Gegevens.cshtml" />
+    <Content Include="Views\Profiel\Bedrijf.cshtml" />
+    <Content Include="Views\Profiel\Contactpersonen.cshtml" />
+    <Content Include="Views\Winkel\Index.cshtml" />
+    <Content Include="Views\Winkel\Search.cshtml" />
+    <Content Include="Views\Winkel\Fastsearch.cshtml" />
+    <Content Include="Views\Winkel\Quickorder.cshtml" />
+    <Content Include="Views\Winkel\Details.cshtml" />
+    <Content Include="Views\Bestel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -266,32 +273,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704191537340_AddContactsToDB.resx">
-      <DependentUpon>201704191537340_AddContactsToDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706071404463_Backup.resx">
+      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704191540434_AddRequirementsToContacts.resx">
-      <DependentUpon>201704191540434_AddRequirementsToContacts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705242348520_AddCategories.resx">
-      <DependentUpon>201705242348520_AddCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705242354400_AddGebruikers.resx">
-      <DependentUpon>201705242354400_AddGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250000213_AddProducts.resx">
-      <DependentUpon>201705250000213_AddProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250009437_AddFavorietenlijsts.resx">
-      <DependentUpon>201705250009437_AddFavorietenlijsts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705250012392_UpdateProductWithFavorietenlijsts.resx">
-      <DependentUpon>201705250012392_UpdateProductWithFavorietenlijsts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706021007041_Add LoginToken.resx">
-      <DependentUpon>201706021007041_Add LoginToken.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706021035383_IDK.resx">
-      <DependentUpon>201706021035383_IDK.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.resx">
+      <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
