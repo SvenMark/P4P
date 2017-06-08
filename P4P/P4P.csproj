@@ -157,9 +157,11 @@
     <Compile Include="Areas\Admin\Controllers\CategorieController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MeldingController.cs" />
+    <Compile Include="Controllers\BestelController.cs" />
     <Compile Include="Controllers\FavorietenController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfielController.cs" />
+    <Compile Include="Controllers\WinkelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +243,12 @@
     <Content Include="Views\Profiel\Gegevens.cshtml" />
     <Content Include="Views\Profiel\Bedrijf.cshtml" />
     <Content Include="Views\Profiel\Contactpersonen.cshtml" />
+    <Content Include="Views\Winkel\Index.cshtml" />
+    <Content Include="Views\Winkel\Search.cshtml" />
+    <Content Include="Views\Winkel\Fastsearch.cshtml" />
+    <Content Include="Views\Winkel\Quickorder.cshtml" />
+    <Content Include="Views\Winkel\Details.cshtml" />
+    <Content Include="Views\Bestel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
