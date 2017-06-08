@@ -179,8 +179,13 @@
     <Compile Include="Migrations\201706080932304_AddMeldingenToDb.Designer.cs">
       <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706080936103_AddBedrijfToDb.cs" />
+    <Compile Include="Migrations\201706080936103_AddBedrijfToDb.Designer.cs">
+      <DependentUpon>201706080936103_AddBedrijfToDb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
+    <Compile Include="Models\Bedrijf.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Favorietenlijst.cs" />
     <Compile Include="Models\Gebruiker.cs" />
@@ -287,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706080932304_AddMeldingenToDb.resx">
       <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706080936103_AddBedrijfToDb.resx">
+      <DependentUpon>201706080936103_AddBedrijfToDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

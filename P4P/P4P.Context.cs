@@ -12,5 +12,6 @@ namespace P4P
         public DbSet<Favorietenlijst> Favorietenlijsts { get; set; }
         public DbSet<Aanbiedingen> Aanbiedingen { get; set; }
         public DbSet<Melding> Meldingen { get; set; }
+        public DbSet<Bedrijf> Bedrijven { get; set; }
     }
 }
