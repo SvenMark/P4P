@@ -17,13 +17,14 @@ namespace P4P.Models
         [Required]
         public Bedrijf Bedrijf { get; set; }
 
-        [Required]
-        public DateTime Afleverdatum { get; set; }
+        public DateTime? Afleverdatum { get; set; }
 
         [Required]
         public Gebruiker Gebruiker { get; set; }
 
         [StringLength(255)]
         public string Opmerking { get; set; }
+
+        public bool Afgerond { get; set; }
     }
 }
