@@ -207,6 +207,14 @@
     <Compile Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.Designer.cs">
       <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706081118439_MakePasswordRequired.cs" />
+    <Compile Include="Migrations\201706081118439_MakePasswordRequired.Designer.cs">
+      <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.cs" />
+    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.Designer.cs">
+      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -251,6 +259,7 @@
     <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\icons.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -279,7 +288,7 @@
     <Content Include="Views\Favorieten\Index.cshtml" />
     <Content Include="Views\Favorieten\Details.cshtml" />
     <Content Include="Views\Profiel\Index.cshtml" />
-    <Content Include="Views\Profiel\Gegevens.cshtml" />
+    <Content Include="Views\Profiel\Gegevenscontrole.cshtml" />
     <Content Include="Views\Profiel\Bedrijf.cshtml" />
     <Content Include="Views\Profiel\Contactpersonen.cshtml" />
     <Content Include="Views\Winkel\Index.cshtml" />
@@ -289,6 +298,8 @@
     <Content Include="Views\Winkel\Details.cshtml" />
     <Content Include="Views\Bestel\Index.cshtml" />
     <Content Include="Views\Profiel\Login.cshtml" />
+    <Content Include="Views\Profiel\Gegevens.cshtml" />
+    <Content Include="Views\Profiel\Setpassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
@@ -338,6 +349,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.resx">
       <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081118439_MakePasswordRequired.resx">
+      <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.resx">
+      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

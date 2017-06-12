@@ -26,19 +26,17 @@ namespace P4P.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public bool Create(Gebruiker gebruiker)
+        public ActionResult Create(Gebruiker gebruiker)
         {
             using (var ctx = new P4PContext())
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 try
                 {
-                    //admin registratie
-                    //gebruiker.Wachtwoord = Auth.Hash("Lemmesmash");
+                    if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
+                        return RedirectToAction("Create");
 
-                    //normale registratie(bij admin creatie dit uitcommenten)
-                    string loginToken = Auth.Getlogintoken();
-                    gebruiker.Token = Auth.Hash(loginToken);
+                    gebruiker.Token = Auth.Getlogintoken();
 
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
@@ -50,15 +48,15 @@ namespace P4P.Areas.Admin.Controllers
                     mailer.ToEmail = gebruiker.Emailadres;
                     mailer.Subject = "Loginlink";
                     mailer.Body =
-                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/Home/Login/" +
-                        loginToken;
+                        "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/Profiel/Login/" +
+                        gebruiker.Token;
                     mailer.IsHtml = true;
                     mailer.Send();
-                    return true;
+                    return RedirectToAction("Index", "Account");
                 }
                 catch
                 {
-                    return false;
+                    return RedirectToAction("Create", "Account");
                 }
             }
         }
