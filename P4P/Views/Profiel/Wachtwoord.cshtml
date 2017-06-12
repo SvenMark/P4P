@@ -1,0 +1,34 @@
+﻿@model P4P.Models.Gebruiker
+@{
+    ViewBag.Title = "Wachtwoord";
+}
+
+<h2>Login</h2>
+<h3>Wachtwoord wijzigen</h3>
+
+@using (Html.BeginForm("Wachtwoord", "Profiel"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Token, "Oud wachtwoord")
+        @Html.PasswordFor(m => m.Token, new { @class = "form-control", required = "True"})
+        @Html.ValidationMessageFor(m => m.Token)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Wachtwoord, "Nieuw wachtwoord")
+        @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True" })
+        @Html.ValidationMessageFor(m => m.Wachtwoord)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, "Wachtwoord bevestigen")
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "True" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword)
+    </div>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

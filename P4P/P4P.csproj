@@ -300,6 +300,7 @@
     <Content Include="Views\Profiel\Login.cshtml" />
     <Content Include="Views\Profiel\Gegevens.cshtml" />
     <Content Include="Views\Profiel\Setpassword.cshtml" />
+    <Content Include="Views\Profiel\Wachtwoord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
