@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
@@ -44,8 +45,10 @@ namespace P4P.Models
         public string Woonplaats { get; set; }
 
         [StringLength(255)]
-        [MinLength(8)]
         public string Wachtwoord { get; set; }
+
+        [NotMapped]
+        public string ConfirmPassword { get; set; }
 
         [StringLength(255)]
         public string Token { get; set; }

@@ -155,6 +155,76 @@ namespace P4P.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Gegevens(Gebruiker gebruiker)
+        {
+            if(Auth.IsAuth()) return RedirectToAction("Login");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    var gebruikerInDb = ctx.Gebruikers.Find(Session["Id"]);
+
+                    if (gebruikerInDb == null) return HttpNotFound();
+
+                    if (!Auth.VerifyHash(gebruiker.Wachtwoord, gebruikerInDb.Wachtwoord))
+                        return RedirectToAction("Gegevens");
+
+                    gebruikerInDb.Voornaam = gebruiker.Voornaam;
+                    gebruikerInDb.Achternaam = gebruiker.Achternaam;
+                    gebruikerInDb.Telefoonnummer = gebruiker.Telefoonnummer;
+
+                    ctx.SaveChanges();
+                    return RedirectToAction("Gegevens");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Gegevens");
+            }
+        }
+
+        public ActionResult Wachtwoord()
+        {
+            if (Auth.IsAuth()) return RedirectToAction("Login");
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.Find(Session["Id"]);
+                return View(gebruiker);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Wachtwoord(Gebruiker gebruiker)
+        {
+            if (Auth.IsAuth()) return RedirectToAction("Login");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    var gebruikerInDb = ctx.Gebruikers.Find(Session["Id"]);
+
+                    if (!Auth.VerifyHash(gebruiker.Token, gebruikerInDb.Wachtwoord))
+                        return RedirectToAction("Wachtwoord");
+
+                    if (gebruiker.Wachtwoord != gebruiker.ConfirmPassword) return RedirectToAction("Wachtwoord");
+
+                    gebruikerInDb.Wachtwoord = Auth.Hash(gebruiker.Wachtwoord);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Gegevens");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Wachtwoord");
+            }
+        }
+
         public ActionResult Bedrijf()
         {
             return View();

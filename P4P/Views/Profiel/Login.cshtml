@@ -19,7 +19,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Wachtwoord)
-        @Html.TextBoxFor(m => m.Wachtwoord, new { @class = "form-control" })
+        @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True"})
         @Html.ValidationMessageFor(m => m.Wachtwoord)
     </div>
     @Html.AntiForgeryToken()
