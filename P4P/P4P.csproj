@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201706081118439_MakePasswordRequired.Designer.cs">
       <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.cs" />
+    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.Designer.cs">
+      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -345,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706081118439_MakePasswordRequired.resx">
       <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.resx">
+      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

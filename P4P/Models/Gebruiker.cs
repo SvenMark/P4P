@@ -43,7 +43,6 @@ namespace P4P.Models
         [StringLength(255)]
         public string Woonplaats { get; set; }
 
-        [Required]
         [StringLength(255)]
         [MinLength(8)]
         public string Wachtwoord { get; set; }
