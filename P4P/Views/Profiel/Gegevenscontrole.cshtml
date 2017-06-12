@@ -1,0 +1,27 @@
+﻿@model P4P.Models.Gebruiker
+@{
+    ViewBag.Title = "Gegevens";
+}
+
+<h2>Gegevens</h2>
+<h3>Wilt u uw gegevens controleren en waar nodig naar juistheid aanpassen?</h3>
+@using (Html.BeginForm("Gegevenscontrole", "Profiel"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Voornaam)
+        @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Voornaam)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Achternaam)
+        @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Achternaam)
+    </div>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Opslaan</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
