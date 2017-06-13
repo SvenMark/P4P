@@ -44,13 +44,14 @@ p {
 }
 
 #leftside{
-    width:80vw;
+    width:79vw;
     margin:0;
     padding:0;
 }
 #rightside {
     width: 18vw;
     margin: 0;
+    margin-left:5px;
     padding: 0;
     height:100vh;
 }
