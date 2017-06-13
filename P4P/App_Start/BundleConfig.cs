@@ -24,12 +24,14 @@ namespace P4P
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js",
-                      "~/Scripts/icons.js"));
+                      "~/Scripts/materialize.min.js",
+                      "~/Scripts/init.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/toastr.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/materialize.min.css"));
         }
     }
 }
