@@ -16,6 +16,9 @@ namespace P4P.Controllers
 
         public ActionResult Login(string token)
         {
+            if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
+            ViewBag.Success = Request.QueryString["success"];
+            ViewBag.Errormessage = Request.QueryString["Errormessage"];
             if (token == null) return View();
 
             using (P4PContext ctx = new P4PContext())
