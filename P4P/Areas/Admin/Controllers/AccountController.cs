@@ -23,7 +23,7 @@ namespace P4P.Areas.Admin.Controllers
         {
             if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
             ViewBag.Success = Request.QueryString["success"];
-            ViewBag.Errormessage = Request.QueryString["Errormessage"];
+            ViewBag.Errormessage = Request.QueryString["errormessage"];
             return View();
         }
 
@@ -37,7 +37,7 @@ namespace P4P.Areas.Admin.Controllers
                 try
                 {
                     if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
-                        return RedirectToAction("Create", new { succes="false", Errormessage="Email already exists"});
+                        return RedirectToAction("Create", new { succes="false", errormessage="Email already exists"});
 
                     gebruiker.Token = Auth.Getlogintoken();
 
@@ -59,7 +59,7 @@ namespace P4P.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    return RedirectToAction("Create", new { success="false", Errormessage="Unexpected error"});
+                    return RedirectToAction("Create", new { success="false", errormessage="Unexpected error"});
                 }
             }
         }
