@@ -231,8 +231,12 @@
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
     <Content Include="App_Data\P4P.P4PContext_log.ldf" />
+    <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cart.png" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\materialize.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -259,6 +263,7 @@
     <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\init.js" />
     <Content Include="Scripts\icons.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -267,6 +272,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
