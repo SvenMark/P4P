@@ -37,7 +37,7 @@ namespace P4P.Areas.Admin.Controllers
                 try
                 {
                     if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
-                        return RedirectToAction("Create", new { succes="false", errormessage="Email already exists"});
+                        return RedirectToAction("Create", new { success="false", errormessage="Email already exists"});
 
                     gebruiker.Token = Auth.Getlogintoken();
 
