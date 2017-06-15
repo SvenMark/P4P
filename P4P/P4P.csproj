@@ -301,7 +301,6 @@
     <Content Include="Views\Profiel\Contactpersonen.cshtml" />
     <Content Include="Views\Winkel\Index.cshtml" />
     <Content Include="Views\Winkel\Search.cshtml" />
-    <Content Include="Views\Winkel\Fastsearch.cshtml" />
     <Content Include="Views\Winkel\Quickorder.cshtml" />
     <Content Include="Views\Winkel\Details.cshtml" />
     <Content Include="Views\Bestel\Index.cshtml" />
