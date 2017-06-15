@@ -39,7 +39,8 @@ namespace P4P.Controllers
         {
             using (var ctx = new P4PContext())
             {
-                //hiersomekekcode
+                var bestellingen = ctx.Bestellingen.Where(x => x.Afgerond).ToList();
+                return View(bestellingen);
             }
         }
 
