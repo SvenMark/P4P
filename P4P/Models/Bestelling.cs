@@ -27,6 +27,6 @@ namespace P4P.Models
 
         public bool Afgerond { get; set; }
 
-        public virtual ICollection<Product> Producten { get; set; }
+        public virtual ICollection<BestellingProduct> Producten { get; set; }
     }
 }
