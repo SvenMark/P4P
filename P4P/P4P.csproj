@@ -215,10 +215,15 @@
     <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.Designer.cs">
       <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706151420333_AddManytoMany.cs" />
+    <Compile Include="Migrations\201706151420333_AddManytoMany.Designer.cs">
+      <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
     <Compile Include="Models\Bestelling.cs" />
+    <Compile Include="Models\BestellingProduct.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Favorietenlijst.cs" />
     <Compile Include="Models\Gebruiker.cs" />
@@ -367,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.resx">
       <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706151420333_AddManytoMany.resx">
+      <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

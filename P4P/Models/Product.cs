@@ -15,7 +15,7 @@ namespace P4P.Models
 
         public virtual ICollection<Favorietenlijst> Favorietenlijsts { get; set; }
 
-        public virtual ICollection<Bestelling> Bestellingen { get; set; }
+        public virtual ICollection<BestellingProduct> Bestellingen { get; set; }
 
         [Required]
         [StringLength(255)]
