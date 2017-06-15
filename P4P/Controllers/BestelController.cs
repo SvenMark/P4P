@@ -31,7 +31,8 @@ namespace P4P.Controllers
         {
             //database shit hier
 
-            return View();
+            //de actie waar je heen wilt redirecten RedirectToAction("Action", "Controller");
+            return RedirectToAction("idk", "Bestel");
         }
 
         //de rest van de stappen.
