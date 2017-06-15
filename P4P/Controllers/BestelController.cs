@@ -35,6 +35,27 @@ namespace P4P.Controllers
             return RedirectToAction("idk", "Bestel");
         }
 
+        public ActionResult Afgerond()
+        {
+            using (var ctx = new P4PContext())
+            {
+                //hiersomekekcode
+            }
+        }
+
+        public ActionResult Details(int id)
+        {
+            using (P4PContext ctx = new P4PContext())
+            {
+                var bestellijst = ctx.Bestellingen.SingleOrDefault(m => m.Id == id);
+
+                if (bestellijst == null)
+                    return HttpNotFound();
+
+                return View(bestellijst);
+            }
+        }
+
         //de rest van de stappen.
     }
 }

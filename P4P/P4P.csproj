@@ -310,6 +310,7 @@
     <Content Include="Views\Profiel\Wachtwoord.cshtml" />
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
+    <Content Include="Views\Bestel\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
