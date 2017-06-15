@@ -1,8 +1,51 @@
 ﻿
+@model P4P.Models.Gebruiker
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mijn profiel";
 }
+<div class="row">
+    <div class="col-sm-6">
+        <h2>Profiel</h2>
+        <h3>Een overzicht van uw gegevens</h3>
 
-<h2>Index</h2>
-<h3>Dashboard van je profiel</h3>
+        @using (Html.BeginForm("Gegevens", "Profiel"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Voornaam)
+                @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Voornaam)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Achternaam)
+                @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Achternaam)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Telefoonnummer)
+                @Html.TextBoxFor(m => m.Telefoonnummer, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Telefoonnummer)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Emailadres)
+                @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Emailadres)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Wachtwoord, "Wachtwoord bevestigen")
+                @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True" })
+                @Html.ValidationMessageFor(m => m.Wachtwoord)
+            </div>
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Opslaan</button>
+        }
+        @Html.ActionLink("Wachtwoord wijzigen", "Wachtwoord", "Profiel", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-sm-6">
+        <h2>Contacten</h2>
+    </div>
+</div>
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
