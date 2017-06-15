@@ -11,7 +11,44 @@ namespace P4P.Controllers
         // GET: Profiel
         public ActionResult Index()
         {
-            return View();
+            if (Session["Id"] == null) return RedirectToAction("Login");
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.Find(Session["Id"]);
+                return View(gebruiker);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Gebruiker gebruiker)
+        {
+            if (Auth.IsAuth()) return RedirectToAction("Login");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    var gebruikerInDb = ctx.Gebruikers.Find(Session["Id"]);
+
+                    if (gebruikerInDb == null) return HttpNotFound();
+
+                    if (!Auth.VerifyHash(gebruiker.Wachtwoord, gebruikerInDb.Wachtwoord))
+                        return RedirectToAction("Index");
+
+                    gebruikerInDb.Voornaam = gebruiker.Voornaam;
+                    gebruikerInDb.Achternaam = gebruiker.Achternaam;
+                    gebruikerInDb.Telefoonnummer = gebruiker.Telefoonnummer;
+
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Login(string token)
@@ -138,54 +175,12 @@ namespace P4P.Controllers
 
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Gegevens");
+                    return RedirectToAction("Index");
                 }
             }
             catch
             {
-                return RedirectToAction("Gegevens");
-            }
-        }
-
-        public ActionResult Gegevens()
-        {
-            if (Session["Id"] == null) return RedirectToAction("Login");
-
-            using (P4PContext ctx = new P4PContext())
-            {
-                var gebruiker = ctx.Gebruikers.Find(Session["Id"]);
-                return View(gebruiker);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Gegevens(Gebruiker gebruiker)
-        {
-            if(Auth.IsAuth()) return RedirectToAction("Login");
-
-            try
-            {
-                using (var ctx = new P4PContext())
-                {
-                    var gebruikerInDb = ctx.Gebruikers.Find(Session["Id"]);
-
-                    if (gebruikerInDb == null) return HttpNotFound();
-
-                    if (!Auth.VerifyHash(gebruiker.Wachtwoord, gebruikerInDb.Wachtwoord))
-                        return RedirectToAction("Gegevens");
-
-                    gebruikerInDb.Voornaam = gebruiker.Voornaam;
-                    gebruikerInDb.Achternaam = gebruiker.Achternaam;
-                    gebruikerInDb.Telefoonnummer = gebruiker.Telefoonnummer;
-
-                    ctx.SaveChanges();
-                    return RedirectToAction("Gegevens");
-                }
-            }
-            catch
-            {
-                return RedirectToAction("Gegevens");
+                return RedirectToAction("Index");
             }
         }
 
@@ -219,7 +214,7 @@ namespace P4P.Controllers
 
                     gebruikerInDb.Wachtwoord = Auth.Hash(gebruiker.Wachtwoord);
                     ctx.SaveChanges();
-                    return RedirectToAction("Gegevens");
+                    return RedirectToAction("Index");
                 }
             }
             catch
