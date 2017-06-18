@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Data.Entity;
 using P4P.Helpers;
 using P4P.Models;
+using P4P.ViewModel;
 
 namespace P4P.Areas.Admin.Controllers
 {
@@ -27,11 +28,25 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
-            ViewBag.Success = Request.QueryString["success"];
-            ViewBag.Errormessage = Request.QueryString["errormessage"];
-            return View();
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+                return View();
+            }
+
+            using (var ctx = new P4PContext())
+            {
+                var bedrijven = ctx.Bedrijven.ToList();
+
+                var viewModel = new NewGebruikerViewModel
+                {
+                    Bedrijven = bedrijven
+                };
+                return View(viewModel);
+            }
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

@@ -1,4 +1,4 @@
-﻿@model P4P.Models.Gebruiker
+﻿@model P4P.ViewModel.NewGebruikerViewModel
 @{
     ViewBag.Title = "Register";
 }
@@ -11,55 +11,59 @@
         <h2>@ViewBag.message</h2>
     }
     <div class="form-group">
-        @Html.LabelFor(m => m.Voornaam)
-        @Html.TextBoxFor(m => m.Voornaam, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Voornaam)
+        @Html.LabelFor(m => m.Gebruiker.Voornaam)
+        @Html.TextBoxFor(m => m.Gebruiker.Voornaam, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Voornaam)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Tussenvoegsel)
-        @Html.TextBoxFor(m => m.Tussenvoegsel, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Tussenvoegsel)
+        @Html.LabelFor(m => m.Gebruiker.Tussenvoegsel)
+        @Html.TextBoxFor(m => m.Gebruiker.Tussenvoegsel, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Tussenvoegsel)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Achternaam)
-        @Html.TextBoxFor(m => m.Achternaam, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Achternaam)
+        @Html.LabelFor(m => m.Gebruiker.Achternaam)
+        @Html.TextBoxFor(m => m.Gebruiker.Achternaam, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Achternaam)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Telefoonnummer)
-        @Html.TextBoxFor(m => m.Telefoonnummer, new {@class = "form-control", type = "tel"})
-        @Html.ValidationMessageFor(m => m.Telefoonnummer)
+        @Html.LabelFor(m => m.Gebruiker.Telefoonnummer)
+        @Html.TextBoxFor(m => m.Gebruiker.Telefoonnummer, new {@class = "form-control", type = "tel"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Telefoonnummer)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Emailadres)
-        @Html.TextBoxFor(m => m.Emailadres, new {@class = "form-control", type = "email"})
-        @Html.ValidationMessageFor(m => m.Emailadres)
+        @Html.LabelFor(m => m.Gebruiker.Emailadres)
+        @Html.TextBoxFor(m => m.Gebruiker.Emailadres, new {@class = "form-control", type = "email"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Emailadres)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Adres)
-        @Html.TextBoxFor(m => m.Adres, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Adres)
+        @Html.LabelFor(m => m.Gebruiker.Adres)
+        @Html.TextBoxFor(m => m.Gebruiker.Adres, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Adres)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Postcode)
-        @Html.TextBoxFor(m => m.Postcode, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Postcode)
+        @Html.LabelFor(m => m.Gebruiker.Postcode)
+        @Html.TextBoxFor(m => m.Gebruiker.Postcode, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Postcode)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Woonplaats)
-        @Html.TextBoxFor(m => m.Woonplaats, new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Woonplaats)
+        @Html.LabelFor(m => m.Gebruiker.Woonplaats)
+        @Html.TextBoxFor(m => m.Gebruiker.Woonplaats, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Gebruiker.Woonplaats)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Rol)
-        @Html.DropDownListFor(m => m.Rol,
+        @Html.LabelFor(m => m.Gebruiker.Rol)
+        @Html.DropDownListFor(m => m.Gebruiker.Rol,
             new List<SelectListItem>
             {
                 new SelectListItem {Value = "Gebruiker", Text = "Gebruiker"},
                 new SelectListItem {Value = "Admin", Text = "Admin"},
             },
             new {@class = "form-control"})
-        @Html.ValidationMessageFor(m => m.Rol)
+        @Html.ValidationMessageFor(m => m.Gebruiker.Rol)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gebruiker.BedrijfId)
+        @Html.DropDownListFor(m => m.Gebruiker.BedrijfId, new SelectList(Model.Bedrijven, "Id", "Naam", "Selecteer Bedrijf"), new { @class = "form-control"})
     </div>
 
     @Html.AntiForgeryToken()
