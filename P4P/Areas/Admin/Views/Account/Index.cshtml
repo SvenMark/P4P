@@ -1,5 +1,4 @@
-﻿@using P4P.Models
-@model IEnumerable<P4P.Models.Gebruiker>
+﻿@model IEnumerable<P4P.Models.Gebruiker>
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -36,7 +35,7 @@
             <th>@gebruiker.Postcode</th>
             <th>@gebruiker.Woonplaats</th>
             <th>@gebruiker.Rol</th>
-            <th>@gebruiker.Bedrijf</th>
+            <th>@gebruiker.Bedrijf.Naam</th>
         </tr>
     }
     </tbody>

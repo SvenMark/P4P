@@ -6,6 +6,7 @@ using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Data.Entity;
 using P4P.Helpers;
 using P4P.Models;
 
@@ -18,7 +19,7 @@ namespace P4P.Areas.Admin.Controllers
         {
             using (var ctx = new P4PContext())
             {
-                var gebruikers = ctx.Gebruikers.ToList();
+                var gebruikers = ctx.Gebruikers.Include(c => c.Bedrijf).ToList();
                 return View(gebruikers);
             }
             
