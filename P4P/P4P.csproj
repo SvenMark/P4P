@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201706151420333_AddManytoMany.Designer.cs">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.cs" />
+    <Compile Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.Designer.cs">
+      <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -611,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706151420333_AddManytoMany.resx">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.resx">
+      <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
