@@ -12,30 +12,34 @@
 <table id="gebruikers" class="table table-bordered table-hover">
     <thead>
     <tr>
+        <th>Email</th>
         <th>Voornaam</th>
         <th>Achternaam</th>
         <th>Telefoonnummer</th>
-        <th>Email</th>
         <th>Adres</th>
         <th>Postcode</th>
         <th>Woonplaats</th>
         <th>Rol</th>
         <th>Bedrijf</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var gebruiker in Model)
     {
         <tr>
-            <th>@gebruiker.Voornaam</th>
-            <th>@gebruiker.Achternaam</th>
-            <th>@gebruiker.Telefoonnummer</th>
-            <th>@gebruiker.Emailadres</th>
-            <th>@gebruiker.Adres</th>
-            <th>@gebruiker.Postcode</th>
-            <th>@gebruiker.Woonplaats</th>
-            <th>@gebruiker.Rol</th>
-            <th>@gebruiker.Bedrijf.Naam</th>
+            <td>@gebruiker.Emailadres</td>
+            <td>@gebruiker.Voornaam</td>
+            <td>@gebruiker.Achternaam</td>
+            <td>@gebruiker.Telefoonnummer</td>
+            <td>@gebruiker.Adres</td>
+            <td>@gebruiker.Postcode</td>
+            <td>@gebruiker.Woonplaats</td>
+            <td>@gebruiker.Rol</td>
+            <td>@gebruiker.Bedrijf.Naam</td>
+            <td>
+                <button class="btn-link js-delete">Delete</button>
+            </td>
         </tr>
     }
     </tbody>
