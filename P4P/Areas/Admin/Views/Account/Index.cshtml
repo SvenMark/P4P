@@ -1,7 +1,43 @@
-﻿
+﻿@using P4P.Models
+@model IEnumerable<P4P.Models.Gebruiker>
 @{
     ViewBag.Title = "Dashboard";
 }
 
 <h2>Dashboard</h2>
 <h3>Overzicht van gebruikers</h3>
+
+<p>
+    @Html.ActionLink("Nieuwe gebruiker", "Create", "Account", null, new { @class = "btn btn-primary" })
+</p>
+<table id="gebruikers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Voornaam</th>
+        <th>Achternaam</th>
+        <th>Telefoonnummer</th>
+        <th>Email</th>
+        <th>Adres</th>
+        <th>Postcode</th>
+        <th>Woonplaats</th>
+        <th>Rol</th>
+        <th>Bedrijf</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var gebruiker in Model)
+    {
+        <tr>
+            <th>@gebruiker.Voornaam</th>
+            <th>@gebruiker.Achternaam</th>
+            <th>@gebruiker.Telefoonnummer</th>
+            <th>@gebruiker.Emailadres</th>
+            <th>@gebruiker.Adres</th>
+            <th>@gebruiker.Postcode</th>
+            <th>@gebruiker.Woonplaats</th>
+            <th>@gebruiker.Rol</th>
+            <th>@gebruiker.Bedrijf</th>
+        </tr>
+    }
+    </tbody>
+</table>

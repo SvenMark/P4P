@@ -16,7 +16,12 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            return View();
+            using (var ctx = new P4PContext())
+            {
+                var gebruikers = ctx.Gebruikers.ToList();
+                return View(gebruikers);
+            }
+            
         }
 
         public ActionResult Create()
