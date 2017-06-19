@@ -42,8 +42,8 @@ namespace P4P.Areas.Admin.Controllers
             using (var ctx = new P4PContext())
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.
-//                try
-//                {
+                try
+                {
                     if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
                         return RedirectToAction("Create", new { success="false", errormessage="Email already exists"});
 
@@ -64,11 +64,11 @@ namespace P4P.Areas.Admin.Controllers
                     mailer.IsHtml = true;
                     mailer.Send();
                     return RedirectToAction("Create", new { success="true"});
-//                }
-//                catch
-//                {
-//                    return RedirectToAction("Create", new { success="false", errormessage="Unexpected error"});
-//                }
+                }
+                catch
+                {
+                    return RedirectToAction("Create", new { success="false", errormessage="Unexpected error"});
+                }
             }
         }
 

@@ -25,7 +25,7 @@ namespace P4P.Helpers
 
         public static bool IsAuth()
         {
-            return HttpContext.Current.Session["Id"] == null;
+            return HttpContext.Current.Session["Id"] != null;
         }
     }
 }
