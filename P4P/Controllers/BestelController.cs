@@ -17,7 +17,7 @@ namespace P4P.Controllers
         // GET: Bestel
         public ActionResult Index()
         {
-            //if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
 
             using (P4PContext ctx = new P4PContext())
             {
@@ -28,15 +28,45 @@ namespace P4P.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Bestelling bestelling)
+        public ActionResult Index(Winkelwagen winkelwagen)
         {
-            //if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
             try
             {
                 using (var ctx = new P4PContext())
                 {
+                    double totaalPrijs = 0;
+                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).ToList())
+                    {
+                        totaalPrijs += (item.Aantal * item.Product.Prijs);
+                    }
+
+                    int Id = Convert.ToInt32(Session["Id"]);
+                    var gebruikerInDb = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == Id);
+
+                    Bestelling bestelling = new Bestelling
+                    {
+                        Prijs = totaalPrijs,
+                        Gebruiker = gebruikerInDb,
+                        Bedrijf = gebruikerInDb.Bedrijf,
+                        Afgerond = false
+                    };
+
+                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).ToList())
+                    {
+                        BestellingProduct bestellingProduct = new BestellingProduct
+                        {
+                            Bestelling_Id = bestelling.Id,
+                            Aantal = item.Aantal,
+                            Product_Id = item.Product_Id
+                        };
+                        ctx.BestellingProducts.Add(bestellingProduct);
+                    }
+
+                    ctx.Bestellingen.Add(bestelling);
                     ctx.SaveChanges();
+
                     return RedirectToAction("Orderdetails");
                 }
             }
@@ -48,7 +78,14 @@ namespace P4P.Controllers
 
         public ActionResult Orderdetails()
         {
-            return View();
+            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            int Id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var bestelling = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == Id);
+                return View(bestelling);
+            }
         }
 
         public ActionResult Orderconfirmation()
@@ -74,20 +111,6 @@ namespace P4P.Controllers
                 return View(bestellingen);
             }
         }
-
-        public ActionResult Details(int id)
-        {
-            using (P4PContext ctx = new P4PContext())
-            {
-                var bestellijst = ctx.Bestellingen.SingleOrDefault(m => m.Id == id);
-
-                if (bestellijst == null)
-                    return HttpNotFound();
-
-                return View(bestellijst);
-            }
-        }
-
         //de rest van de stappen.
     }
 }

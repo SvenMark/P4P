@@ -4,6 +4,7 @@
 }
 @*Op deze pagina ziet de gebruiker de inhoud van zijn/haar winkelwagen. De gebruikerkan hier de aantallen aanpassen en producten verwijderen. 
     Vervolgens kan de gebruiker op bestel klikken.*@
+
 <h4 class="center">Winkelwagen</h4>
 
 @using (Html.BeginForm("Index", "Bestel"))
@@ -19,23 +20,24 @@
             @{
                 foreach(var p in Model)
                 {
-                <tr>
-                    <td>@p.Product.Code</td>
-                    <td>@p.Product.Naam</td>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => p.Aantal)
-                            @Html.TextBoxFor(m => p.Aantal, new { @type = "Number"})
-                            @Html.ValidationMessageFor(m => p.Aantal)
-                        </div>
-                    </td>
-                    <td>€@p.Product.Prijs</td>
-                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-                </tr>
+                    <tr>
+                        <td>@p.Product.Code</td>
+                        <td>@p.Product.Naam</td>
+                        <td>
+                            <div class="form-group">
+                                @Html.LabelFor(m => p.Aantal)
+                                @Html.TextBoxFor(m => p.Aantal, new { @type = "Number"})
+                                @Html.ValidationMessageFor(m => p.Aantal)
+                            </div>
+                        </td>
+                        <td>€@p.Product.Prijs</td>
+                        <td><button type="button" class="btn red"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    </tr>
                 }
             }
         </table>
     </div>
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Bestellen</button>
 }
 

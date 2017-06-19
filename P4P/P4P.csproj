@@ -219,9 +219,13 @@
     <Compile Include="Migrations\201706151420333_AddManytoMany.Designer.cs">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706181855205_CreateWinkelwagen.cs" />
-    <Compile Include="Migrations\201706181855205_CreateWinkelwagen.Designer.cs">
-      <DependentUpon>201706181855205_CreateWinkelwagen.cs</DependentUpon>
+    <Compile Include="Migrations\201706190835563_Winkelwagen.cs" />
+    <Compile Include="Migrations\201706190835563_Winkelwagen.Designer.cs">
+      <DependentUpon>201706190835563_Winkelwagen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191123468_Bedrijfsgegevens.cs" />
+    <Compile Include="Migrations\201706191123468_Bedrijfsgegevens.Designer.cs">
+      <DependentUpon>201706191123468_Bedrijfsgegevens.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
@@ -318,7 +322,6 @@
     <Content Include="Views\Profiel\Wachtwoord.cshtml" />
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
-    <Content Include="Views\Bestel\Details.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -379,8 +382,11 @@
     <EmbeddedResource Include="Migrations\201706151420333_AddManytoMany.resx">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706181855205_CreateWinkelwagen.resx">
-      <DependentUpon>201706181855205_CreateWinkelwagen.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706190835563_Winkelwagen.resx">
+      <DependentUpon>201706190835563_Winkelwagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191123468_Bedrijfsgegevens.resx">
+      <DependentUpon>201706191123468_Bedrijfsgegevens.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
