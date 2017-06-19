@@ -59,7 +59,7 @@ namespace P4P.Models
 
         public Bedrijf Bedrijf { get; set; }
 
-        public byte BedrijfId { get; set; }
+        public int BedrijfId { get; set; }
 
     }
 }

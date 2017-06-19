@@ -9,7 +9,7 @@ namespace P4P.ViewModel
 {
     public class NewGebruikerViewModel
     {
-        public IEnumerable<Bedrijf> Bedrijven { get; set; }
+        public Bedrijf Bedrijf { get; set; }
         public Gebruiker Gebruiker { get; set; }
     }
 }

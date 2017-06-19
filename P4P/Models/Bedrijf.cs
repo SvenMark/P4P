@@ -9,7 +9,8 @@ namespace P4P.Models
 {
     public class Bedrijf
     {
-        public byte Id { get; set; }
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         [StringLength(255)]

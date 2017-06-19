@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.Designer.cs">
       <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706190842144_Dank.cs" />
+    <Compile Include="Migrations\201706190842144_Dank.Designer.cs">
+      <DependentUpon>201706190842144_Dank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -620,6 +624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.resx">
       <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706190842144_Dank.resx">
+      <DependentUpon>201706190842144_Dank.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

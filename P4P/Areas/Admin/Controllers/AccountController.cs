@@ -28,40 +28,27 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
-            {
-                ViewBag.Success = Request.QueryString["success"];
-                ViewBag.Errormessage = Request.QueryString["errormessage"];
-                return View();
-            }
-
-            using (var ctx = new P4PContext())
-            {
-                var bedrijven = ctx.Bedrijven.ToList();
-
-                var viewModel = new NewGebruikerViewModel
-                {
-                    Bedrijven = bedrijven
-                };
-                return View(viewModel);
-            }
+            if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
+            ViewBag.Success = Request.QueryString["success"];
+            ViewBag.Errormessage = Request.QueryString["errormessage"];
+            return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Gebruiker gebruiker)
+        public ActionResult Create(Gebruiker gebruiker, Bedrijf bedrijf)
         {
             using (var ctx = new P4PContext())
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.
-                try
-                {
+//                try
+//                {
                     if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
                         return RedirectToAction("Create", new { success="false", errormessage="Email already exists"});
 
                     gebruiker.Token = Auth.Getlogintoken();
-
+                    ctx.Bedrijven.Add(bedrijf);
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
 
@@ -77,11 +64,11 @@ namespace P4P.Areas.Admin.Controllers
                     mailer.IsHtml = true;
                     mailer.Send();
                     return RedirectToAction("Create", new { success="true"});
-                }
-                catch
-                {
-                    return RedirectToAction("Create", new { success="false", errormessage="Unexpected error"});
-                }
+//                }
+//                catch
+//                {
+//                    return RedirectToAction("Create", new { success="false", errormessage="Unexpected error"});
+//                }
             }
         }
 

@@ -61,9 +61,11 @@
             new {@class = "form-control"})
         @Html.ValidationMessageFor(m => m.Gebruiker.Rol)
     </div>
+
     <div class="form-group">
-        @Html.LabelFor(m => m.Gebruiker.BedrijfId)
-        @Html.DropDownListFor(m => m.Gebruiker.BedrijfId, new SelectList(Model.Bedrijven, "Id", "Naam", "Selecteer Bedrijf"), new { @class = "form-control"})
+        @Html.LabelFor(m => m.Bedrijf.Naam)
+        @Html.TextBoxFor(m => m.Bedrijf.Naam, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bedrijf.Naam)
     </div>
 
     @Html.AntiForgeryToken()
