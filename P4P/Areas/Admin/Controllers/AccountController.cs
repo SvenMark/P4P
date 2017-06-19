@@ -71,7 +71,5 @@ namespace P4P.Areas.Admin.Controllers
                 }
             }
         }
-
-        //edit(rechten), delete gebruiker
     }
 }
