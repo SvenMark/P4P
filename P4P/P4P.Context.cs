@@ -14,5 +14,7 @@ namespace P4P
         public DbSet<Melding> Meldingen { get; set; }
         public DbSet<Bedrijf> Bedrijven { get; set; }
         public DbSet<Bestelling> Bestellingen { get; set; }
+        public DbSet<BestellingProduct> BestellingProducts { get; set; }
+        public DbSet<Winkelwagen> Winkelwagens { get; set; }
     }
 }

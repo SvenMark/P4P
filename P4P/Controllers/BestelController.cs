@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using System.Data.Entity;
+using P4P.Helpers;
 using P4P.Models;
 
 namespace P4P.Controllers
@@ -12,7 +17,33 @@ namespace P4P.Controllers
         // GET: Bestel
         public ActionResult Index()
         {
-            return View();
+            //if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var winkelmand = ctx.Winkelwagens.Include(c => c.Product).ToList();
+                return View(winkelmand);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Bestelling bestelling)
+        {
+            //if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    ctx.SaveChanges();
+                    return RedirectToAction("Orderdetails");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public ActionResult Orderdetails()

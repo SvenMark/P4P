@@ -1,8 +1,46 @@
-﻿
+﻿@model IEnumerable<P4P.Models.Winkelwagen>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Winkelwagen";
+}
+@*Op deze pagina ziet de gebruiker de inhoud van zijn/haar winkelwagen. De gebruikerkan hier de aantallen aanpassen en producten verwijderen. 
+    Vervolgens kan de gebruiker op bestel klikken.*@
+<h4 class="center">Winkelwagen</h4>
+
+@using (Html.BeginForm("Index", "Bestel"))
+{
+    <div class="table-responsive">
+        <table class="table-bordered">
+            <tr>
+                <th>Productcode</th>
+                <th>Productnaam</th>
+                <th>Aantal</th>
+                <th>Prijs</th>
+            </tr>
+            @{
+                foreach(var p in Model)
+                {
+                <tr>
+                    <td>@p.Product.Code</td>
+                    <td>@p.Product.Naam</td>
+                    <td>
+                        <div class="form-group">
+                            @Html.LabelFor(m => p.Aantal)
+                            @Html.TextBoxFor(m => p.Aantal, new { @type = "Number"})
+                            @Html.ValidationMessageFor(m => p.Aantal)
+                        </div>
+                    </td>
+                    <td>€@p.Product.Prijs</td>
+                    <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Bestellen</button>
 }
 
-<h2>Index</h2>
-<h3>Winkelwagen overzicht</h3>
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 

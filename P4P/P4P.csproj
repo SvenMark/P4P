@@ -219,6 +219,10 @@
     <Compile Include="Migrations\201706151420333_AddManytoMany.Designer.cs">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706181855205_CreateWinkelwagen.cs" />
+    <Compile Include="Migrations\201706181855205_CreateWinkelwagen.Designer.cs">
+      <DependentUpon>201706181855205_CreateWinkelwagen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Models\Melding.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Subcategorie.cs" />
+    <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706151420333_AddManytoMany.resx">
       <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181855205_CreateWinkelwagen.resx">
+      <DependentUpon>201706181855205_CreateWinkelwagen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
