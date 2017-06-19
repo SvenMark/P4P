@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201706190842144_Dank.Designer.cs">
       <DependentUpon>201706190842144_Dank.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706191022027_Yeah.cs" />
+    <Compile Include="Migrations\201706191022027_Yeah.Designer.cs">
+      <DependentUpon>201706191022027_Yeah.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -239,12 +243,11 @@
     <Compile Include="Models\Melding.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Subcategorie.cs" />
+    <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -565,6 +568,7 @@
     <Content Include="Views\Bestel\Afgerond.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -627,6 +631,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706190842144_Dank.resx">
       <DependentUpon>201706190842144_Dank.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191022027_Yeah.resx">
+      <DependentUpon>201706191022027_Yeah.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
