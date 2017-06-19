@@ -9,12 +9,14 @@ namespace P4P.Models
 {
     public class Winkelwagen
     {
-        [Key, ForeignKey("Product")]
+        [Key, Column(Order = 0), ForeignKey("Gebruiker")]
+        public int Gebruiker_id { get; set; }
+        [Key, Column(Order = 1), ForeignKey("Product")]
         public int Product_Id { get; set; }
 
+        public Gebruiker Gebruiker { get; set; }
         public Product Product { get; set; }
 
         public int Aantal { get; set; }
-        
     }
 }
