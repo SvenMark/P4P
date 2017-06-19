@@ -248,6 +248,10 @@
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\P4P.P4PContext.mdf" />
+    <Content Include="App_Data\P4P.P4PContext_log.ldf">
+      <DependentUpon>P4P.P4PContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -437,11 +441,11 @@
     <Content Include="Areas\Admin\Views\Artikel\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Artikel\New.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Categorie\New.cshtml" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Areas\Admin\Views\Account\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\CreateHoofdcategorie.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -568,7 +572,6 @@
     <Content Include="Views\Bestel\Afgerond.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>

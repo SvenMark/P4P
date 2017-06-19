@@ -1,8 +1,37 @@
-﻿
+﻿@model  IEnumerable<P4P.Models.Subcategorie>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
 }
 
-<h2>Index</h2>
-<h3>Alle categorieen</h3>
+<h2>Dashboard</h2>
+<h3>Overzicht van gebruikers</h3>
 
+<p>
+    @Html.ActionLink("Nieuw Artikel", "New", "Artikel", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Nieuwe categorie", "New", "Categorie", null, new { @class = "btn btn-primary" })
+</p>
+<table id="gebruikers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Hoofdcategorie</th>
+        <th>Subcategorie</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var categorie in Model)
+    {
+        <tr>
+            <td>@categorie.Hoofdcategorie.Naam</td>
+            <td>@categorie.Naam</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#gebruikers").DataTable();
+        })
+    </script>
+}
