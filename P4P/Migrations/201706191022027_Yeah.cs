@@ -3,7 +3,7 @@ namespace P4P.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateWinkelwagen : DbMigration
+    public partial class Yeah : DbMigration
     {
         public override void Up()
         {
