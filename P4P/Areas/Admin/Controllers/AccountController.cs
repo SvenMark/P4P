@@ -6,8 +6,10 @@ using System.Security.Policy;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Data.Entity;
 using P4P.Helpers;
 using P4P.Models;
+using P4P.ViewModel;
 
 namespace P4P.Areas.Admin.Controllers
 {
@@ -16,7 +18,12 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            return View();
+            using (var ctx = new P4PContext())
+            {
+                var gebruikers = ctx.Gebruikers.Include(c => c.Bedrijf).ToList();
+                return View(gebruikers);
+            }
+            
         }
 
         public ActionResult Create()
@@ -27,9 +34,10 @@ namespace P4P.Areas.Admin.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Gebruiker gebruiker)
+        public ActionResult Create(Gebruiker gebruiker, Bedrijf bedrijf)
         {
             using (var ctx = new P4PContext())
             {
@@ -40,7 +48,7 @@ namespace P4P.Areas.Admin.Controllers
                         return RedirectToAction("Create", new { success="false", errormessage="Email already exists"});
 
                     gebruiker.Token = Auth.Getlogintoken();
-
+                    ctx.Bedrijven.Add(bedrijf);
                     ctx.Gebruikers.Add(gebruiker);
                     ctx.SaveChanges();
 
