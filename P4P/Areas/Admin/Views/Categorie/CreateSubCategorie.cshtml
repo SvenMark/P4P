@@ -18,6 +18,7 @@
     </div>
 
     @Model.Hoofdcategorie.Naam
+    @Html.HiddenFor(m => m.Hoofdcategorie.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Register</button>
 }

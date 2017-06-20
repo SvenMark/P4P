@@ -1,18 +1,17 @@
-﻿@model P4P.ViewModel.NewSubcategorie
+﻿@model P4P.ViewModel.DetailsSubcategorie
 @{
     ViewBag.Title = "Details";
 }
 <h2>Details</h2>
-@if (!Model.Any())
+@Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new { id = Model.Hoofdcategorie.Id }, new { @class = "btn btn-primary" })
+@if (!Model.Subcategorie.Any())
 {
     <p>Er zijn nog geen subcategorieën ingesteld op deze hoofdcategorie</p>
 }
 else
 {
-    foreach (var categorie in Model)
+    foreach (var categorie in Model.Subcategorie)
     {
         @categorie.Naam
-        @Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new { id=categorie.Id }, new { @class = "btn btn-primary" })
     }
 }
-
