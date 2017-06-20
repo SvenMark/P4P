@@ -236,12 +236,16 @@
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
     <Content Include="App_Data\P4P.P4PContext_log.ldf" />
-    <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cart.png" />
     <Content Include="Content\Index.css" />
+    <Content Include="Content\jansma_logo.png" />
+    <Content Include="Content\jansma_logo2.png" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\loginbackground.jpg" />
     <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\override.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -315,6 +319,7 @@
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Details.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
+    <Content Include="Views\Shared\_Searchbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

@@ -1,0 +1,21 @@
+﻿.btn {
+    background-color: #4caf50;
+}
+#titel {
+    color: #4caf50;
+}
+body {
+    background-color: #fcfff9;
+}
+.white{
+    background-color:white;
+    color:grey!important;
+    margin-top:-15px!important;
+}
+.navbar-default{
+    background-color:white!important;
+    border-color:white!important;
+}
+.indicator {
+    background-color: white!important;
+}

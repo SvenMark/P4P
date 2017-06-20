@@ -31,7 +31,8 @@ namespace P4P
                       "~/Content/bootstrap.css",
                       "~/Content/toastr.css",
                       "~/Content/site.css",
-                      "~/Content/materialize.min.css"));
+                      "~/Content/materialize.min.css",
+                      "~/Content/override.css"));
         }
     }
 }
