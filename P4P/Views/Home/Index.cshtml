@@ -1,66 +1,140 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+
+    string aanbiedingen = "kaas";
 }
-<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
-
-<div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-        <div class="container">
-            <br><br>
-            <h1 class="header center teal-text text-lighten-2">Jansma Haule</h1>
-            <div class="row center">
-                <h5 class="header col s12 light">Een wereld van boerenproducten</h5>
-            </div>
-            <div class="row center">
-                <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Hier komt een zoekbalk</a>
-            </div>
-            <br><br>
-        </div>
-    </div>
-    <div class="parallax"><img src="~/Content/background1.jpg" alt="Unsplashed background img 1"></div>
-</div>
-
-
-<div class="section">
-    <!--   Icon Section   -->
-    <div id="leftside" class="col-xs-6">
-        <div class="row"><div id="aanbiedingen" class="col-md-12"><div id="aanbiedingen2" class="card"><h5>Aanbiedingen</h5></div></div></div>
-        <div class="row">
-            <div class="col s12 m4">
-                <div class="icon-block card clickable">
-                    <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                    <h5 class="center">Aanbieding 1</h5>
-                    <p class="light">Gratis fietsbel bij elke kaas.</p>
+    <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <br><br>
+                <h1 id="titel" class="header center text-lighten-2">Jansma Haule</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">Een wereld van boerenproducten</h5>
                 </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="icon-block card clickable">
-                    <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                    <h5 class="center">Aanbieding 2</h5>
-                    <p class="light">Gratis kaas bij elke kaas.</p>
+                <div class="row center">
+                    @Html.Partial("_Searchbar")
                 </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="icon-block card clickable">
-                    <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                    <h5 class="center">Aanbieding 3</h5>
-                    <p class="light">De melk is extra sappig dit seizoen.</p>
-                </div>
-            </div>
-            <div class="col s12 m4">
-                <div class="icon-block card clickable">
-                    <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                    <h5 class="center">Aanbieding 3</h5>
-                    <p class="light">De melk is extra sappig dit seizoen.</p>
-                </div>
+                <br><br>
             </div>
         </div>
+        <div class="parallax"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1"></div>
     </div>
-    <div id="rightside" class="col-xs-6">
-        <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-widget-id="382128209740832768">Tweets door BaronJansma</a>
-        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
-    </div>
-</div>
 
 
-<div id="scrollen"></div>
+    <div class="section">
+        <!--   Icon Section   -->
+        <div id="leftside" class="col-xs-6">
+            <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card"><h5>Aanbiedingen</h5></div></div></div>
+            <div class="row">
+
+                <!-- Voor als er geen aanbiedingen zijn, variabele moet nog anders. -->
+                @if (aanbiedingen == "niets")
+                {
+                    <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card white"><h5>Niets!</h5></div></div></div>
+                }
+
+                <!-- Voor elke aanbieding een div -->
+                <div class="col s12 m4">
+                    <div class="icon-block card clickable">
+                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
+                        <h5 class="center">Aanbieding 1</h5>
+                        <p class="light">Gratis fietsbel bij elke kaas.</p>
+                    </div>
+                </div>
+
+
+                <div class="col s12 m4">
+                    <div class="icon-block card clickable">
+                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
+                        <h5 class="center">Aanbieding 2</h5>
+                        <p class="light">Gratis kaas bij elke kaas.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block card clickable">
+                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
+                        <h5 class="center">Aanbieding 3</h5>
+                        <p class="light">De melk is extra sappig dit seizoen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card"><h5>Categoriën</h5></div></div></div>
+            <div class="row">
+
+               <!-- Voor elke categorie een div* -->
+
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 1</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 2</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 3</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 4</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 5</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 6</h5>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card clickable">
+                        <h5 class="center">Categorie 7</h5>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div id="rightside" class="col-xs-6">
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="http://materializecss.com/images/sample-1.jpg" style="max-height:150px;">
+                    <span class="card-title">Meldingen</span>
+                </div>
+               <!-- Voor elke melding maak een div en een devider* -->
+                <div class="divider"></div>
+                <div class="card-content">
+                    <p>
+                        Dit is melding 1
+                    </p>
+                </div>
+
+                <div class="divider"></div>
+                <div class="card-content">
+                    <p>
+                        Dit is melding 2
+                    </p>
+                </div>
+
+                <div class="card-action">
+                    <a href="#">This is a link</a>
+                </div>
+            </div>
+
+            <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-widget-id="382128209740832768">Tweets door BaronJansma</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+        </div>
+    </div>
+

@@ -1,17 +1,32 @@
-﻿    <div class="navbar navbar-inverse navbar-fixed-top">
+﻿   <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
+            <a class="navbar-brand pull-left" href="~/Home"><img src="~/Content/jansma_logo2.png" style="max-height:25px; margin:0; padding:0; margin-right:20px;" />   Jansma Haule</a>
+            <!--3 streepjes mobiel-->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+        </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav text-center">
+                    <li><a href="~/Bestel"><span class="badge green" data-badge-caption="producten" style="color:white;">4</span>Winkelwagen</a></li>
+                    <li><a href="~/Profiel/Bedrijf">Bedrijf</a></li>
+                    <li class="dropdown">
+                        <a href="~/Profiel"  role="button" aria-haspopup="true" aria-expanded="false">
+                            Profiel</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mijn gegevens</a></li>
+                            <li><a href="#">Bedrijf beheren</a></li>
+                            <li><a href="#">Mijn contactpersonen</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
+        
+
+
     </div>
 
