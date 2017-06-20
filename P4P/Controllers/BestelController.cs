@@ -9,6 +9,7 @@ using System.Web.Security;
 using System.Data.Entity;
 using P4P.Helpers;
 using P4P.Models;
+using P4P.ViewModel;
 
 namespace P4P.Controllers
 {
@@ -30,7 +31,7 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(Winkelwagen winkelwagen)
         {
-            if (Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
             try
             {
@@ -67,7 +68,7 @@ namespace P4P.Controllers
                     ctx.Bestellingen.Add(bestelling);
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Orderdetails");
+                    return RedirectToAction("Orderdetails", new { id=bestelling.Id});
                 }
             }
             catch
@@ -79,28 +80,105 @@ namespace P4P.Controllers
         public ActionResult Orderdetails()
         {
             if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
-            int Id = Convert.ToInt32(Session["Id"]);
+            int User_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
             {
-                var bestelling = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == Id);
-                return View(bestelling);
+                var gebruiker = ctx.Gebruikers.SingleOrDefault(c => c.Id == User_id);
+                var bedrijf = ctx.Bedrijven.SingleOrDefault(c => c.Id == gebruiker.BedrijfId);
+                var bestelling = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == User_id);
+                var viewModel = new NewOrderDetails()
+                {
+                    BestellingProducts = bestelling,
+                    Bedrijf = bedrijf,
+                    Gebruiker = gebruiker
+                };
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Orderdetails(Bestelling bestelling, Bedrijf bedrijf)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    int user_Id = Convert.ToInt32(Session["Id"]);
+                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_Id);
+
+                    getBestelling.Opmerking = bestelling.Opmerking;
+                    getBestelling.AfleverAdres = bedrijf.Adres;
+                    getBestelling.Afleverdatum = bestelling.Afleverdatum;
+                    getBestelling.AfleverPlaats = bedrijf.Plaats;
+                    getBestelling.AfleverPostcode = bedrijf.Postcode;
+
+                    ctx.SaveChanges();
+
+                    return RedirectToAction("Orderconfirmation");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Orderdetails");
             }
         }
 
         public ActionResult Orderconfirmation()
         {
-            return View();
+            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            int User_id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.SingleOrDefault(c => c.Id == User_id);
+                var bedrijf = ctx.Bedrijven.SingleOrDefault(c => c.Id == gebruiker.BedrijfId);
+                var bestelling = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == User_id);
+                var viewModel = new NewOrderDetails()
+                {
+                    BestellingProducts = bestelling,
+                    Bedrijf = bedrijf,
+                    Gebruiker = gebruiker
+                };
+                return View(viewModel);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Orderconfirmation(Bestelling bestelling)
         {
-            //database shit hier
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    int user_Id = Convert.ToInt32(Session["Id"]);
+                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_Id);
+
+                    getBestelling.Afgerond = true;
+                    var producten = ctx.Winkelwagens.ToList().Where(c => c.Gebruiker_id == user_Id);
+                    foreach (var x in producten)
+                    {
+                        ctx.Winkelwagens.Remove(x);
+                    }
+
+                    ctx.SaveChanges();
+
+                    return RedirectToAction("Orderconfirmation");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Orderdetails");
+            }
 
             //de actie waar je heen wilt redirecten RedirectToAction("Action", "Controller");
-            return RedirectToAction("idk", "Bestel");
+            return RedirectToAction("Afgerond", "Bestel");
         }
 
         public ActionResult Afgerond()

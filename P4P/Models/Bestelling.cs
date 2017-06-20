@@ -27,5 +27,14 @@ namespace P4P.Models
         public bool Afgerond { get; set; }
 
         public virtual ICollection<BestellingProduct> Producten { get; set; }
+
+        [StringLength(255)]
+        public string AfleverAdres { get; set; }
+
+        [StringLength(255)]
+        public string AfleverPostcode { get; set; }
+
+        [StringLength(255)]
+        public string AfleverPlaats { get; set; }
     }
 }

@@ -1,7 +1,73 @@
-﻿@model P4P.Models.Bestelling
+﻿@model P4P.ViewModel.NewOrderDetails
 @{
     ViewBag.Title = "Orderconfirmation";
 }
 
-<h2>Orderconfirmation</h2>
+<div class="row">
+    @using (Html.BeginForm("Orderconfirmation", "Bestel"))
+    {
+        <div class="col-md-6">
+            <h4>Aflevergegevens</h4>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Adres, "Afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Adres, new {@class = "form-control", required = "True", disabled="True"})
+                @Html.ValidationMessageFor(m => m.Bedrijf.Adres)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Postcode, "Postcode afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Postcode, new {@class = "form-control", required = "True", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bedrijf.Postcode)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Plaats, "Plaats afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Plaats, new {@class = "form-control", required = "True", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bedrijf.Plaats)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Afleverdatum, "Gewenste afleverdatum")
+                @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, new {@class = "form-control", type = "date", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Afleverdatum)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Opmerking, "Opmerkingen")
+                @Html.TextBoxFor(m => m.Bestelling.Opmerking, new {@class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Opmerking)
+            </div>
+            <a href="Index" class="btn">Terug</a>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Winkelmandje</h4>
+            <div class="table-responsive">
+                <table class="table-bordered">
+                    <tr>
+                        <th>Productcode</th>
+                        <th>Productnaam</th>
+                        <th>Aantal</th>
+                        <th>Prijs</th>
+                    </tr>
+                    @{
+                        foreach (var p in Model.BestellingProducts)
+                        {
+                            <tr>
+                                <td>@p.Product.Code</td>
+                                <td>@p.Product.Naam</td>
+                                <td>@p.Aantal</td>
+                                <td>€@p.Product.Prijs</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Bevestigen</button> 
+    }
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
 
