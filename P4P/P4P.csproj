@@ -167,10 +167,6 @@
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\GMailer.cs" />
-    <Compile Include="Migrations\201706200806547_Sick.cs" />
-    <Compile Include="Migrations\201706200806547_Sick.Designer.cs">
-      <DependentUpon>201706200806547_Sick.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -527,11 +523,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706200806547_Sick.resx">
-      <DependentUpon>201706200806547_Sick.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
