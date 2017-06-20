@@ -39,7 +39,7 @@ namespace P4P.Areas.Admin.Controllers
             {
                 ctx.Hoofdcategories.Add(hoofdcategorie);
                 ctx.SaveChanges();
-                RedirectToAction("CreateHoofdcategorie", new { success = "true"});
+                return RedirectToAction("CreateHoofdcategorie", new { success = "true"});
             }
         }
 

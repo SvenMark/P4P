@@ -167,77 +167,9 @@
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\GMailer.cs" />
-    <Compile Include="Migrations\201706071404463_Backup.cs" />
-    <Compile Include="Migrations\201706071404463_Backup.Designer.cs">
-      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs" />
-    <Compile Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.Designer.cs">
-      <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080932304_AddMeldingenToDb.cs" />
-    <Compile Include="Migrations\201706080932304_AddMeldingenToDb.Designer.cs">
-      <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080936103_AddBedrijfToDb.cs" />
-    <Compile Include="Migrations\201706080936103_AddBedrijfToDb.Designer.cs">
-      <DependentUpon>201706080936103_AddBedrijfToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080938376_AddBedrijfToGebruikers.cs" />
-    <Compile Include="Migrations\201706080938376_AddBedrijfToGebruikers.Designer.cs">
-      <DependentUpon>201706080938376_AddBedrijfToGebruikers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080942422_AddBestellingToDb.cs" />
-    <Compile Include="Migrations\201706080942422_AddBestellingToDb.Designer.cs">
-      <DependentUpon>201706080942422_AddBestellingToDb.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080944116_AddOpmerkingToBestelling.cs" />
-    <Compile Include="Migrations\201706080944116_AddOpmerkingToBestelling.Designer.cs">
-      <DependentUpon>201706080944116_AddOpmerkingToBestelling.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080955442_ModifyAfleverdatumInBestellingToNullable.cs" />
-    <Compile Include="Migrations\201706080955442_ModifyAfleverdatumInBestellingToNullable.Designer.cs">
-      <DependentUpon>201706080955442_ModifyAfleverdatumInBestellingToNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706080957238_AddAfgerondToBestelling.cs" />
-    <Compile Include="Migrations\201706080957238_AddAfgerondToBestelling.Designer.cs">
-      <DependentUpon>201706080957238_AddAfgerondToBestelling.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.cs" />
-    <Compile Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.Designer.cs">
-      <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706081118439_MakePasswordRequired.cs" />
-    <Compile Include="Migrations\201706081118439_MakePasswordRequired.Designer.cs">
-      <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.cs" />
-    <Compile Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.Designer.cs">
-      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706151420333_AddManytoMany.cs" />
-    <Compile Include="Migrations\201706151420333_AddManytoMany.Designer.cs">
-      <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706190835563_Winkelwagen.cs" />
-    <Compile Include="Migrations\201706190835563_Winkelwagen.Designer.cs">
-      <DependentUpon>201706190835563_Winkelwagen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191123468_Bedrijfsgegevens.cs" />
-    <Compile Include="Migrations\201706191123468_Bedrijfsgegevens.Designer.cs">
-      <DependentUpon>201706191123468_Bedrijfsgegevens.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.cs" />
-    <Compile Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.Designer.cs">
-      <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706190842144_Dank.cs" />
-    <Compile Include="Migrations\201706190842144_Dank.Designer.cs">
-      <DependentUpon>201706190842144_Dank.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191022027_Yeah.cs" />
-    <Compile Include="Migrations\201706191022027_Yeah.Designer.cs">
-      <DependentUpon>201706191022027_Yeah.cs</DependentUpon>
+    <Compile Include="Migrations\201706200806547_Sick.cs" />
+    <Compile Include="Migrations\201706200806547_Sick.Designer.cs">
+      <DependentUpon>201706200806547_Sick.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
@@ -256,10 +188,6 @@
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf">
-      <DependentUpon>P4P.P4PContext.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -579,6 +507,7 @@
     <Content Include="Views\Bestel\Afgerond.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -597,59 +526,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706071404463_Backup.resx">
-      <DependentUpon>201706071404463_Backup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080915132_RemoveRolBedrijfsnaamFromGebruikers.resx">
-      <DependentUpon>201706080915132_RemoveRolBedrijfsnaamFromGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080932304_AddMeldingenToDb.resx">
-      <DependentUpon>201706080932304_AddMeldingenToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080936103_AddBedrijfToDb.resx">
-      <DependentUpon>201706080936103_AddBedrijfToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080938376_AddBedrijfToGebruikers.resx">
-      <DependentUpon>201706080938376_AddBedrijfToGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080942422_AddBestellingToDb.resx">
-      <DependentUpon>201706080942422_AddBestellingToDb.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080944116_AddOpmerkingToBestelling.resx">
-      <DependentUpon>201706080944116_AddOpmerkingToBestelling.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080955442_ModifyAfleverdatumInBestellingToNullable.resx">
-      <DependentUpon>201706080955442_ModifyAfleverdatumInBestellingToNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706080957238_AddAfgerondToBestelling.resx">
-      <DependentUpon>201706080957238_AddAfgerondToBestelling.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081001222_UpdateBestellingProductWithCollection.resx">
-      <DependentUpon>201706081001222_UpdateBestellingProductWithCollection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706081118439_MakePasswordRequired.resx">
-      <DependentUpon>201706081118439_MakePasswordRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706120732538_RemoveRequiredFromGebruikers.resx">
-      <DependentUpon>201706120732538_RemoveRequiredFromGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706151420333_AddManytoMany.resx">
-      <DependentUpon>201706151420333_AddManytoMany.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706190835563_Winkelwagen.resx">
-      <DependentUpon>201706190835563_Winkelwagen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191123468_Bedrijfsgegevens.resx">
-      <DependentUpon>201706191123468_Bedrijfsgegevens.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706181912102_AddBedrijfIdToGebruiker.resx">
-      <DependentUpon>201706181912102_AddBedrijfIdToGebruiker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706190842144_Dank.resx">
-      <DependentUpon>201706190842144_Dank.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191022027_Yeah.resx">
-      <DependentUpon>201706191022027_Yeah.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706200806547_Sick.resx">
+      <DependentUpon>201706200806547_Sick.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

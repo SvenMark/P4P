@@ -7,13 +7,13 @@ namespace P4P.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Winkelwagen : IMigrationMetadata
+    public sealed partial class Sick : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Winkelwagen));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Sick));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706190835563_Winkelwagen"; }
+            get { return "201706200806547_Sick"; }
         }
         
         string IMigrationMetadata.Source
