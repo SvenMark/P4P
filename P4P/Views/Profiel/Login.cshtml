@@ -26,12 +26,12 @@
 
             @using (Html.BeginForm("Login", "Profiel"))
             {
-                <div class="form-group">
+                <div class="form-group input-field">
                     @Html.LabelFor(m => m.Emailadres)
-                    @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control", type = "email"})
                     @Html.ValidationMessageFor(m => m.Emailadres)
                 </div>
-                <div class="form-group">
+                <div class="form-group input-field">
                     @Html.LabelFor(m => m.Wachtwoord)
                     @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True" })
                     @Html.ValidationMessageFor(m => m.Wachtwoord)
@@ -41,7 +41,7 @@
             }
         </div>
         <div id="help">
-            <div class="form-group">
+            <div class="form-group input-field">
                 @Html.LabelFor(m => m.Emailadres)
                 @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Emailadres)
