@@ -7,13 +7,13 @@ namespace P4P.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Sick : IMigrationMetadata
+    public sealed partial class All_tables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Sick));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(All_tables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706200806547_Sick"; }
+            get { return "201706200818070_All_tables"; }
         }
         
         string IMigrationMetadata.Source
