@@ -14,7 +14,6 @@ namespace P4P.Models
         [Required]
         public double Prijs { get; set; }
 
-        [Required]
         public Bedrijf Bedrijf { get; set; }
 
         public DateTime? Afleverdatum { get; set; }

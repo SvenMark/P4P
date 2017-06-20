@@ -1,8 +1,47 @@
-﻿
+﻿@model IEnumerable<P4P.Models.Product>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dashboard";
 }
 
-<h2>Index</h2>
-<h3>Overzicht van artikelen</h3>
+<h2>Dashboard</h2>
+<h3>Overzicht van gebruikers</h3>
 
+<p>
+    @Html.ActionLink("Nieuw Artikel", "New", "Artikel", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Nieuwe categorie", "New", "Categorie", null, new { @class = "btn btn-primary" })
+</p>
+<table id="gebruikers" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Naam</th>
+        <th>Verkoopeenheid</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Hoofdcategorie</th>
+        <th>Subcategorie</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Code</td>
+                <td>@product.Naam</td>
+                <td>@product.Verkoopeenheid</td>
+                <td>@product.Beschrijving</td>
+                <td>@product.Prijs</td>
+                <td>@product.Hoofdcategorie</td>
+                <td>@product.Subcategorie</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#gebruikers").DataTable();
+        })
+    </script>
+}
