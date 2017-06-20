@@ -67,6 +67,26 @@
         @Html.TextBoxFor(m => m.Bedrijf.Naam, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.Bedrijf.Naam)
     </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bedrijf.Adres)
+        @Html.TextBoxFor(m => m.Bedrijf.Adres, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bedrijf.Adres)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bedrijf.Postcode)
+        @Html.TextBoxFor(m => m.Bedrijf.Postcode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bedrijf.Postcode)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bedrijf.Plaats)
+        @Html.TextBoxFor(m => m.Bedrijf.Plaats, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bedrijf.Plaats)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Bedrijf.Telefoonnummer)
+        @Html.TextBoxFor(m => m.Bedrijf.Telefoonnummer, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Bedrijf.Telefoonnummer)
+    </div>
 
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Register</button>
