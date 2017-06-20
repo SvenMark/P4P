@@ -16,11 +16,21 @@ namespace P4P.Areas.Admin.Controllers
         {
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList();
+                var hoofdCategorie = ctx.Hoofdcategories.ToList();
+
+                return View(hoofdCategorie);
+            }
+            
+        }
+
+        public ActionResult Details(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
 
                 return View(subCategorie);
             }
-            
         }
 
         public ActionResult CreateHoofdcategorie()
@@ -41,6 +51,26 @@ namespace P4P.Areas.Admin.Controllers
                 ctx.SaveChanges();
                 return RedirectToAction("CreateHoofdcategorie", new { success = "true"});
             }
+        }
+
+        public ActionResult CreateSubCategorie(int id)
+        {
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
+
+            using (var ctx = new P4PContext())
+            {
+                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+                var viewModel = new NewSubcategorie()
+                {
+                    Hoofdcategorie = hoofdCategorie
+                };
+                return View(viewModel);
+            }
+            
         }
 
         //edit, delete
