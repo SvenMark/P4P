@@ -63,7 +63,7 @@ namespace P4P.Areas.Admin.Controllers
             {
                 ctx.Hoofdcategories.Add(hoofdcategorie);
                 ctx.SaveChanges();
-                return RedirectToAction("CreateHoofdcategorie", new { success = "true"});
+                return RedirectToAction("Index", new { success = "true"});
             }
         }
 
@@ -100,6 +100,13 @@ namespace P4P.Areas.Admin.Controllers
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
 
                 if (hoofdCategorie == null) return HttpNotFound();
+
+                var subCategorieen = ctx.Subcategories.ToList().Where(c => c.Hoofdcategorie.Id == id);
+
+                foreach (var subCategorie in subCategorieen)
+                {
+                    ctx.Subcategories.Remove(subCategorie);
+                }
 
                 ctx.Hoofdcategories.Remove(hoofdCategorie);
                 ctx.SaveChanges();
