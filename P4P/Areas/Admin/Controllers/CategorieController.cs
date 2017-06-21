@@ -152,7 +152,7 @@ namespace P4P.Areas.Admin.Controllers
         {
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Find(id);
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
                 if (subCategorie == null) return HttpNotFound();
 
                 return View(subCategorie);

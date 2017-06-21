@@ -3,7 +3,12 @@
     ViewBag.Title = "Details";
 }
 <h2>Details</h2>
-@Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new { id = Model.Hoofdcategorie.Id }, new { @class = "btn btn-primary" })
+
+<p>
+    @Html.ActionLink("Terug", "Index", "Categorie", null, new {@class = "btn btn-primary"})
+    @Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new {id = Model.Hoofdcategorie.Id}, new {@class = "btn btn-primary"})
+</p>
+
 @if (!Model.Subcategorie.Any())
 {
     <p>Er zijn nog geen subcategorieën ingesteld op deze hoofdcategorie</p>

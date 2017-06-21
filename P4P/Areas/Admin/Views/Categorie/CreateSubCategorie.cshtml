@@ -5,6 +5,10 @@
 
 <h2>Nieuwe Subcategorie</h2>
 <h2>Register</h2>
+
+<p>
+    @Html.ActionLink("Terug", "Details", "Categorie", new { id=Model.Hoofdcategorie.Id}, new { @class = "btn btn-primary" })
+</p>
 @using (Html.BeginForm("CreateSubCategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
 {
     if (ViewBag.message != null)

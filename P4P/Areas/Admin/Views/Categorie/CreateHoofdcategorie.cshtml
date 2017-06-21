@@ -5,6 +5,10 @@
 
 <h2>Nieuwe hoofdcategorie</h2>
 <h2>Register</h2>
+
+<p>
+    @Html.ActionLink("Terug", "Index", "Categorie", null, new { @class = "btn btn-primary" })
+</p>
 @using (Html.BeginForm("CreateHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
 {
     if (ViewBag.message != null)

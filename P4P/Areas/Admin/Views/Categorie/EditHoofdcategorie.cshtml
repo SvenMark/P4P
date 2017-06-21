@@ -4,6 +4,10 @@
 }
 
 <h2>EditSubCategorie</h2>
+
+<p>
+    @Html.ActionLink("Terug", "Index", "Categorie", null, new { @class = "btn btn-primary" })
+</p>
 @using (Html.BeginForm("EditHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
 {
     if (ViewBag.message != null)
