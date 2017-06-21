@@ -18,6 +18,9 @@ namespace P4P.Areas.Admin.Controllers
             {
                 var hoofdCategorie = ctx.Hoofdcategories.ToList();
 
+                if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(hoofdCategorie);
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
                 return View(hoofdCategorie);
             }
             
@@ -30,12 +33,16 @@ namespace P4P.Areas.Admin.Controllers
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
 
+                if (hoofdCategorie == null) return HttpNotFound();
+
                 var viewModel = new DetailsSubcategorie()
                 {
                     Subcategorie = subCategorie,
                     Hoofdcategorie = hoofdCategorie
                 };
-
+                if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(viewModel);
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
                 return View(viewModel);
             }
         }
@@ -57,6 +64,46 @@ namespace P4P.Areas.Admin.Controllers
                 ctx.Hoofdcategories.Add(hoofdcategorie);
                 ctx.SaveChanges();
                 return RedirectToAction("CreateHoofdcategorie", new { success = "true"});
+            }
+        }
+
+        public ActionResult EditHoofdcategorie(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+                if (hoofdCategorie == null) return HttpNotFound();
+
+                return View(hoofdCategorie);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditHoofdCategorie(Hoofdcategorie hoofdcategorie)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var hoofdCategorie = ctx.Hoofdcategories.Find(hoofdcategorie.Id);
+                if (hoofdCategorie == null) return HttpNotFound();
+                hoofdCategorie.Naam = hoofdcategorie.Naam;
+
+                ctx.SaveChanges();
+                return RedirectToAction("Index", "Categorie", new { success = "true" });
+            }
+        }
+
+        public ActionResult DeleteHoofdCategorie(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+
+                if (hoofdCategorie == null) return HttpNotFound();
+
+                ctx.Hoofdcategories.Remove(hoofdCategorie);
+                ctx.SaveChanges();
+                return RedirectToAction("Index", "Categorie", new { success = "true" });
             }
         }
 
@@ -94,6 +141,44 @@ namespace P4P.Areas.Admin.Controllers
             return RedirectToAction("Details", new {id});
         }
 
-        //edit, delete
+        public ActionResult EditSubCategorie(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var subCategorie = ctx.Subcategories.Find(id);
+                if (subCategorie == null) return HttpNotFound();
+
+                return View(subCategorie);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSubCategorie(Subcategorie subcategorie)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == subcategorie.Id);
+                if (subCategorie == null) return HttpNotFound();
+                subCategorie.Naam = subcategorie.Naam;
+                
+                ctx.SaveChanges();
+                return RedirectToAction("Details", "Categorie", new {id = subCategorie.Hoofdcategorie.Id, success = "true" });
+            }
+        }
+
+        public ActionResult DeleteSubCategorie(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
+                var hoofdCategorieId = subCategorie.Hoofdcategorie.Id;
+
+                if (subCategorie == null) return HttpNotFound();
+                ctx.Subcategories.Remove(subCategorie);
+                ctx.SaveChanges();
+                return RedirectToAction("Details", "Categorie", new { id = hoofdCategorieId, success = "true" });
+            }
+        }
     }
 }
