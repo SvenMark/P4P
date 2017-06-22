@@ -41,12 +41,16 @@
             }
         </div>
         <div id="help">
+        @using (Html.BeginForm("Reset", "Profiel"))
+        {
             <div class="form-group input-field">
                 @Html.LabelFor(m => m.Emailadres)
-                @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control" })
+                @Html.TextBoxFor(m => m.Emailadres, new {@class = "form-control"})
                 @Html.ValidationMessageFor(m => m.Emailadres)
             </div>
+            @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-primary">Versturen</button>
+        }
         </div>
     </div>
 </div>
@@ -56,5 +60,15 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @if (ViewBag.Success == "true") { 
+                @:toastr.success("Opgeslagen");
+            } else if (ViewBag.Success == "false") {
+                @:toastr.error("@ViewBag.Errormessage");      
+            }
+        });
+    </script>
 }
 
