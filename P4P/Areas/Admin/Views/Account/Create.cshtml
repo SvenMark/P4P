@@ -12,10 +12,6 @@
         <div class="card-content">
             @using (Html.BeginForm("Create", "Account", FormMethod.Post, new { id = "registerForm" }))
             {
-                if (ViewBag.message != null)
-                {
-                    <h2>@ViewBag.message</h2>
-                }
                 <div id="topform">
                     <center><h4>Persoonlijk</h4></center>
                     <div class="row nomargin">
@@ -70,12 +66,12 @@
                         <div class="form-group col-md-12">
                             @Html.LabelFor(m => m.Gebruiker.Rol)
                             @Html.DropDownListFor(m => m.Gebruiker.Rol,
-                 new List<SelectListItem>
-                 {
-                            new SelectListItem {Value = "Gebruiker", Text = "Gebruiker"},
-                            new SelectListItem {Value = "Admin", Text = "Admin"},
-                 },
-                 new { @class = "form-control" })
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem {Value = "Gebruiker", Text = "Gebruiker"},
+                                new SelectListItem {Value = "Admin", Text = "Admin"},
+                            },
+                            new {@class = "form-control"})
                             @Html.ValidationMessageFor(m => m.Gebruiker.Rol)
                         </div>
                     </div>  
