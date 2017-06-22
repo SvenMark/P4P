@@ -19,7 +19,7 @@ namespace P4P.Controllers
         // GET: Bestel
         public ActionResult Index()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -81,7 +81,7 @@ namespace P4P.Controllers
 
         public ActionResult Orderdetails()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int User_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -131,7 +131,7 @@ namespace P4P.Controllers
 
         public ActionResult Orderconfirmation()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -184,7 +184,7 @@ namespace P4P.Controllers
 
         public ActionResult AfgerondBestellingen()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -197,7 +197,7 @@ namespace P4P.Controllers
 
         public ActionResult Afgerond(int id)
         {
-            if (Session["Id"] == null) return RedirectToAction("Login", "Profiel");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
