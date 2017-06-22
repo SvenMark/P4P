@@ -194,12 +194,11 @@
     <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
+    <Compile Include="ViewModel\DetailsSubcategorie.cs" />
+    <Compile Include="ViewModel\NewSubcategorie.cs" />
     <Compile Include="ViewModel\NewOrderDetails.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
-    <Content Include="Content\background1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cart.png" />
@@ -361,7 +360,12 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\Index.css" />
+    <Content Include="Content\jansma_logo.png" />
+    <Content Include="Content\jansma_logo2.png" />
+    <Content Include="Content\login.css" />
+    <Content Include="Content\loginbackground.jpg" />
     <Content Include="Content\materialize.min.css" />
+    <Content Include="Content\override.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -375,9 +379,7 @@
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
     <Compile Include="P4P.Context.cs" />
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
@@ -391,8 +393,12 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Areas\Admin\Views\Account\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\CreateHoofdcategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\CreateSubCategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\EditSubCategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\EditHoofdcategorie.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -570,8 +576,10 @@
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
+    <Content Include="Views\Shared\_Searchbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>

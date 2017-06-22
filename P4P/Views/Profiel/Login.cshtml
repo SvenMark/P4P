@@ -3,31 +3,72 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
-<h3>Login form</h3>
-@if (ViewBag.Error != null)
-{
-    <h4>@ViewBag.Error</h4>
-}
+<link rel="stylesheet" type="text/css" href="~/Content/login.css">
 
-@using (Html.BeginForm("Login", "Profiel"))
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.Emailadres)
-        @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Emailadres)
+
+
+<div id="card" class="card">
+    <div class="card-content override">
+        <img id="haule" src="~/Content/jansma_logo.png" />
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Wachtwoord)
-        @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True"})
-        @Html.ValidationMessageFor(m => m.Wachtwoord)
+    <div class="card-tabs">
+        <ul class="tabs tabs-fixed-width">
+            <li class="tab override"><a class="active override" href="#login">Login</a></li>
+            <li class="tab override"><a class ="override"href="#help">Vergeten</a></li>
+        </ul>
     </div>
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Opslaan</button>
-}
+    <div class="card-content grey lighten-4">
+        <div id="login">
+            @if (ViewBag.Error != null)
+            {
+                <h4>@ViewBag.Error</h4>
+            }
+
+            @using (Html.BeginForm("Login", "Profiel"))
+            {
+                <div class="form-group input-field">
+                    @Html.LabelFor(m => m.Emailadres)
+                    @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control", type = "email"})
+                    @Html.ValidationMessageFor(m => m.Emailadres)
+                </div>
+                <div class="form-group input-field">
+                    @Html.LabelFor(m => m.Wachtwoord)
+                    @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True" })
+                    @Html.ValidationMessageFor(m => m.Wachtwoord)
+                </div>
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Inloggen</button>
+            }
+        </div>
+        <div id="help">
+        @using (Html.BeginForm("Reset", "Profiel"))
+        {
+            <div class="form-group input-field">
+                @Html.LabelFor(m => m.Emailadres)
+                @Html.TextBoxFor(m => m.Emailadres, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Emailadres)
+            </div>
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Versturen</button>
+        }
+        </div>
+    </div>
+</div>
+
+
 
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @if (ViewBag.Success == "true") { 
+                @:toastr.success("Opgeslagen");
+            } else if (ViewBag.Success == "false") {
+                @:toastr.error("@ViewBag.Errormessage");      
+            }
+        });
+    </script>
 }
 
