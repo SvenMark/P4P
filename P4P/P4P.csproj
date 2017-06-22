@@ -576,6 +576,7 @@
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
+    <Content Include="Views\Bestel\AfgerondBestellingen.cshtml" />
     <Content Include="Views\Shared\_Searchbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
