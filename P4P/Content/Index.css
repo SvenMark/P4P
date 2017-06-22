@@ -144,3 +144,40 @@ h4 {
 .field-validation-error{
     color:red;
 }
+
+/*Admin gebruikers lijst*/
+#gebruikers{
+    margin-left:2vw;
+    margin-right:2vw;
+    width:95vw;
+}
+#gebruiker-banner {
+    width: 100vw;
+    height: 20vh;
+    padding-top:30px;
+    min-height: 280px;
+    margin-bottom:20px;
+}
+/*Profiel index*/
+.profiel {
+    width: 90%;
+    margin-left: 5%;
+    min-height: 80vh;
+    margin-top: 10px;
+    padding: 45px;
+    background-color: #f9f9f9;
+}
+#opslaan{
+    margin-bottom:20px;
+}
+.collection-item{
+    text-align:left;
+}
+/*Gegevenscontrole*/
+.tekstvak{
+    max-width:30vw!important;
+    margin:auto;
+}
+.profiel2{
+    min-height:50vh;
+}

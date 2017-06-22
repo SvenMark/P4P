@@ -2,14 +2,21 @@
 @{
     ViewBag.Title = "Dashboard";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="gebruiker-banner" class="parallax-container">
+    <div class="parallax">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2>Dashboard</h2>
+        <h4>Overzicht van gebruikers</h4>
+        <p>
+            @Html.ActionLink("Nieuwe gebruiker", "Create", "Account", null, new { @class = "btn btn-primary" })
+        </p>
+    </center>
+</div>
 
-<h2>Dashboard</h2>
-<h3>Overzicht van gebruikers</h3>
-
-<p>
-    @Html.ActionLink("Nieuwe gebruiker", "Create", "Account", null, new { @class = "btn btn-primary" })
-</p>
-<table id="gebruikers" class="table table-bordered table-hover">
+<table id="gebruikers" class="table striped table-hover">
     <thead>
     <tr>
         <th>Email</th>
