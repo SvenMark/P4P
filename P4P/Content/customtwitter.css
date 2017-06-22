@@ -1,0 +1,12 @@
+﻿#logo {
+    content: url("jansma_logowhite.png");
+}
+#twitterheader {
+    color: dodgerblue;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+}
+#twitterbody {
+    width: 100%;
+}
