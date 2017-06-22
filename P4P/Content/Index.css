@@ -136,3 +136,11 @@ h4 {
     font-size: 20px;
     color: #4caf50;
 }
+
+.nomargin{
+    padding-bottom:0;
+    margin-bottom:-22px;
+}
+.field-validation-error{
+    color:red;
+}
