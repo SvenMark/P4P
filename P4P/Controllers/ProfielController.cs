@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web.Mvc;
 using P4P.Helpers;
 using P4P.Models;
@@ -51,11 +52,41 @@ namespace P4P.Controllers
             }
         }
 
+        public ActionResult Reset(Gebruiker gebruiker)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var gebruikerInDb = ctx.Gebruikers.SingleOrDefault(c => c.Emailadres == gebruiker.Emailadres);
+
+                if (gebruikerInDb == null) return HttpNotFound();
+
+                gebruikerInDb.Wachtwoord = null;
+                gebruikerInDb.Token = Auth.Getlogintoken();
+
+                ctx.SaveChanges();
+
+                GMailer.GmailUsername = "webshopjansma@gmail.com";
+                GMailer.GmailPassword = "Lemmesmash";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = gebruiker.Emailadres;
+                mailer.Subject = "ResetLink";
+                mailer.Body =
+                    "Hierbij de resetlink voor uw account<br> Reset uw wachtwoord met behulp van deze link: http://localhost:60565/Profiel/Login/" +
+                    gebruikerInDb.Token;
+                mailer.IsHtml = true;
+                mailer.Send();
+                return RedirectToAction("Login", "Profiel", new {success = "true"});
+            }
+        }
+
         public ActionResult Login(string token)
         {
-            ViewBag.Success = Request.QueryString["success"];
-            ViewBag.Errormessage = Request.QueryString["Errormessage"];
-
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             if (token == null) return View();
 
             using (P4PContext ctx = new P4PContext())
@@ -70,10 +101,7 @@ namespace P4P.Controllers
                         ViewBag.Error = "";
                         return RedirectToAction("Gegevenscontrole");
                     }
-                    else
-                    {
                         ViewBag.Error = "Token is not valid";
-                    }
                 }
                 catch
                 {
