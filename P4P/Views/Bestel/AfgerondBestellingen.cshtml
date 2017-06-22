@@ -1,0 +1,46 @@
+﻿@model IEnumerable<P4P.Models.Bestelling>
+@{
+    ViewBag.Title = "AfgerondBestellingen";
+}
+
+<h2>Afgeronde bestellingen</h2>
+
+<table id="bestellingen" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Afleverdatum</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var bestelling in Model)
+    {
+        <tr>
+            <td>@bestelling.Id</td>
+            <td>@bestelling.Afleverdatum.Value.ToString("dd/MM/yyyy")</td>
+            <td>@Html.ActionLink("Openen", "Afgerond", "Bestel", new { bestelling.Id }, new { @class = "btn btn-primary" })</td>    
+        </tr>
+    }
+    </tbody>
+</table>
+<a href="~/Home/Index" class="btn">Terug</a>
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#bestellingen").DataTable();
+        })
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @if (ViewBag.Success == "true") {
+                @:toastr.success("Opgeslagen");
+            } else if (ViewBag.Success == "false") {
+                @:toastr.error("@ViewBag.Errormessage");
+            }
+        });
+    </script>
+}

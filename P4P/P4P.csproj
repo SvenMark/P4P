@@ -171,6 +171,14 @@
     <Compile Include="Migrations\201706200818070_All_tables.Designer.cs">
       <DependentUpon>201706200818070_All_tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706200956076_aflevergegevens.cs" />
+    <Compile Include="Migrations\201706200956076_aflevergegevens.Designer.cs">
+      <DependentUpon>201706200956076_aflevergegevens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706201059211_Bestelling not required.cs" />
+    <Compile Include="Migrations\201706201059211_Bestelling not required.Designer.cs">
+      <DependentUpon>201706201059211_Bestelling not required.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -188,6 +196,7 @@
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
     <Compile Include="ViewModel\DetailsSubcategorie.cs" />
     <Compile Include="ViewModel\NewSubcategorie.cs" />
+    <Compile Include="ViewModel\NewOrderDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -478,6 +487,60 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\materialize.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pickadate\legacy.js" />
+    <Content Include="Scripts\pickadate\picker.date.js" />
+    <Content Include="Scripts\pickadate\picker.js" />
+    <Content Include="Scripts\pickadate\picker.time.js" />
+    <Content Include="Scripts\pickadate\themes\classic.css" />
+    <Content Include="Scripts\pickadate\themes\classic.date.css" />
+    <Content Include="Scripts\pickadate\themes\classic.time.css" />
+    <Content Include="Scripts\pickadate\themes\default.css" />
+    <Content Include="Scripts\pickadate\themes\default.date.css" />
+    <Content Include="Scripts\pickadate\themes\default.time.css" />
+    <Content Include="Scripts\pickadate\themes\rtl.css" />
+    <Content Include="Scripts\pickadate\translations\ar.js" />
+    <Content Include="Scripts\pickadate\translations\bg_BG.js" />
+    <Content Include="Scripts\pickadate\translations\bs_BA.js" />
+    <Content Include="Scripts\pickadate\translations\ca_ES.js" />
+    <Content Include="Scripts\pickadate\translations\cs_CZ.js" />
+    <Content Include="Scripts\pickadate\translations\da_DK.js" />
+    <Content Include="Scripts\pickadate\translations\de_DE.js" />
+    <Content Include="Scripts\pickadate\translations\el_GR.js" />
+    <Content Include="Scripts\pickadate\translations\es_ES.js" />
+    <Content Include="Scripts\pickadate\translations\et_EE.js" />
+    <Content Include="Scripts\pickadate\translations\eu_ES.js" />
+    <Content Include="Scripts\pickadate\translations\fi_FI.js" />
+    <Content Include="Scripts\pickadate\translations\fr_FR.js" />
+    <Content Include="Scripts\pickadate\translations\gl_ES.js" />
+    <Content Include="Scripts\pickadate\translations\he_IL.js" />
+    <Content Include="Scripts\pickadate\translations\hi_IN.js" />
+    <Content Include="Scripts\pickadate\translations\hr_HR.js" />
+    <Content Include="Scripts\pickadate\translations\hu_HU.js" />
+    <Content Include="Scripts\pickadate\translations\id_ID.js" />
+    <Content Include="Scripts\pickadate\translations\is_IS.js" />
+    <Content Include="Scripts\pickadate\translations\it_IT.js" />
+    <Content Include="Scripts\pickadate\translations\ja_JP.js" />
+    <Content Include="Scripts\pickadate\translations\ko_KR.js" />
+    <Content Include="Scripts\pickadate\translations\lt_LT.js" />
+    <Content Include="Scripts\pickadate\translations\lv_LV.js" />
+    <Content Include="Scripts\pickadate\translations\nb_NO.js" />
+    <Content Include="Scripts\pickadate\translations\ne_NP.js" />
+    <Content Include="Scripts\pickadate\translations\nl_NL.js" />
+    <Content Include="Scripts\pickadate\translations\no_NO.js" />
+    <Content Include="Scripts\pickadate\translations\pl_PL.js" />
+    <Content Include="Scripts\pickadate\translations\pt_BR.js" />
+    <Content Include="Scripts\pickadate\translations\pt_PT.js" />
+    <Content Include="Scripts\pickadate\translations\ro_RO.js" />
+    <Content Include="Scripts\pickadate\translations\ru_RU.js" />
+    <Content Include="Scripts\pickadate\translations\sk_SK.js" />
+    <Content Include="Scripts\pickadate\translations\sl_SI.js" />
+    <Content Include="Scripts\pickadate\translations\sv_SE.js" />
+    <Content Include="Scripts\pickadate\translations\th_TH.js" />
+    <Content Include="Scripts\pickadate\translations\tr_TR.js" />
+    <Content Include="Scripts\pickadate\translations\uk_UA.js" />
+    <Content Include="Scripts\pickadate\translations\vi_VN.js" />
+    <Content Include="Scripts\pickadate\translations\zh_CN.js" />
+    <Content Include="Scripts\pickadate\translations\zh_TW.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\toastr.js" />
@@ -513,6 +576,7 @@
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
+    <Content Include="Views\Bestel\AfgerondBestellingen.cshtml" />
     <Content Include="Views\Shared\_Searchbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -537,6 +601,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706200818070_All_tables.resx">
       <DependentUpon>201706200818070_All_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706200956076_aflevergegevens.resx">
+      <DependentUpon>201706200956076_aflevergegevens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706201059211_Bestelling not required.resx">
+      <DependentUpon>201706201059211_Bestelling not required.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
