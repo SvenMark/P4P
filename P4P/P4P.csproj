@@ -186,6 +186,8 @@
     <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
+    <Compile Include="ViewModel\DetailsSubcategorie.cs" />
+    <Compile Include="ViewModel\NewSubcategorie.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
@@ -386,7 +388,11 @@
     <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="Areas\Admin\Views\Account\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\CreateHoofdcategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\CreateSubCategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\EditSubCategorie.cshtml" />
+    <Content Include="Areas\Admin\Views\Categorie\EditHoofdcategorie.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
