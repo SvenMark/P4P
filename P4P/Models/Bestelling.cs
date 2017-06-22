@@ -16,6 +16,7 @@ namespace P4P.Models
 
         public Bedrijf Bedrijf { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? Afleverdatum { get; set; }
 
         [Required]

@@ -570,6 +570,7 @@
     <Content Include="Views\Bestel\Orderdetails.cshtml" />
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
+    <Content Include="Views\Bestel\AfgerondBestellingen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

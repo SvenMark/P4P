@@ -1,7 +1,39 @@
-﻿@model P4P.Models.Bestelling
+﻿@model P4P.ViewModel.NewOrderDetails
 @{
-    ViewBag.Title = "Afgerond";
+    ViewBag.Title = "Bestelling";
 }
 
-<h2>Afgerond</h2>
+<h2>Afgeronde bestelling Id: @Model.Bestelling.Id</h2>
+
+@using (Html.BeginForm("Afgerond", "Bestel"))
+{
+    <div class="col-md-6">
+        <h4>Producten in deze bestelling</h4>
+        <div class="table-responsive">
+            <table class="table-bordered">
+                <tr>
+                    <th>Productcode</th>
+                    <th>Productnaam</th>
+                    <th>Aantal</th>
+                    <th>Prijs</th>
+                </tr>
+                @{
+                    foreach (var p in Model.BestellingProducts)
+                    {
+                        <tr>
+                            <td>@p.Product.Code</td>
+                            <td>@p.Product.Naam</td>
+                            <td>@p.Aantal</td>
+                            <td>€@p.Product.Prijs</td>
+                        </tr>
+                    }
+                }
+            </table>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Bestelling.Id)
+    <a href="~/Bestel/AfgerondBestellingen" class="btn">Terug</a>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Opnieuw bestellen</button> 
+}
 
