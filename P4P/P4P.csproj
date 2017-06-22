@@ -386,7 +386,6 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Areas\Admin\Views\Account\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\CreateHoofdcategorie.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_NavBar.cshtml" />
