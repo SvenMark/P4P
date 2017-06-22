@@ -190,8 +190,6 @@
     <Compile Include="ViewModel\NewSubcategorie.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\P4P.P4PContext.mdf" />
-    <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cart.png" />
@@ -519,6 +517,7 @@
     <Content Include="Views\Shared\_Searchbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
