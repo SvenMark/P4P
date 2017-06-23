@@ -31,8 +31,22 @@
                 <td>@product.Verkoopeenheid</td>
                 <td>@product.Beschrijving</td>
                 <td>€@product.Prijs</td>
-                <td>@product.Hoofdcategorie.Naam</td>
-                <td>@product.Subcategorie.Naam</td>
+                @if (product.Hoofdcategorie != null)
+                {
+                    <td>@product.Hoofdcategorie.Naam</td>
+                }
+                else
+                {
+                    <td>Geen Hoofdcategorie</td>
+                }
+                @if (product.Subcategorie != null)
+                {
+                    <td>@product.Subcategorie.Naam</td>
+                }
+                else
+                {
+                    <td>Geen Subcategorie</td>
+                }
             </tr>
         }
     </tbody>
