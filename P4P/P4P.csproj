@@ -589,9 +589,9 @@
     <Content Include="Views\Winkel\Artikelpagina.cshtml" />
     <Content Include="Views\Winkel\SubCategorie.cshtml" />
     <Content Include="Views\Winkel\Categorie.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   <ItemGroup>
