@@ -100,12 +100,15 @@ namespace P4P.Areas.Admin.Controllers
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
 
                 if (hoofdCategorie == null) return HttpNotFound();
-
-                var subCategorieen = ctx.Subcategories.ToList().Where(c => c.Hoofdcategorie.Id == id);
-
-                foreach (var subCategorie in subCategorieen)
+                if (ctx.Subcategories.Any(c => c.Hoofdcategorie.Id == id))
                 {
-                    ctx.Subcategories.Remove(subCategorie);
+
+                    var subCategorieen = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
+
+                    foreach (var subCategorie in subCategorieen)
+                    {
+                        ctx.Subcategories.Remove(subCategorie);
+                    }
                 }
 
                 ctx.Hoofdcategories.Remove(hoofdCategorie);
