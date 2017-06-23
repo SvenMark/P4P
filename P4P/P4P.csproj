@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201706231021227_Hoofdcategorie_required.Designer.cs">
       <DependentUpon>201706231021227_Hoofdcategorie_required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706231458378_kaasisbaas.cs" />
+    <Compile Include="Migrations\201706231458378_kaasisbaas.Designer.cs">
+      <DependentUpon>201706231458378_kaasisbaas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -621,6 +625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706231021227_Hoofdcategorie_required.resx">
       <DependentUpon>201706231021227_Hoofdcategorie_required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706231458378_kaasisbaas.resx">
+      <DependentUpon>201706231458378_kaasisbaas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
