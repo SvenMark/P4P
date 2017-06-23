@@ -1,0 +1,40 @@
+﻿@model P4P.ViewModel.NewWinkelmand
+@{
+    ViewBag.Title = "Artikelpagina";
+}
+
+<h4>"Categorie > subcategorie"</h4>
+<h2>@Model.product.Naam</h2>
+
+@using (Html.BeginForm("Artikelpagina", "Winkel"))
+{
+    @Html.LabelFor(m => m.product.Code)
+    @Html.TextBoxFor(m => m.product.Code, new { disabled="True" })
+    @Html.ValidationMessageFor(m => m.product.Code)
+
+    @Html.LabelFor(m => m.product.Prijs)
+    @Html.TextBoxFor(m => m.product.Prijs, new { disabled="True" })
+    @Html.ValidationMessageFor(m => m.product.Prijs)
+
+    @Html.LabelFor(m => m.product.Beschrijving)
+    @Html.TextAreaFor(m => m.product.Beschrijving, new { disabled="True" })
+    @Html.ValidationMessageFor(m => m.product.Beschrijving)
+
+    @Html.LabelFor(m => m.product.Specificaties)
+    @Html.TextAreaFor(m => m.product.Specificaties, new { disabled="True" })
+    @Html.ValidationMessageFor(m => m.product.Specificaties)
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.winkelwagen.Aantal)
+        @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number",  @class = "form-control", required = "True" })
+        @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+    </div>
+    @Html.HiddenFor(m => m.product.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">In winkelmand</button>
+}
+
+@using (Html.BeginForm("AddFavoriet", "Favorieten"))
+{
+    
+}
