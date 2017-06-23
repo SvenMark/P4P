@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using P4P.Models;
+using P4P.Helpers;
 
 namespace P4P.Controllers
 {
@@ -17,7 +18,14 @@ namespace P4P.Controllers
 
         public ActionResult Indexalternative()
         {
-            return View();
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var categorie = ctx.Hoofdcategories.ToList();
+                return View(categorie);
+            }
         }
 
         public ActionResult About()

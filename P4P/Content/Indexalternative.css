@@ -20,19 +20,6 @@
         background-color: whitesmoke;
     }
 
-
-.links {
-    height: 1000px;
-    margin:0;
-    padding:0;
-}
-
-.rechts {
-    height: 1000px;
-    margin: 0;
-    padding: 0;
-}
-
 .parallax-container {
     min-height: 380px;
     line-height: 0;
@@ -46,7 +33,7 @@
 
 .background-grass {
     color: rgb(255, 255, 255);
-    background: linear-gradient(145deg, #4caf50, #6caf50);
+    background: linear-gradient(145deg, #4caf50, #33e07b);
 }
 
 .gradient {
@@ -70,34 +57,36 @@
     overflow: hidden;
     margin-top:-15vh;
 }
+.edited {
+    color: white;
+    height: 50vh;
+    min-height: 200px;
+    margin-top: 10vh;
+    z-index: -1;
+    padding: 0;
+    background: linear-gradient(145deg, #33e07b, #32e0c3);
+}
+#recht {
+
+    z-index: 1;
+    transform:skewY(-5deg);
+    height:40vh;
+}
+
+
 .big{
     height:30vh;
 }
-#content{
-    width:100vw;
 
-}
-.navbar-default {
-    background-color: transparent !important;
-    border-color: transparent!important;
-    color:white!important;
-}
-#scroll{
-    height:1000px;
-    width:100vw;
-}
-a{
-    color:blue;
-}
-.navbar a{
-    color: white !important;
-}
 h1 {
     transform: skewY(-5deg);
     color:white;
     margin-left:auto;
     margin-right:auto;
     margin-top:17vh;
+}
+h5 {
+    color: dimgrey;
 }
 #custom-search-input {
     border-radius: 6px;
@@ -133,7 +122,6 @@ h1 {
     display: inline-block;
     float: none;
     margin-right: -4px;
-    width:23vw;
 }
 .aanbieding {
     max-width: 350px;
@@ -165,7 +153,21 @@ h1 {
     a {
         color: black !important;
     }
-}
+    .col-centered {
+        width:30vw;
+        margin:0;
+        padding:0;
+
+    }
+    h5{
+        font-size:20px;
+    }
+    #categories{
+        z-index:-1;
+        margin:0;
+
+    }
+    }
 @media only screen and (max-width : 1000px) {
     #custom-search-input{
         width:80vw;
