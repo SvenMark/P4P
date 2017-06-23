@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using P4P.Models;
+using P4P.Helpers;
 
 namespace P4P.Controllers
 {
@@ -12,11 +13,13 @@ namespace P4P.Controllers
 
         public ActionResult Index()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             return View();
         }
 
         public ActionResult About()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -24,6 +27,7 @@ namespace P4P.Controllers
 
         public ActionResult Contact()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             ViewBag.Message = "Get in Touch!";
 
             return View();
