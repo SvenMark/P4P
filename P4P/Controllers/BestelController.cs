@@ -41,12 +41,13 @@ namespace P4P.Controllers
                 using (var ctx = new P4PContext())
                 {
                     double totaalPrijs = 0;
-                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).ToList())
+                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id))
                     {
                         totaalPrijs += (item.Aantal * item.Product.Prijs);
                     }
 
                     var gebruikerInDb = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                    if (gebruikerInDb == null) return HttpNotFound();
 
                     Bestelling bestelling = new Bestelling
                     {
@@ -56,7 +57,7 @@ namespace P4P.Controllers
                         Afgerond = false
                     };
 
-                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).ToList())
+                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id))
                     {
                         BestellingProduct bestellingProduct = new BestellingProduct
                         {
@@ -64,7 +65,7 @@ namespace P4P.Controllers
                             Aantal = item.Aantal,
                             Product_Id = item.Product_Id
                         };
-                        ctx.BestellingProducts.Add(bestellingProduct);
+                        if(bestellingProduct.Product != null) ctx.BestellingProducts.Add(bestellingProduct);
                     }
 
                     ctx.Bestellingen.Add(bestelling);
@@ -111,6 +112,8 @@ namespace P4P.Controllers
                 using (var ctx = new P4PContext())
                 {
                     var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_Id);
+
+                    if (getBestelling == null) return HttpNotFound();
 
                     getBestelling.Opmerking = bestelling.Opmerking;
                     getBestelling.AfleverAdres = bedrijf.Adres;
@@ -163,6 +166,7 @@ namespace P4P.Controllers
                 using (var ctx = new P4PContext())
                 {
                     var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id);
+                    if (getBestelling == null) return HttpNotFound();
 
                     getBestelling.Afgerond = true;
                     var producten = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id);

@@ -1,4 +1,8 @@
-﻿   <div class="navbar navbar-default navbar-fixed-top">
+﻿@using System;
+@using System.Linq;
+@using System.Data.Entity;
+
+   <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand pull-left" href="~/Home"><img src="~/Content/jansma_logo2.png" style="max-height:25px; margin:0; padding:0; margin-right:20px;" />   Jansma Haule</a>
@@ -11,7 +15,14 @@
         </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav text-center">
-                    <li><a href="~/Bestel"><span class="badge green" data-badge-caption="producten" style="color:white;">4</span>Winkelwagen</a></li>
+                    <li><a href="~/Bestel"><span class="badge green" style="color: white;">
+                        @using (P4PContext ctx = new P4PContext())
+                        {
+                            int user_id = Convert.ToInt32(Session["Id"]);
+                            var winkelmand = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker_id == user_id).Count();
+                            @winkelmand
+                        }
+                    </span>Winkelwagen</a></li>
                     <li><a href="~/Profiel/Bedrijf">Bedrijf</a></li>
                     <li class="dropdown">
                         <a href="~/Profiel"  role="button" aria-haspopup="true" aria-expanded="false">

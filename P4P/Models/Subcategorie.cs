@@ -10,6 +10,7 @@ namespace P4P.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public Hoofdcategorie Hoofdcategorie { get; set; }
 
         [Required]
