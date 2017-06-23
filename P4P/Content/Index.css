@@ -1,162 +1,289 @@
-﻿
-p {
-    line-height: 2rem;
-}
-
-/*.button-collapse {
-    color: #26a69a;
-}*/
-
-
-.card {
+﻿.card {
     background: #fff;
     border-radius: 2px;
     display: inline-block;
     margin: 0;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    text-align:center;
+    text-align: center;
+    padding: 10px;
 }
 
 .clickable {
-    width: 100%;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
     .clickable:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-        background-color: #ecffd6;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 0px 10px rgba(0,0,0,0.22);
+        background-color: whitesmoke;
     }
-
-.light {
+/* centered columns styles */
+.row-centered {
     text-align: center;
 }
-#balk{
-    width:100%;
-    padding-left:0.5vw;
-    padding-right:0.5vw;
+
+.col-centered {
+    display: inline-block;
+    float: none;
+    margin-right: -4px;
 }
-#balk2 {
-    background-color: #4caf50;
-    color: white;
-    width: 100%;
+/*Profiel*/
+.round {
+    border-radius: 100%;
+    width:100px;
+    margin:auto;
+    margin-top:3vh;
+}
+.streep{
+    height:1px;
+    background-color:lightgrey;
+    width:30%;
+    margin:auto;
+}
+h6{
+    color:grey;
+    margin-bottom:20px;
 }
 
-#leftside{
-    width:79vw;
-    margin:0;
-    padding:0;
-}
-#rightside {
-    width: 19vw;
-    margin: 0;
-    margin-left:5px;
+/*Categorie*/
+.categorie {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    margin: 1px;
+    margin-bottom: 4px;
     padding: 0;
-    height:100vh;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.20);
+    background-color:whitesmoke
 }
-
-.input{
-    background-color:white!important;
-    height:36px!important;
-    border-style:none!important;
-}
-
-.parallax-container {
-    min-height: 380px;
-    line-height: 0;
-    height: auto;
-    color: rgba(255,255,255,.9);
-}
-
-    .parallax-container .section {
-        width: 100%;
+    .categorie h5 {
+        margin-top: 40px;
+        font-size: 20px;
     }
 
-    /*Telefoon*/
-@media only screen and (max-width : 1100px) {
-#rightside{
-    width:18vw;
-}
+/*Achtergrond*/
+.background-grass {
+    color: rgb(255, 255, 255);
+    background: linear-gradient(0deg,rgba(76,175,80,0.5),rgba(51,224,123,0.5)),url(loginbackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position:center;
+    /*background: linear-gradient(145deg, #4caf50, #33e07b);*/
 }
 
+.gradient {
+    min-height: 480px;
+    height: 80vh;
+    max-height: 560px;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    transform: skewY(5deg);
+    transform-origin: 100% center 0px;
+    padding: 48px 48px 32px;
+    overflow: hidden;
+    margin-top:-15vh;
+}
+
+.big{
+    height:30vh;
+}
+
+h1 {
+    transform: skewY(-5deg);
+    color:white;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:17vh;
+}
+h5 {
+    color: dimgrey;
+}
+
+#custom-search-input {
+    border-radius: 6px;
+    background-color: #fff;
+    transform: skewY(-5deg);
+    height:45px;
+    width:30vw;
+}
+
+    #custom-search-input button {
+        margin: 0px 0 0 0;
+        background: none;
+        box-shadow: none;
+        border: 0;
+        color: #666666;
+        padding: 0 8px 0 20px;
+    }
+
+    #custom-search-input .glyphicon-search {
+        font-size: 20px;
+        margin-top:-3px;
+    }
+
+/*Aanbiedingen*/
+.aanbieding {
+    width: 100%;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3px;
+    border-bottom:1px solid whitesmoke;
+}
+.aanbiedingimg{
+    width:20%;
+    height:100%;
+    padding:0;
+}
+.aanbiedingtekst {
+    width: 80%;
+    float: right;
+    height: 100%;
+    position:relative;
+}
+    .aanbiedingtekst h5 {
+        width: 50%;
+        height: 50%;
+        overflow: auto;
+        margin: auto;
+        margin-top:8%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+/*Rijen*/
+.links {
+    width: 80%;
+    float: right;
+    max-width: 500px;
+}
+.rechts {
+    width: 80%;
+    float: left;
+    max-width: 500px;
+}
+/*Meldingen*/
+.alert{
+    margin-bottom:5px;
+}
+.alert h4{
+    font-size:20px;
+}
+
+/*Telefoon*/
+@media only screen and (max-width : 768px) {
+    h1 {
+        font-size: 45px;
+    }
+
+    #custom-search-input {
+        width: 95vw;
+    }
+
+    .gradient {
+        margin-top: -25vh;
+    }
+
+    .navbar-brand {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background-color: white;
+        border: solid 2px black;
+    }
+
+    a {
+        color: black !important;
+    }
+    h5{
+        font-size:20px;
+    }
+    }
 @media only screen and (max-width : 992px) {
+    #custom-search-input{
+        width:80vw;
+    }
     .parallax-container .section {
         position: absolute;
         top: 40%;
     }
-
-    #index-banner .section {
-        top: 10%;
+    .links {
+        width:90%;
+        float: none;
     }
 
-    #leftside {
-        width: 98vw;
+    .rechts {
+        width: 90%;
+        float: none;
     }
 
-    #rightside {
-        width: 0;
-        height: 0;
-        display: none;
-    }
 }
-@media only screen and (max-width : 600px) {
-    #index-banner .section {
-        top: 0;
-    }
+/*Shared index*/
+.input {
+    background-color: white !important;
+    height: 36px !important;
+    border-style: none !important;
 }
-
-.icon-block {
-    padding: 0 15px;
-}
-
-    .icon-block .material-icons {
-        font-size: inherit;
-    }
-
-#scrollen{
-    height:10000px;
-}
-
 /*Create.cshtml*/
-#bottomform{
-    margin-top:20px;
+#bottomform {
+    margin-top: 20px;
 }
+
 #formcard {
     margin-top: 10px;
     width: 80vw;
     margin-left: auto;
     margin-right: auto;
     background-color: #f9f9f9;
+    padding:0;
 }
+
 .card-image {
     background-color: #4caf50;
 }
+
 h4 {
     font-size: 20px;
     color: #4caf50;
 }
 
-.nomargin{
-    padding-bottom:0;
-    margin-bottom:-22px;
+.nomargin {
+    padding-bottom: 0;
+    margin-bottom: -22px;
 }
-.field-validation-error{
-    color:red;
+
+.field-validation-error {
+    color: red;
 }
 
 /*Admin gebruikers lijst*/
-#gebruikers{
-    margin-left:2vw;
-    margin-right:2vw;
-    width:95vw;
+#gebruikers {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    width: 95vw;
 }
+
 #gebruiker-banner {
     width: 100vw;
     height: 20vh;
-    padding-top:30px;
+    padding-top: 30px;
     min-height: 280px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 /*Profiel index*/
 .profiel {
@@ -167,17 +294,20 @@ h4 {
     padding: 45px;
     background-color: #f9f9f9;
 }
-#opslaan{
-    margin-bottom:20px;
+
+#opslaan {
+    margin-bottom: 20px;
 }
-.collection-item{
-    text-align:left;
+
+.collection-item {
+    text-align: left;
 }
 /*Gegevenscontrole*/
-.tekstvak{
-    max-width:30vw!important;
-    margin:auto;
+.tekstvak {
+    max-width: 30vw !important;
+    margin: auto;
 }
-.profiel2{
-    min-height:50vh;
+
+.profiel2 {
+    min-height: 50vh;
 }

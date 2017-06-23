@@ -352,8 +352,8 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\IndexOLD.css" />
     <Content Include="Content\Index.css" />
-    <Content Include="Content\Indexalternative.css" />
     <Content Include="Content\jansma_logo.png" />
     <Content Include="Content\jansma_logo2.png" />
     <Content Include="Content\jansma_logowhite.png" />
@@ -502,7 +502,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\IndexOLD.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Favorieten\Index.cshtml" />
     <Content Include="Views\Favorieten\Details.cshtml" />
@@ -521,7 +521,7 @@
     <Content Include="Views\Bestel\Orderconfirmation.cshtml" />
     <Content Include="Views\Bestel\Afgerond.cshtml" />
     <Content Include="Views\Shared\_Searchbar.cshtml" />
-    <Content Include="Views\Home\Indexalternative.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
