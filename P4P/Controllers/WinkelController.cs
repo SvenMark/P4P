@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using P4P.Helpers;
 using P4P.Models;
 using P4P.ViewModel;
+using System.Data.Entity;
+using Microsoft.Ajax.Utilities;
+
 
 namespace P4P.Controllers
 {
@@ -49,14 +52,39 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
-            return View();
+            using (var ctx = new P4PContext())
+            {
+                var producten = ctx.Products.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
+                var subcategories = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
+
+                if (ctx.Products.Include(c => c.Hoofdcategorie).Any(c => c.Hoofdcategorie.Id == id))
+                {
+                    return View("ProductsInCategorie", producten);
+                }
+
+                return View("Categorie", subcategories);
+            }
         }
 
         public ActionResult SubCategorie(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
-            return View();
+            using (var ctx = new P4PContext())
+            {
+                var producten = ctx.Products.Include(c => c.Subcategorie).Include(c => c.Hoofdcategorie).ToList().Where(c => c.Subcategorie.Id == id);
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
+                var hoofdCategorie = ctx.Hoofdcategories.SingleOrDefault(c => c.Id == subCategorie.Hoofdcategorie.Id);
+
+                var viewModel = new SubcategorieProducts
+                {
+                    product = producten,
+                    subcategorie = subCategorie,
+                    hoofdcategorie = hoofdCategorie
+                };
+
+                return View(viewModel);
+            }
         }
 
         public ActionResult Artikelpagina(int id)
