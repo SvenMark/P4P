@@ -107,8 +107,20 @@
 
 @section scripts
 {   
-
     <script>
+        $(document).ready(function () {
+            $(".links").hide();
+            $(".rechts").hide();
+            $(".links").each(function (i) {
+                $(this).delay(i * 600).slideToggle(1200);
+            })
+            $(".rechts").each(function (i) {
+                $(this).delay(i * 600).slideToggle(1200);
+            })
+            });
+    </script>
+
+    @*<script>
         var options = [
             { selector: '#categories', offset: 600, callback: 'unhidecat()' },
         ];
@@ -119,21 +131,20 @@
                 opacity: 1
             }, 500);
         };
-
-    </script>
+    </script>*@
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             $('body').hide(0).fadeIn(800);
-            $('#categories').animate({
-                opacity: 0
-            }, 1);
+            //$('#categories').animate({
+            //    opacity: 0
+            //}, 1);
 
             $('.aanbieding').animate({
                 opacity: 0
             }, 1);
-            $(".aanbieding").each(function (i) {
+            $(".aanbieding").delay(1000).each(function (i) {
                 $(this).delay(i * 400).animate({
                     opacity: 1
                 }, 400);
