@@ -15,8 +15,8 @@ namespace P4P
 
             routes.MapRoute(
                 "WinkelQuery",
-                "Winkel/{action}/{q}",
-                new {controller = "Winkel", action = "Index", q = UrlParameter.Optional},
+                "Winkel/{action}/{id}",
+                new {controller = "Winkel", action = "Index", id = UrlParameter.Optional},
                 new[] {"P4P.Controllers"}
             );
 

@@ -129,12 +129,12 @@ namespace P4P.Controllers
                         return RedirectToAction("Login");
 
                     Session["Id"] = gebruikerInDb.Id;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             catch
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
         }
 
