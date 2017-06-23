@@ -30,4 +30,14 @@ textarea {
 .nomobile {
     display: none !important;
 }
+
+.parallax-container {
+    min-height: 380px;
+    line-height: 0;
+    height: auto;
+    color: rgba(255,255,255,.9);
 }
+
+    .parallax-container .section {
+        width: 100%;
+    }

@@ -5,93 +5,109 @@
 }
     <link rel="stylesheet" type="text/css" href="~/Content/Indexalternative.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="~/Content/customtwitter.css" media="screen" />
+    <style>body {background-color: whitesmoke;}</style>
+
+    <div class="big">
+        <header class="l-relative">
+            <!--Gradient-->
+            <div class="background-grass gradient">
+                <h1>Jansma Haule</h1>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" placeholder="Zoek naar producten" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+<div class="row row-centered">
+    <div class="col-md-6">
+        <div class="card links">
+            <img class="round" src="http://lorempixel.com/400/400/animals">
+            <h5>Welkom John Doe</h5>
+            <div class="streep"></div>
+            <h6>Veel plezier op onze vernieuwde webwinkel!</h6>
+        </div>
 
 
-<div class="big">
-    <header class="l-relative">
-        <!--Gradient-->
-        <div class="background-grass gradient">
-            <h1>Jansma Haule</h1>
-
-            <div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="Zoek naar producten" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
+        <div class="card links">
+            <center><h5>Categoriën</h5></center>
+            @foreach (var c in Model)
+            {
+                <div class="col-xs-4 col-centered clickable categorie">
+                        <h5 class="center">@c.Naam</h5>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card rechts">
+            <h5>Aanbiedingen</h5>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
+                </div>
+            </div>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
+                </div>
+            </div>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
                 </div>
             </div>
         </div>
-    </header>
-</div>
- <div class="row row-centered">
-     <!-- Voor elke aanbieding een div -->
-     <div class="col-md-3 col-centered aanbieding">
-         <div class="card clickable">
-             <h2 class="center"><img src="~/Content/cart.png" style="max-width:40px;" /></h2>
-             <h5 class="center">Aanbieding 1</h5>
-         </div>
-     </div>
-     <div class="col-md-3 col-centered aanbieding">
-         <div class="card clickable">
-             <h2 class="center"><img src="~/Content/cart.png" style="max-width:40px;" /></h2>
-             <h5 class="center">Aanbieding 2</h5>
-         </div>
-     </div>
-     <div class="col-md-3 col-centered aanbieding">
-         <div class="card clickable">
-             <h2 class="center"><img src="~/Content/cart.png" style="max-width:40px;" /></h2>
-             <h5 class="center">Aanbieding 3</h5>
-         </div>
-     </div>
-</div>
-    <header class="l-relative">
-        <!--Gradient-->
-        <div id="categories" class="background-grass gradient edited">
-            <div id="recht">
-                
-                <center><h3>Categories</h3></center>
-                @foreach (var c in Model)
-                {
-                    <div class="col-xs-2 col-centered ">
-                        <div class="card clickable">
-                            <h5 class="center">@c.Naam</h5>
-                        </div>
-                    </div>
-                }
+        <div class="card rechts">
+            <h5>Meldingen</h5>
+
+            <div class="alert alert-success">
+                <button href="#" type="button" class="close"></button>
+                <h4>Success Alert</h4>
+                <p>Hier kan een succes melding</p>
             </div>
+
+            <div class="alert alert-info">
+                <button href="#" type="button" class="close"></button>
+                <h4>Information Alert</h4>
+                <p>Hier kan een info melding</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <button href="#" type="button" class="close"></button>
+                <h4>Warning Alert</h4>
+                <p>Hier kan een waarschuwings melding</p>
+            </div>
+
+            <div class="alert alert-danger">
+                <button href="#" type="button" class="close"></button>
+                <h4>Danger Alert</h4>
+                <p>Hier kan een gevaar melding</p>
+            </div>
+
         </div>
-        
-        
-    </header>
-
-
-
-
-
-
-@*<div class="row">
-    <div class="links col-md-9">
-
-    </div>
-    <div class="rechts col-md-3">
-        <div class="card">
-            <div id="twitterheader">
-                <h4>Tweets</h4>
-            </div>
-            <div id="twitterbody">
-                <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-chrome="transparent noscrollbar noborders nofooter noheader" data-widget-id="382128209740832768"></a>
-                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
-            </div>
+        <div class="card rechts">
+            <h5>Twitter</h5>
+            <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-chrome="noheader nofooter transparent noscrollbar noborders"data-widget-id="382128209740832768">Tweets door BaronJansma</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
         </div>
-
     </div>
-</div>*@
+</div>
+
 
 @section scripts
 {   
+
     <script>
         var options = [
             { selector: '#categories', offset: 600, callback: 'unhidecat()' },

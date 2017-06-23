@@ -7,33 +7,70 @@
     position: relative;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     text-align: center;
-    padding:10px;
+    padding: 10px;
 }
 
 .clickable {
-    width: 100%;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
     .clickable:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 0px 10px rgba(0,0,0,0.22);
         background-color: whitesmoke;
     }
-
-.parallax-container {
-    min-height: 380px;
-    line-height: 0;
-    height: auto;
-    color: rgba(255,255,255,.9);
+/* centered columns styles */
+.row-centered {
+    text-align: center;
 }
 
-    .parallax-container .section {
-        width: 100%;
+.col-centered {
+    display: inline-block;
+    float: none;
+    margin-right: -4px;
+}
+/*Profiel*/
+.round {
+    border-radius: 100%;
+    width:100px;
+    margin:auto;
+    margin-top:3vh;
+}
+.streep{
+    height:1px;
+    background-color:lightgrey;
+    width:30%;
+    margin:auto;
+}
+h6{
+    color:grey;
+    margin-bottom:20px;
+}
+
+/*Categorie*/
+.categorie {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    margin: 1px;
+    margin-bottom: 4px;
+    padding: 0;
+    box-shadow: inset 0px 0px 5px 0px rgba(0,0,0,0.20);
+    background-color:whitesmoke
+}
+    .categorie h5 {
+        margin-top: 40px;
+        font-size: 20px;
     }
 
+/*Achtergrond*/
 .background-grass {
     color: rgb(255, 255, 255);
-    background: linear-gradient(145deg, #4caf50, #33e07b);
+    background: linear-gradient(0deg,rgba(76,175,80,0.5),rgba(51,224,123,0.5)),url(loginbackground.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position:center;
+    /*background: linear-gradient(145deg, #4caf50, #33e07b);*/
 }
 
 .gradient {
@@ -57,22 +94,6 @@
     overflow: hidden;
     margin-top:-15vh;
 }
-.edited {
-    color: white;
-    height: 50vh;
-    min-height: 200px;
-    margin-top: 10vh;
-    z-index: -1;
-    padding: 0;
-    background: linear-gradient(145deg, #33e07b, #32e0c3);
-}
-#recht {
-
-    z-index: 1;
-    transform:skewY(-5deg);
-    height:40vh;
-}
-
 
 .big{
     height:30vh;
@@ -88,6 +109,7 @@ h1 {
 h5 {
     color: dimgrey;
 }
+
 #custom-search-input {
     border-radius: 6px;
     background-color: #fff;
@@ -104,27 +126,62 @@ h5 {
         color: #666666;
         padding: 0 8px 0 20px;
     }
-    .nomobile a{
-        color:black!important;
-    }
-
 
     #custom-search-input .glyphicon-search {
         font-size: 20px;
         margin-top:-3px;
     }
-/* centered columns styles */
-.row-centered {
-    text-align: center;
-}
 
-.col-centered {
-    display: inline-block;
-    float: none;
-    margin-right: -4px;
-}
+/*Aanbiedingen*/
 .aanbieding {
-    max-width: 350px;
+    width: 100%;
+    height: 90px;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3px;
+    border-bottom:1px solid whitesmoke;
+}
+.aanbiedingimg{
+    width:20%;
+    height:100%;
+    padding:0;
+}
+.aanbiedingtekst {
+    width: 80%;
+    float: right;
+    height: 100%;
+    position:relative;
+}
+    .aanbiedingtekst h5 {
+        width: 50%;
+        height: 50%;
+        overflow: auto;
+        margin: auto;
+        margin-top:8%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+/*Rijen*/
+.links {
+    width: 80%;
+    float: right;
+    max-width: 500px;
+}
+.rechts {
+    width: 80%;
+    float: left;
+    max-width: 500px;
+}
+/*Meldingen*/
+.alert{
+    margin-bottom:5px;
+}
+.alert h4{
+    font-size:20px;
 }
 
 /*Telefoon*/
@@ -153,22 +210,11 @@ h5 {
     a {
         color: black !important;
     }
-    .col-centered {
-        width:30vw;
-        margin:0;
-        padding:0;
-
-    }
     h5{
         font-size:20px;
     }
-    #categories{
-        z-index:-1;
-        margin:0;
-
     }
-    }
-@media only screen and (max-width : 1000px) {
+@media only screen and (max-width : 992px) {
     #custom-search-input{
         width:80vw;
     }
@@ -176,5 +222,15 @@ h5 {
         position: absolute;
         top: 40%;
     }
+    .links {
+        width:90%;
+        float: none;
+    }
+
+    .rechts {
+        width: 90%;
+        float: none;
+    }
+
 }
 
