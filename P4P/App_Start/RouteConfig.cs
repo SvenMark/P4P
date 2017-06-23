@@ -30,7 +30,7 @@ namespace P4P
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new {controller = "Home", action = "Index", id = UrlParameter.Optional},
+                new {controller = "Winkel", action = "Index", id = UrlParameter.Optional},
                 new[] {"P4P.Controllers"}
             );
 

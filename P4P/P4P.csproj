@@ -193,6 +193,7 @@
     <Compile Include="Models\Subcategorie.cs" />
     <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\NewArtikelViewModel.cs" />
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
     <Compile Include="ViewModel\DetailsSubcategorie.cs" />
     <Compile Include="ViewModel\NewSubcategorie.cs" />
@@ -392,7 +393,7 @@
     <Content Include="Areas\Admin\Views\Melding\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Melding\New.cshtml" />
     <Content Include="Areas\Admin\Views\Artikel\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Artikel\New.cshtml" />
+    <Content Include="Areas\Admin\Views\Artikel\CreateArtikel.cshtml" />
     <Content Include="Areas\Admin\Views\Categorie\Index.cshtml" />
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
