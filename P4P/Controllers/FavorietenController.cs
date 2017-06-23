@@ -26,6 +26,13 @@ namespace P4P.Controllers
                 return View(favorietenlijst);
             }
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddFavoriet()
+        {
+            return View("", "Winkel");
+        }
         //New, Edit, Delete, Save(controller voor opslaan van voorgaande acties), Add_product, removeproduct, editproduct?
     }
 }

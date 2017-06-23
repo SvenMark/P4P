@@ -16,6 +16,7 @@ namespace P4P.Models
 
         public Bedrijf Bedrijf { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? Afleverdatum { get; set; }
 
         [Required]
@@ -27,5 +28,14 @@ namespace P4P.Models
         public bool Afgerond { get; set; }
 
         public virtual ICollection<BestellingProduct> Producten { get; set; }
+
+        [StringLength(255)]
+        public string AfleverAdres { get; set; }
+
+        [StringLength(255)]
+        public string AfleverPostcode { get; set; }
+
+        [StringLength(255)]
+        public string AfleverPlaats { get; set; }
     }
 }

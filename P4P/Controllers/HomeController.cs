@@ -25,6 +25,7 @@ namespace P4P.Controllers
 
         public ActionResult About()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -32,6 +33,7 @@ namespace P4P.Controllers
 
         public ActionResult Contact()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             ViewBag.Message = "Get in Touch!";
 
             return View();
