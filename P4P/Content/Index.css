@@ -272,7 +272,7 @@ h4 {
 }
 
 /*Admin gebruikers lijst*/
-#gebruikers {
+.tabel {
     margin-left: 2vw;
     margin-right: 2vw;
     width: 95vw;
@@ -310,4 +310,11 @@ h4 {
 
 .profiel2 {
     min-height: 50vh;
+}
+/*Voortgangsbalk*/
+.progress-indicator{
+    margin-top:10px!important;
+}
+.smaller {
+    min-height: 65vh;
 }
