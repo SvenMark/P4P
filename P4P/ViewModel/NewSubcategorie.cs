@@ -8,7 +8,7 @@ namespace P4P.ViewModel
 {
     public class NewSubcategorie
     {
-        public SubcategorieProducts Subcategorie { get; set; }
+        public Subcategorie Subcategorie { get; set; }
         public Hoofdcategorie Hoofdcategorie { get; set; }
     }
 }
