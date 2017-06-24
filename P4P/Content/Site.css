@@ -41,3 +41,13 @@ textarea {
     .parallax-container .section {
         width: 100%;
     }
+
+
+#winkelwagen {
+    margin-top: 3%;
+}
+@media only screen and (max-width : 1010px) {
+    #winkelwagen {
+        margin-top:8%;
+    }
+}
