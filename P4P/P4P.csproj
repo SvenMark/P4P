@@ -206,6 +206,7 @@
     <Compile Include="ViewModel\NewSubcategorie.cs" />
     <Compile Include="ViewModel\NewOrderDetails.cs" />
     <Compile Include="ViewModel\NewWinkelmand.cs" />
+    <Compile Include="ViewModel\SubcategorieProducts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
@@ -572,6 +573,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Favorieten\Index.cshtml" />
     <Content Include="Views\Favorieten\Details.cshtml" />
@@ -594,7 +596,7 @@
     <Content Include="Views\Winkel\Artikelpagina.cshtml" />
     <Content Include="Views\Winkel\SubCategorie.cshtml" />
     <Content Include="Views\Winkel\Categorie.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Winkel\ProductsInCategorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
