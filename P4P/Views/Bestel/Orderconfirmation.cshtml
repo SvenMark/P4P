@@ -2,66 +2,80 @@
 @{
     ViewBag.Title = "Orderconfirmation";
 }
-
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="~/Content/progress-wizard.min.css" media="screen" />
 <div class="row">
+    <div class="col-sm-12">
+        <ul class="progress-indicator">
+            <li class="completed"> <span class="bubble"></span> Winkelwagen </li>
+            <li class="completed"> <span class="bubble"></span> Gegevens </li>
+            <li> <span class="bubble"></span> Bevestiging </li>
+            <li> <span class="bubble"></span> Afronding </li>
+        </ul>
+    </div>
     @using (Html.BeginForm("Orderconfirmation", "Bestel"))
     {
         <div class="col-md-6">
-            <h4>Aflevergegevens</h4>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Bedrijf.Adres, "Afleveradres")
-                @Html.TextBoxFor(m => m.Bedrijf.Adres, new {@class = "form-control", required = "True", disabled="True"})
-                @Html.ValidationMessageFor(m => m.Bedrijf.Adres)
+            <div class="card profiel smaller">
+                <h4>Aflevergegevens</h4>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Bedrijf.Adres, "Afleveradres")
+                    @Html.TextBoxFor(m => m.Bedrijf.Adres, new { @class = "form-control", required = "True", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.Bedrijf.Adres)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Bedrijf.Postcode, "Postcode afleveradres")
+                    @Html.TextBoxFor(m => m.Bedrijf.Postcode, new { @class = "form-control", required = "True", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.Bedrijf.Postcode)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Bedrijf.Plaats, "Plaats afleveradres")
+                    @Html.TextBoxFor(m => m.Bedrijf.Plaats, new { @class = "form-control", required = "True", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.Bedrijf.Plaats)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Bestelling.Afleverdatum, "Gewenste afleverdatum")
+                    @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, "{0:d-MM-yyyy}", new { @class = "form-control", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.Bestelling.Afleverdatum)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Bestelling.Opmerking, "Opmerkingen")
+                    @Html.TextBoxFor(m => m.Bestelling.Opmerking, new { @class = "form-control", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.Bestelling.Opmerking)
+                </div>
             </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Bedrijf.Postcode, "Postcode afleveradres")
-                @Html.TextBoxFor(m => m.Bedrijf.Postcode, new {@class = "form-control", required = "True", disabled = "True" })
-                @Html.ValidationMessageFor(m => m.Bedrijf.Postcode)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Bedrijf.Plaats, "Plaats afleveradres")
-                @Html.TextBoxFor(m => m.Bedrijf.Plaats, new {@class = "form-control", required = "True", disabled = "True" })
-                @Html.ValidationMessageFor(m => m.Bedrijf.Plaats)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Bestelling.Afleverdatum, "Gewenste afleverdatum")
-                @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, "{0:d-MM-yyyy}", new {@class = "form-control", disabled = "True" })
-                @Html.ValidationMessageFor(m => m.Bestelling.Afleverdatum)
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.Bestelling.Opmerking, "Opmerkingen")
-                @Html.TextBoxFor(m => m.Bestelling.Opmerking, new {@class = "form-control", disabled = "True" })
-                @Html.ValidationMessageFor(m => m.Bestelling.Opmerking)
-            </div>
-            <a href="Index" class="btn">Terug</a>
+            <center><a href="Index" class="btn">Terug</a></center>
         </div>
 
         <div class="col-md-6">
-            <h4>Winkelmandje</h4>
-            <div class="table-responsive">
-                <table class="table-bordered">
-                    <tr>
-                        <th>Productcode</th>
-                        <th>Productnaam</th>
-                        <th>Aantal</th>
-                        <th>Prijs</th>
-                    </tr>
-                    @{
-                        foreach (var p in Model.BestellingProducts)
-                        {
-                            <tr>
-                                <td>@p.Product.Code</td>
-                                <td>@p.Product.Naam</td>
-                                <td>@p.Aantal</td>
-                                <td>€@p.Product.Prijs</td>
-                            </tr>
+            <div class="card profiel smaller">
+                <h4>Winkelmandje</h4>
+                <div class="table-responsive">
+                    <table class="table striped table-hover">
+                        <tr>
+                            <th>Productcode</th>
+                            <th>Productnaam</th>
+                            <th>Aantal</th>
+                            <th>Prijs</th>
+                        </tr>
+                        @{
+                            foreach (var p in Model.BestellingProducts)
+                            {
+                                <tr>
+                                    <td>@p.Product.Code</td>
+                                    <td>@p.Product.Naam</td>
+                                    <td>@p.Aantal</td>
+                                    <td>€@p.Product.Prijs</td>
+                                </tr>
+                            }
                         }
-                    }
-                </table>
+                    </table>
+                </div>
             </div>
+            <center><button type="submit" class="btn btn-primary">Bevestigen</button> </center>
         </div>
         @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-primary">Bevestigen</button> 
+        
     }
 </div>
 

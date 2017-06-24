@@ -1,140 +1,154 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<P4P.Models.Hoofdcategorie>
 
-    string aanbiedingen = "kaas";
+@{
+    ViewBag.Title = "Home Page";
 }
     <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
-    <div id="index-banner" class="parallax-container">
-        <div class="section no-pad-bot">
-            <div class="container">
-                <br><br>
-                <h1 id="titel" class="header center text-lighten-2">Jansma Haule</h1>
-                <div class="row center">
-                    <h5 class="header col s12 light">Een wereld van boerenproducten</h5>
+    <link rel="stylesheet" type="text/css" href="~/Content/customtwitter.css" media="screen" />
+    <style>body {background-color: whitesmoke;}</style>
+
+    <div class="big">
+        <header class="l-relative">
+            <!--Gradient-->
+            <div class="background-grass gradient">
+                <h1>Jansma Haule</h1>
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <input type="text" class="form-control input-lg" placeholder="Zoek naar producten" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn-lg" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
-                <div class="row center">
-                    @Html.Partial("_Searchbar")
-                </div>
-                <br><br>
             </div>
-        </div>
-        <div class="parallax"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1"></div>
+        </header>
     </div>
 
+<div class="row row-centered">
+    <div class="col-md-6">
+        <div class="card links">
+            <img class="round" src="http://lorempixel.com/400/400/animals">
+            <h5>Welkom John Doe</h5>
+            <div class="streep"></div>
+            <h6>Veel plezier op onze vernieuwde webwinkel!</h6>
+        </div>
 
-    <div class="section">
-        <!--   Icon Section   -->
-        <div id="leftside" class="col-xs-6">
-            <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card"><h5>Aanbiedingen</h5></div></div></div>
-            <div class="row">
 
-                <!-- Voor als er geen aanbiedingen zijn, variabele moet nog anders. -->
-                @if (aanbiedingen == "niets")
-                {
-                    <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card white"><h5>Niets!</h5></div></div></div>
-                }
-
-                <!-- Voor elke aanbieding een div -->
-                <div class="col s12 m4">
-                    <div class="icon-block card clickable">
-                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                        <h5 class="center">Aanbieding 1</h5>
-                        <p class="light">Gratis fietsbel bij elke kaas.</p>
-                    </div>
+        <div class="card links">
+            <center><h5>Categoriën</h5></center>
+            @foreach (var c in Model)
+            {
+                <div class="col-xs-4 col-centered clickable categorie">
+                        <h5 class="center">@c.Naam</h5>
                 </div>
-
-
-                <div class="col s12 m4">
-                    <div class="icon-block card clickable">
-                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                        <h5 class="center">Aanbieding 2</h5>
-                        <p class="light">Gratis kaas bij elke kaas.</p>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="icon-block card clickable">
-                        <h2 class="center brown-text"><img src="~/Content/cart.png" /></h2>
-                        <h5 class="center">Aanbieding 3</h5>
-                        <p class="light">De melk is extra sappig dit seizoen.</p>
-                    </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card rechts">
+            <h5>Aanbiedingen</h5>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
                 </div>
             </div>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
+                </div>
+            </div>
+            <div class="aanbieding clickable">
+                <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">
+                <div class="aanbiedingtekst col-md-8">
+                    <h5>Steak</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card rechts">
+            <h5>Meldingen</h5>
 
-            <div class="row"><div id="balk" class="col-md-12"><div id="balk2" class="card"><h5>Categoriën</h5></div></div></div>
-            <div class="row">
-
-               <!-- Voor elke categorie een div* -->
-
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 1</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 2</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 3</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 4</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 5</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 6</h5>
-                    </div>
-                </div>
-                <div class="col s12 m4">
-                    <div class="card clickable">
-                        <h5 class="center">Categorie 7</h5>
-                    </div>
-                </div>
-
-
+            <div class="alert alert-success">
+                <button href="#" type="button" class="close"></button>
+                <h4>Success Alert</h4>
+                <p>Hier kan een succes melding</p>
             </div>
 
+            <div class="alert alert-info">
+                <button href="#" type="button" class="close"></button>
+                <h4>Information Alert</h4>
+                <p>Hier kan een info melding</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <button href="#" type="button" class="close"></button>
+                <h4>Warning Alert</h4>
+                <p>Hier kan een waarschuwings melding</p>
+            </div>
+
+            <div class="alert alert-danger">
+                <button href="#" type="button" class="close"></button>
+                <h4>Danger Alert</h4>
+                <p>Hier kan een gevaar melding</p>
+            </div>
 
         </div>
-        <div id="rightside" class="col-xs-6">
-
-            <div class="card">
-                <div class="card-image">
-                    <img src="http://materializecss.com/images/sample-1.jpg" style="max-height:150px;">
-                    <span class="card-title">Meldingen</span>
-                </div>
-               <!-- Voor elke melding maak een div en een devider* -->
-                <div class="divider"></div>
-                <div class="card-content">
-                    <p>
-                        Dit is melding 1
-                    </p>
-                </div>
-
-                <div class="divider"></div>
-                <div class="card-content">
-                    <p>
-                        Dit is melding 2
-                    </p>
-                </div>
-
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                </div>
-            </div>
-
-            <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-widget-id="382128209740832768">Tweets door BaronJansma</a>
+        <div class="card rechts">
+            <h5>Twitter</h5>
+            <a class="twitter-timeline" href="https://twitter.com/BaronJansma" data-chrome="noheader nofooter transparent noscrollbar noborders"data-widget-id="382128209740832768">Tweets door BaronJansma</a>
             <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
         </div>
     </div>
+</div>
 
+
+@section scripts
+{   
+    <script>
+        $(document).ready(function () {
+            $(".links").hide();
+            $(".rechts").hide();
+            $(".links").each(function (i) {
+                $(this).delay(i * 600).slideToggle(1200);
+            })
+            $(".rechts").each(function (i) {
+                $(this).delay(i * 600).slideToggle(1200);
+            })
+            });
+    </script>
+
+    @*<script>
+        var options = [
+            { selector: '#categories', offset: 600, callback: 'unhidecat()' },
+        ];
+        Materialize.scrollFire(options);
+
+        function unhidecat() {
+            $('#categories').animate({
+                opacity: 1
+            }, 500);
+        };
+    </script>*@
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('body').hide(0).fadeIn(800);
+            //$('#categories').animate({
+            //    opacity: 0
+            //}, 1);
+
+            $('.aanbieding').animate({
+                opacity: 0
+            }, 1);
+            $(".aanbieding").delay(1000).each(function (i) {
+                $(this).delay(i * 400).animate({
+                    opacity: 1
+                }, 400);
+            })
+        });
+    </script>
+}
