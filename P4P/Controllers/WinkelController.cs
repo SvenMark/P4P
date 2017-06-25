@@ -54,15 +54,28 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var producten = ctx.Products.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
+                var producten = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id && c.Subcategorie == null);
                 var subcategories = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
+                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
 
-                if (ctx.Products.Include(c => c.Hoofdcategorie).Any(c => c.Hoofdcategorie.Id == id))
+                if (producten.Any())
                 {
-                    return View("ProductsInCategorie", producten);
+                    var viewProducts = new SubcategorieProducts
+                    {
+                        product = producten,
+                        hoofdcategorie = hoofdCategorie
+                    };
+
+                    return View("ProductsInCategorie", viewProducts);
                 }
 
-                return View("Categorie", subcategories);
+                var viewSubcategories = new SubcategorieProducts
+                {
+                    subcategories = subcategories,
+                    hoofdcategorie = hoofdCategorie
+                };
+
+                return View(viewSubcategories);
             }
         }
 
@@ -72,9 +85,9 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var producten = ctx.Products.Include(c => c.Subcategorie).Include(c => c.Hoofdcategorie).ToList().Where(c => c.Subcategorie.Id == id);
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
                 var hoofdCategorie = ctx.Hoofdcategories.SingleOrDefault(c => c.Id == subCategorie.Hoofdcategorie.Id);
+                var producten = ctx.Products.Include(c => c.Subcategorie).Include(c => c.Hoofdcategorie).ToList().Where(c => c.Subcategorie != null && c.Subcategorie.Id == id);
 
                 var viewModel = new SubcategorieProducts
                 {
@@ -93,7 +106,7 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var product = ctx.Products.Find(id);
+                var product = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).SingleOrDefault(c => c.Id == id);
 
                 if (product == null) return HttpNotFound();
 

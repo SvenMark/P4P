@@ -1,9 +1,9 @@
 ﻿@model P4P.ViewModel.NewWinkelmand
 @{
-    ViewBag.Title = "Artikelpagina";
+    ViewBag.Title = @Model.product.Naam;
 }
 
-<h4>"Categorie > subcategorie"</h4>
+<h4><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a></h4>
 <h2>@Model.product.Naam</h2>
 
 @using (Html.BeginForm("Artikelpagina", "Winkel"))
