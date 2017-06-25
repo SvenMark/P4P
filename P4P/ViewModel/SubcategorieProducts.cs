@@ -11,5 +11,6 @@ namespace P4P.ViewModel
         public IEnumerable<Product> product { get; set; }
         public Hoofdcategorie hoofdcategorie { get; set; }
         public Subcategorie subcategorie { get; set; }
+        public IEnumerable<Subcategorie> subcategories { get; set; }
     }
 }

@@ -1,7 +1,17 @@
-﻿
+﻿@model P4P.ViewModel.SubcategorieProducts
 @{
-    ViewBag.Title = "ProductsInCategorie";
+    ViewBag.Title = @Model.hoofdcategorie.Naam + "Producten";
 }
 
-<h2>ProductsInCategorie</h2>
+<h2><a href="~/Winkel/Categorie/@Model.hoofdcategorie.Id">@Model.hoofdcategorie.Naam</a></h2>
+
+<div class="card links">
+    <center><h5>Producten:</h5></center>
+    @foreach (var c in Model.product)
+    {
+        <div class="col-xs-4 col-centered clickable">
+            <h5 class="center"><a href="~/Winkel/Artikelpagina/@c.Id">@c.Naam</a></h5>
+        </div>
+    }
+</div>
 
