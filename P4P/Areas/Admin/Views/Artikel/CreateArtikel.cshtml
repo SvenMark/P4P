@@ -67,19 +67,14 @@
 
         <div id="bottomform">
             <center>
-                <h4>Bedrijf</h4>
+                <h4>Subcategorie</h4>
             </center>
             <div class="row nomargin">
-                <div class="form-group input-field col-md-6">
+                <div class="form-group input-field col-md-12">
                     <button class="btn btn-primary" id="disable2">Test2</button>
                     @Html.LabelFor(m => m.Product.Subcategorie.Naam)
                     @Html.TextBoxFor(m => m.Product.Subcategorie.Naam, new {@class = "form-control", id = "input2"})
                     @Html.ValidationMessageFor(m => m.Product.Subcategorie.Naam)
-                </div>
-                <div class="form-group input-field col-md-6">
-                    @Html.LabelFor(m => m.Subcategorie)
-                    @Html.DropDownListFor(m => m.Product.Subcategorie.Id, new SelectList(Model.Subcategorie, "Id", "Naam"), "", new {@class = "form-control", id="dropdown2"})
-                    @Html.ValidationMessageFor(m => m.Subcategorie)
                 </div>
             </div>
             <div class="row nomargin">
@@ -100,20 +95,18 @@
         $(document).ready(function ()
         {
             $("#input1").prop("disabled", "true");
-            $("#input2").prop("disabled", "true");
             $("#disable1").on("click",
                 function() {
                     const toggle = $("#input1").prop("disabled");
 
                     $("#input1").prop("disabled", !toggle );
-                    $("#dropdown1").prop("disabled", toggle );
+                    $("#dropdown1").prop("disabled", toggle);
                 });
             $("#disable2").on("click",
-                function() {
-                    var toggle = $("#input2").prop("disabled");
+                function () {
+                    const toggle = $("#input2").prop("disabled");
 
-                    $("#input2").prop("disabled", !toggle );
-                    $("#dropdown2").prop("disabled", toggle );
+                    $("#input2").prop("disabled", !toggle);
                 });
         });
     </script>
