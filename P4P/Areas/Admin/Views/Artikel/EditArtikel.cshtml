@@ -1,0 +1,71 @@
+﻿@model P4P.ViewModel.NewArtikelViewModel
+@{
+    ViewBag.Title = "EditArtikel";
+}
+
+<h2>EditArtikel</h2>
+<p>
+    @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("EditHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
+{
+    if (ViewBag.message != null)
+    {
+        <h2>@ViewBag.message</h2>
+    }
+    <div id="topform">
+        <center>
+            <h4>Artikel</h4>
+        </center>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Code)
+                @Html.TextBoxFor(m => m.Product.Code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Code)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Naam)
+                @Html.TextBoxFor(m => m.Product.Naam, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Naam)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Beschrijving)
+                @Html.TextBoxFor(m => m.Product.Beschrijving, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Beschrijving)
+            </div>
+        </div>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Specificaties)
+                @Html.TextBoxFor(m => m.Product.Specificaties, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Specificaties)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Verkoopeenheid)
+                @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Prijs)
+                @Html.TextBoxFor(m => m.Product.Prijs, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Product.Prijs)
+                @Html.HiddenFor(m => m.Product.Id)
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @if (ViewBag.Success == "true") {
+                @:toastr.success("Opgeslagen");
+            } else if (ViewBag.Success == "false") {
+                @:toastr.error("@ViewBag.Errormessage");
+            }
+        });
+    </script>
+}

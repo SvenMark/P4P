@@ -5,6 +5,9 @@
 
 <h2>New</h2>
 <h3>Nieuw artikel</h3>
+<p>
+    @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
+</p>
 @using (Html.BeginForm("CreateArtikel", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
 {
     <div id="topform">
