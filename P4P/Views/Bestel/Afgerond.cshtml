@@ -1,4 +1,5 @@
-﻿@model P4P.ViewModel.NewOrderDetails
+﻿@using System.Globalization
+@model P4P.ViewModel.NewOrderDetails
 @{
     ViewBag.Title = "Bestelling";
 }
@@ -6,35 +7,86 @@
 <link rel="stylesheet" type="text/css" href="~/Content/progress-wizard.min.css" media="screen" />
 <h2>Afgeronde bestelling Id: @Model.Bestelling.Id</h2>
 
-@using (Html.BeginForm("Afgerond", "Bestel"))
-{
+<div class="row">
     <div class="col-md-6">
-        <h4>Producten in deze bestelling</h4>
-        <div class="table-responsive">
-            <table class="table-bordered">
-                <tr>
-                    <th>Productcode</th>
-                    <th>Productnaam</th>
-                    <th>Aantal</th>
-                    <th>Prijs</th>
-                </tr>
-                @{
-                    foreach (var p in Model.BestellingProducts)
-                    {
-                        <tr>
-                            <td>@p.Product.Code</td>
-                            <td>@p.Product.Naam</td>
-                            <td>@p.Aantal</td>
-                            <td>€@p.Product.Prijs</td>
-                        </tr>
-                    }
-                }
-            </table>
+        <div class="card profiel smaller">
+            <h4>Bestellinggegevens</h4>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Id, "Bestelling nummer")
+                @Html.TextBoxFor(m => m.Bestelling.Id, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Id)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Prijs, "Totaalprijs")
+                @Html.TextBoxFor(m => m.Bestelling.Prijs, " €" + Model.Bestelling.Prijs, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Prijs)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Gebruiker.Voornaam, "Besteld door")
+                @Html.TextBoxFor(m => m.Gebruiker.Voornaam, Model.Bestelling.Gebruiker.Voornaam + " " + Model.Gebruiker.Achternaam, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Gebruiker.Voornaam)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Adres, "Afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Adres, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bedrijf.Adres)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Postcode, "Postcode afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Postcode, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bedrijf.Postcode)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bedrijf.Plaats, "Plaats afleveradres")
+                @Html.TextBoxFor(m => m.Bedrijf.Plaats, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bedrijf.Plaats)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Afleverdatum, "Afleverdatum")
+                @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, "{0:d-MM-yyyy}", new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Afleverdatum)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bestelling.Opmerking, "Opmerkingen")
+                @Html.TextBoxFor(m => m.Bestelling.Opmerking, new { @class = "form-control", disabled = "True" })
+                @Html.ValidationMessageFor(m => m.Bestelling.Opmerking)
+            </div>
         </div>
     </div>
-    @Html.HiddenFor(m => m.Bestelling.Id)
-    <a href="~/Bestel/AfgerondBestellingen" class="btn">Terug</a>
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Opnieuw bestellen</button> 
-}
+    @using (Html.BeginForm("Afgerond", "Bestel"))
+    {
+        <div class="col-md-6">
+            <h4>Producten in deze bestelling</h4>
+            <div class="table-responsive">
+                <table class="table-bordered">
+                    <tr>
+                        <th>Productcode</th>
+                        <th>Productnaam</th>
+                        <th>Aantal</th>
+                        <th>Prijs per stuk</th>
+                        <th>Totaal</th>
+                    </tr>
+                    @{
+                        foreach (var p in Model.BestellingProducts)
+                        {
+                            double producttotaal = p.Product.Prijs * p.Aantal;
+
+                            <tr>
+                                <td>@p.Product.Code</td>
+                                <td>@p.Product.Naam</td>
+                                <td>@p.Aantal</td>
+                                <td>€@p.Product.Prijs</td>
+                                <td>€@producttotaal</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.Bestelling.Id)
+                        <a href="~/Bestel/AfgerondBestellingen" class="btn">Terug</a>
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Opnieuw bestellen</button>
+                        }
+</div>
 

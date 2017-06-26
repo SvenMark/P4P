@@ -18,17 +18,21 @@
 
 @using (Html.BeginForm("Index", "Bestel"))
 {
+    double totaalprijs = 0;
     <div class="table-responsive">
         <table class="table striped table-hover tabel">
             <tr>
                 <th>Productcode</th>
                 <th>Productnaam</th>
                 <th>Aantal</th>
-                <th>Prijs</th>
+                <th>Prijs per stuk</th>
+                <th>Totaal</th>
             </tr>
             @{
                 foreach(var p in Model)
                 {
+                    double producttotaal = p.Product.Prijs * p.Aantal;
+                    totaalprijs += producttotaal;
                     <tr>
                         <td>@p.Product.Code</td>
                         <td>@p.Product.Naam</td>
@@ -40,11 +44,13 @@
                             </div>
                         </td>
                         <td>€@p.Product.Prijs</td>
+                        <td>€@producttotaal</td>
                         <td><button type="button" class="btn red"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
                     </tr>
                 }
             }
         </table>
+        Totaal: €@totaalprijs
     </div>
     @Html.AntiForgeryToken()
     <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
