@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web.Mvc;
 using P4P.Helpers;
 using P4P.Models;
+using P4P.ViewModel;
+using System.Data.Entity;
 using WebGrease.Css.Ast.Selectors;
 
 namespace P4P.Controllers
@@ -266,7 +269,26 @@ namespace P4P.Controllers
 
         public ActionResult Bedrijf()
         {
-            return View();
+            if (!Auth.IsAuth())
+                return RedirectToAction("Login", new {success = "false", errormessage = "Uw sessie is verlopen"});
+            if (Auth.getRole() != "Bedrijfsleider") return View("Bedrijf_read_only");
+            int user_id = Convert.ToInt32(Session["Id"]);
+            using (var ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                if (gebruiker == null) return HttpNotFound();
+                var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
+                var viewModel = new BedrijfFormViewModel
+                {
+                    Bedrijf = bedrijf
+                };
+                return View(viewModel);
+            }
+        }
+
+        public ActionResult CreateWerknemer()
+        {
+            return Content("ka");
         }
 
         public ActionResult Contactpersonen()

@@ -27,5 +27,14 @@ namespace P4P.Helpers
         {
             return HttpContext.Current.Session["Id"] != null;
         }
+
+        public static string getRole()
+        {
+            using (var ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.Find(HttpContext.Current.Session["Id"]);
+                return gebruiker == null ? "None" : gebruiker.Rol;
+            }
+        }
     }
 }

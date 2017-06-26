@@ -200,6 +200,7 @@
     <Compile Include="Models\Subcategorie.cs" />
     <Compile Include="Models\Winkelwagen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\BedrijfFormViewModel.cs" />
     <Compile Include="ViewModel\NewArtikelViewModel.cs" />
     <Compile Include="ViewModel\NewGebruikerViewModel.cs" />
     <Compile Include="ViewModel\DetailsSubcategorie.cs" />
