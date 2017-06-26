@@ -9,18 +9,14 @@
     }
 </style>
 
-<h4><a href="~/Winkel">Home > </a><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> 
+
+<div class="navigatie">
+    <h5><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > 
     @if (Model.product.Subcategorie != null)
     {
-        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">> @Model.product.Subcategorie.Naam</a>
-    }
-</h4>
-<h2>@Model.product.Naam</h2>
-<div class="navigatie">
-    <h5><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > @Model.product.Subcategorie.Naam</h5>
+        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a> <text>></text>
+    }@Model.product.Naam</h5>
 </div>
-
-@*<h4><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a></h4>*@
 
 <div class="card card-producten">
     <h2>@Model.product.Naam</h2>
@@ -54,7 +50,7 @@
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">In winkelmand</button>
     }
-    </div>
+</div>
     @using (Html.BeginForm("AddFavoriet", "Favorieten"))
     {
 
