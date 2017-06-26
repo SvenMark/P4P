@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Bestelling.Afleverdatum, "Gewenste afleverdatum")
-                    @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, new { @class = "form-control", type = "date" })
+                    @Html.TextBoxFor(m => m.Bestelling.Afleverdatum, new {@class = "form-control", type = "date"})
                     @Html.ValidationMessageFor(m => m.Bestelling.Afleverdatum)
                 </div>
                 <div class="form-group">
@@ -58,21 +58,26 @@
                             <th>Productcode</th>
                             <th>Productnaam</th>
                             <th>Aantal</th>
-                            <th>Prijs</th>
+                            <th>Prijs per stuk</th>
+                            <th>Totaal</th>
                         </tr>
                         @{
                             foreach (var p in Model.BestellingProducts)
                             {
+                                double producttotaal = p.Product.Prijs * p.Aantal;
+
                                 <tr>
                                     <td>@p.Product.Code</td>
                                     <td>@p.Product.Naam</td>
                                     <td>@p.Aantal</td>
                                     <td>€@p.Product.Prijs</td>
+                                    <td>€@producttotaal</td>
                                 </tr>
                             }
                         }
                     </table>
                 </div>
+                @Html.HiddenFor(m => m.Bestelling.Id)
                 @Html.AntiForgeryToken()
             </div>
             <center><button type="submit" class="btn btn-primary">Verder</button> </center>

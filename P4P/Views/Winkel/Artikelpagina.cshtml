@@ -9,6 +9,13 @@
     }
 </style>
 
+<h4><a href="~/Winkel">Home > </a><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> 
+    @if (Model.product.Subcategorie != null)
+    {
+        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">> @Model.product.Subcategorie.Naam</a>
+    }
+</h4>
+<h2>@Model.product.Naam</h2>
 <div class="navigatie">
     <h5><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > @Model.product.Subcategorie.Naam</h5>
 </div>
