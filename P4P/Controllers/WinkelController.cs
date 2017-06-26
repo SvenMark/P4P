@@ -20,7 +20,11 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
-            return View();
+            using (P4PContext ctx = new P4PContext())
+            {
+                var categorie = ctx.Hoofdcategories.ToList();
+                return View(categorie);
+            }
         }
 
         [HttpPost]
