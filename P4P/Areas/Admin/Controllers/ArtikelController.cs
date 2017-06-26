@@ -46,20 +46,62 @@ namespace P4P.Areas.Admin.Controllers
             using (var ctx = new P4PContext())
             {
                 product.Prijs = Convert.ToDouble(collection["Product.Prijs"].Replace('.', ','));
-
                 if (product.Hoofdcategorie != null)
-                    product.Hoofdcategorie = ctx.Hoofdcategories.Find(product.Hoofdcategorie.Id);
+                {
+                    if (product.Hoofdcategorie.Id != 0)
+                        product.Hoofdcategorie = ctx.Hoofdcategories.Find(product.Hoofdcategorie.Id);
+                }
                 if (product.Subcategorie != null)
                 {
-                    product.Subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
+                    if (product.Subcategorie.Id != 0)
+                        product.Subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
                 }
-//                else
-//                {
-//                    product.Subcategorie.Hoofdcategorie = product.Hoofdcategorie;
-//                }
                 ctx.Products.Add(product);
                 ctx.SaveChanges();
                 return RedirectToAction("SetSubcategorie", "Artikel", new { id=product.Id});
+            }
+        }
+
+        public ActionResult EditArtikel(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var product = ctx.Products.Find(id);
+                if (product == null) return HttpNotFound();
+                var hoofdcategorieen = ctx.Hoofdcategories.ToList();
+                var viewModel = new NewArtikelViewModel
+                {
+                    Product = product,
+                    Hoofdcategorie = hoofdcategorieen
+                };
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditArtikel(Product product, FormCollection collection)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var productInDb = ctx.Products.Find(product.Id);
+                if (productInDb == null) return HttpNotFound();
+
+                productInDb.Naam = product.Naam;
+                productInDb.Prijs = Convert.ToDouble(collection["Product.Prijs"].Replace('.', ','));
+                productInDb.Verkoopeenheid = product.Verkoopeenheid;
+                productInDb.Beschrijving = product.Beschrijving;
+                productInDb.Code = product.Code;
+                productInDb.Specificaties = product.Specificaties;
+
+                if (product.Hoofdcategorie != null)
+                {
+                    productInDb.Hoofdcategorie = ctx.Hoofdcategories.Find(product.Hoofdcategorie.Id);
+                }
+
+                ctx.SaveChanges();
+                return RedirectToAction("SetSubcategorie", "Artikel", new { id=product.Id });
             }
         }
 
@@ -92,50 +134,21 @@ namespace P4P.Areas.Admin.Controllers
                 ctx.SaveChanges();
                 return RedirectToAction("Index", "Artikel");
             }
-            
+
         }
 
-        public ActionResult EditArtikel(int id)
+        public ActionResult Delete(int id)
         {
             using (var ctx = new P4PContext())
             {
                 var product = ctx.Products.Find(id);
                 if (product == null) return HttpNotFound();
-
-                return View(product);
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditArtikel(Product product, FormCollection collection)
-        {
-            using (var ctx = new P4PContext())
-            {
-                var productInDb = ctx.Products.Find(product.Id);
-                if (productInDb == null) return HttpNotFound();
-
-                productInDb.Naam = product.Naam;
-                productInDb.Prijs = Convert.ToDouble(collection["Product.Prijs"].Replace('.', ','));
-                productInDb.Verkoopeenheid = product.Verkoopeenheid;
-                productInDb.Beschrijving = product.Beschrijving;
-                productInDb.Code = product.Code;
-                productInDb.Specificaties = product.Specificaties;
-
-                if (product.Hoofdcategorie.Id != 0)
-                {
-                    productInDb.Hoofdcategorie = ctx.Hoofdcategories.Find(product.Hoofdcategorie.Id);
-                }
-                if (product.Subcategorie.Id != 0)
-                {
-                    product.Subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
-                }
-
+                product.Hoofdcategorie = null;
+                product.Subcategorie = null;
+                ctx.Products.Remove(product);
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Categorie", new { success = "true" });
+                return RedirectToAction("Index", "Artikel");
             }
         }
-
-        //edit, delete
     }
 }

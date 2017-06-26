@@ -7,7 +7,7 @@
 <p>
     @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
 </p>
-@using (Html.BeginForm("EditHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
+@using (Html.BeginForm("EditArtikel", "Artikel", FormMethod.Post, new { id = "registerForm" }))
 {
     if (ViewBag.message != null)
     {
@@ -50,6 +50,25 @@
                 @Html.TextBoxFor(m => m.Product.Prijs, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.Product.Prijs)
                 @Html.HiddenFor(m => m.Product.Id)
+            </div>
+        </div>
+        <div class="row nomargin">
+            <div class="col-md-12">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bottomform">
+        <center>
+            <h4>Hoofdcategorie</h4>
+        </center>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-12">
+                @Html.LabelFor(m => m.Hoofdcategorie)
+                @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
+                @Html.ValidationMessageFor(m => m.Hoofdcategorie)
             </div>
         </div>
     </div>
