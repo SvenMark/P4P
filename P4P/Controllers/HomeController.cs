@@ -14,7 +14,13 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
-            return View();
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var categorie = ctx.Hoofdcategories.ToList();
+                return View(categorie);
+            }
         }
 
         public ActionResult About()

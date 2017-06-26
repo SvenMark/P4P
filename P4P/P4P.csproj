@@ -183,6 +183,10 @@
     <Compile Include="Migrations\201706231021227_Hoofdcategorie_required.Designer.cs">
       <DependentUpon>201706231021227_Hoofdcategorie_required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706231458378_kaasisbaas.cs" />
+    <Compile Include="Migrations\201706231458378_kaasisbaas.Designer.cs">
+      <DependentUpon>201706231458378_kaasisbaas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
@@ -203,13 +207,13 @@
     <Compile Include="ViewModel\NewSubcategorie.cs" />
     <Compile Include="ViewModel\NewOrderDetails.cs" />
     <Compile Include="ViewModel\NewWinkelmand.cs" />
+    <Compile Include="ViewModel\SubcategorieProducts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\P4P.P4PContext.mdf" />
     <Content Include="App_Data\P4P.P4PContext_log.ldf" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\cart.png" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -370,10 +374,14 @@
     <Content Include="Content\Index.css" />
     <Content Include="Content\jansma_logo.png" />
     <Content Include="Content\jansma_logo2.png" />
+    <Content Include="Content\jansma_logowhite.png" />
     <Content Include="Content\login.css" />
     <Content Include="Content\loginbackground.jpg" />
+    <Content Include="Content\customtwitter.css" />
     <Content Include="Content\materialize.min.css" />
     <Content Include="Content\override.css" />
+    <Content Include="Content\progress-wizard.min.css" />
+    <Content Include="Content\steak.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -589,6 +597,7 @@
     <Content Include="Views\Winkel\Artikelpagina.cshtml" />
     <Content Include="Views\Winkel\SubCategorie.cshtml" />
     <Content Include="Views\Winkel\Categorie.cshtml" />
+    <Content Include="Views\Winkel\ProductsInCategorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
@@ -620,6 +629,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706231021227_Hoofdcategorie_required.resx">
       <DependentUpon>201706231021227_Hoofdcategorie_required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706231458378_kaasisbaas.resx">
+      <DependentUpon>201706231458378_kaasisbaas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

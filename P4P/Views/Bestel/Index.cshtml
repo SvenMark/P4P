@@ -5,12 +5,21 @@
 @*Op deze pagina ziet de gebruiker de inhoud van zijn/haar winkelwagen. De gebruikerkan hier de aantallen aanpassen en producten verwijderen. 
     Vervolgens kan de gebruiker op bestel klikken.*@
 
-<h4 class="center">Winkelwagen</h4>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="gebruiker-banner" class="parallax-container">
+    <div class="parallax">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2 id="winkelwagen">Winkelwagen</h2>
+        <h4>Overzicht van uw winkelwagen</h4>
+    </center>
+</div>
 
 @using (Html.BeginForm("Index", "Bestel"))
 {
     <div class="table-responsive">
-        <table class="table-bordered">
+        <table class="table striped table-hover tabel">
             <tr>
                 <th>Productcode</th>
                 <th>Productnaam</th>
@@ -38,7 +47,7 @@
         </table>
     </div>
     @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Bestellen</button>
+    <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
 }
 
 @section scripts
