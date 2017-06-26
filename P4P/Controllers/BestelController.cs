@@ -57,6 +57,9 @@ namespace P4P.Controllers
                         Afgerond = false
                     };
 
+                    ctx.Bestellingen.Add(bestelling);
+                    ctx.SaveChanges();
+
                     foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id))
                     {
                         BestellingProduct bestellingProduct = new BestellingProduct
@@ -65,10 +68,9 @@ namespace P4P.Controllers
                             Aantal = item.Aantal,
                             Product_Id = item.Product_Id
                         };
-                        if(bestellingProduct.Product != null) ctx.BestellingProducts.Add(bestellingProduct);
+                        if(bestellingProduct.Product_Id != null) ctx.BestellingProducts.Add(bestellingProduct);
                     }
 
-                    ctx.Bestellingen.Add(bestelling);
                     ctx.SaveChanges();
 
                     return RedirectToAction("Orderdetails", new { id=bestelling.Id});
@@ -80,21 +82,23 @@ namespace P4P.Controllers
             }
         }
 
-        public ActionResult Orderdetails()
+        public ActionResult Orderdetails(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
-            int User_id = Convert.ToInt32(Session["Id"]);
+            int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
             {
-                var gebruiker = ctx.Gebruikers.SingleOrDefault(c => c.Id == User_id);
+                var gebruiker = ctx.Gebruikers.SingleOrDefault(c => c.Id == user_id);
                 var bedrijf = ctx.Bedrijven.SingleOrDefault(c => c.Id == gebruiker.BedrijfId);
-                var bestelling = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == User_id);
+                var bestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id && x.Id == id);
+                var producten = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == user_id && c.Bestelling_Id == id);
                 var viewModel = new NewOrderDetails()
                 {
-                    BestellingProducts = bestelling,
+                    BestellingProducts = producten,
                     Bedrijf = bedrijf,
-                    Gebruiker = gebruiker
+                    Gebruiker = gebruiker,
+                    Bestelling = bestelling
                 };
                 return View(viewModel);
             }
@@ -111,7 +115,7 @@ namespace P4P.Controllers
             {
                 using (var ctx = new P4PContext())
                 {
-                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_Id);
+                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_Id && x.Id == bestelling.Id);
 
                     if (getBestelling == null) return HttpNotFound();
 
@@ -123,7 +127,7 @@ namespace P4P.Controllers
 
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Orderconfirmation");
+                    return RedirectToAction("Orderconfirmation", new { id = bestelling.Id });
                 }
             }
             catch
@@ -132,7 +136,7 @@ namespace P4P.Controllers
             }
         }
 
-        public ActionResult Orderconfirmation()
+        public ActionResult Orderconfirmation(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
@@ -141,8 +145,8 @@ namespace P4P.Controllers
             {
                 var gebruiker = ctx.Gebruikers.SingleOrDefault(c => c.Id == user_id);
                 var bedrijf = ctx.Bedrijven.SingleOrDefault(c => c.Id == gebruiker.BedrijfId);
-                var bestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id);
-                var producten = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == user_id);
+                var bestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id && x.Id == id);
+                var producten = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == user_id && c.Bestelling_Id == id);
                 var viewModel = new NewOrderDetails()
                 {
                     BestellingProducts = producten,
@@ -165,7 +169,7 @@ namespace P4P.Controllers
             {
                 using (var ctx = new P4PContext())
                 {
-                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id);
+                    var getBestelling = ctx.Bestellingen.Include(c => c.Gebruiker).Include(c => c.Bedrijf).FirstOrDefault(x => x.Gebruiker.Id == user_id && x.Id == bestelling.Id);
                     if (getBestelling == null) return HttpNotFound();
 
                     getBestelling.Afgerond = true;
@@ -177,7 +181,7 @@ namespace P4P.Controllers
 
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Afgerond", "Bestel");
+                    return RedirectToAction("Afgerond", "Bestel", new {id = bestelling.Id});
                 }
             }
             catch
@@ -206,14 +210,20 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var bestelling = ctx.Bestellingen.Include(c => c.Gebruiker).SingleOrDefault(c => c.Gebruiker.Id == user_id && c.Id == id);
-                var producten = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == user_id);
+                var bestelling = ctx.Bestellingen.Include(c => c.Gebruiker.Bedrijf).Include(c => c.Gebruiker).SingleOrDefault(c => c.Gebruiker.Id == user_id && c.Id == id);
+                var producten = ctx.BestellingProducts.Include(c => c.Bestelling.Gebruiker).Include(c => c.Product).Include(c => c.Bestelling).ToList().Where(c => c.Bestelling.Gebruiker.Id == user_id && c.Bestelling_Id == id);
                 var viewModel = new NewOrderDetails()
                 {
                     BestellingProducts = producten,
-                    Bestelling = bestelling
+                    Bestelling = bestelling,
+                    Gebruiker = bestelling.Gebruiker,
+                    Bedrijf = bestelling.Gebruiker.Bedrijf
                 };
-                return View(viewModel);
+                if (bestelling.Afgerond)
+                {
+                    return View(viewModel);
+                }
+                return RedirectToAction("Index", "Winkel");
             }
         }
 

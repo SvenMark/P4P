@@ -14,10 +14,10 @@ else
     <table id="bestellingen" class="table table-bordered table-hover">
         <thead>
         <tr>
-            <th>Id</th>
+            <th>Bestelling nummer</th>
+            <th>Prijs</th>
             <th>Afleverdatum</th>
-            <th></th>
-            <th></th>
+            <th> </th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +25,15 @@ else
         {
             <tr>
                 <td>@bestelling.Id</td>
-                <td>@bestelling.Afleverdatum.Value.ToString("dd/MM/yyyy")</td>
+                <td>€@bestelling.Prijs</td>
+                @if (bestelling.Afleverdatum.HasValue)
+                {
+                    <td>@bestelling.Afleverdatum.Value.ToString("dd/MM/yyyy")</td>
+                }
+                else
+                {
+                    <td>Geen afleverdatum</td>
+                }
                 <td>@Html.ActionLink("Openen", "Afgerond", "Bestel", new { bestelling.Id }, new { @class = "btn btn-primary" })</td>    
             </tr>
         }
@@ -37,8 +45,32 @@ else
 @section scripts {
     <script>
         $(document).ready(function () {
-            $("#bestellingen").DataTable();
-        })
+            $('#bestellingen').dataTable({
+                "language": {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        });
     </script>
 
     <script type="text/javascript">
