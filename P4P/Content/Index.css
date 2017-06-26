@@ -9,6 +9,11 @@
     text-align: center;
     padding: 10px;
 }
+.card-producten{
+    width:90vw;
+    margin-left:5vw;
+}
+
 
 .clickable {
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
@@ -269,6 +274,20 @@ h4 {
 .smaller {
     min-height: 65vh;
 }
+/*Categorie paginas*/
+.navigatie{
+    width:100vw;
+    background-color:white;
+    padding:5px;
+    margin-top:-10px;
+    margin-bottom:20px;
+    text-align:center;
+}
+    .navigatie a {
+        color: #4caf50;
+        text-decoration: none;
+    }
+
 
 /*Telefoon*/
 @media only screen and (max-width : 768px) {
