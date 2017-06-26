@@ -1,0 +1,36 @@
+﻿@model P4P.ViewModel.NewArtikelViewModel
+@{
+    ViewBag.Title = "SetSubcategorie";
+}
+
+<h2>SetSubcategorie</h2>
+@using (Html.BeginForm("SetSubcategorie", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
+{
+    <div id="bottomform">
+        <center>
+            <h4>Subcategorie</h4>
+        </center>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-12">
+                <button class="btn btn-primary" id="disable2">Test2</button>
+                @Html.LabelFor(m => m.Subcategorie)
+                @Html.DropDownListFor(m => m.Product.Subcategorie.Id, new SelectList(Model.Subcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
+                @Html.ValidationMessageFor(m => m.Subcategorie)
+            </div>
+        </div>
+        <div class="row nomargin">
+
+            <div class="col-md-6">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Product.Id)
+                <button type="submit" class="btn btn-primary">Opslaan</button>
+                @Html.ActionLink("Overslaan", "Index", "Artikel", new { @class="btn btn-primary"})
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

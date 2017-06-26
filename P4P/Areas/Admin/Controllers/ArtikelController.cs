@@ -47,20 +47,52 @@ namespace P4P.Areas.Admin.Controllers
             {
                 product.Prijs = Convert.ToDouble(collection["Product.Prijs"].Replace('.', ','));
 
-                if (product.Hoofdcategorie.Id != 0)
+                if (product.Hoofdcategorie != null)
                     product.Hoofdcategorie = ctx.Hoofdcategories.Find(product.Hoofdcategorie.Id);
-                if (product.Subcategorie.Id != 0)
+                if (product.Subcategorie != null)
                 {
                     product.Subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
                 }
-                else
-                {
-                    product.Subcategorie.Hoofdcategorie = product.Hoofdcategorie;
-                }
+//                else
+//                {
+//                    product.Subcategorie.Hoofdcategorie = product.Hoofdcategorie;
+//                }
                 ctx.Products.Add(product);
+                ctx.SaveChanges();
+                return RedirectToAction("SetSubcategorie", "Artikel", new { id=product.Id});
+            }
+        }
+
+        public ActionResult SetSubcategorie(int id)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var product = ctx.Products.Find(id);
+                if (product == null) return HttpNotFound();
+                var subcategorieen = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie == product.Hoofdcategorie);
+                var viewModel = new NewArtikelViewModel
+                {
+                    Product = product,
+                    Subcategorie = subcategorieen
+                };
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SetSubcategorie(Product product)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var productInDb = ctx.Products.SingleOrDefault(c => c.Id == product.Id);
+                if (productInDb == null) return HttpNotFound();
+                var subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
+                productInDb.Subcategorie = subcategorie;
                 ctx.SaveChanges();
                 return RedirectToAction("Index", "Artikel");
             }
+            
         }
 
         public ActionResult EditArtikel(int id)
