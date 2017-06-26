@@ -1,0 +1,117 @@
+﻿@model P4P.ViewModel.NewArtikelViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+<h3>Nieuw artikel</h3>
+<p>
+    @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("CreateArtikel", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
+{
+    <div id="topform">
+        <center>
+            <h4>Artikel</h4>
+        </center>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Code)
+                @Html.TextBoxFor(m => m.Product.Code, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Code)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Naam)
+                @Html.TextBoxFor(m => m.Product.Naam, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Naam)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Beschrijving)
+                @Html.TextBoxFor(m => m.Product.Beschrijving, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Beschrijving)
+            </div>
+        </div>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Specificaties)
+                @Html.TextBoxFor(m => m.Product.Specificaties, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Specificaties)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Verkoopeenheid)
+                @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
+            </div>
+            <div class="form-group input-field col-md-4">
+                @Html.LabelFor(m => m.Product.Prijs)
+                @Html.TextBoxFor(m => m.Product.Prijs, new {@class = "form-control"})
+                @Html.ValidationMessageFor(m => m.Product.Prijs)
+            </div>
+        </div>
+    </div>
+
+    <div id="middleform">
+        <center>
+            <h4>Hoofdcategorie</h4>
+        </center>
+        <div class="row nomargin">
+            <div class="form-group input-field col-md-6">
+                <button class="btn btn-primary" id="disable1">Test1</button>
+                @Html.LabelFor(m => m.Product.Hoofdcategorie.Naam)
+                @Html.TextBoxFor(m => m.Product.Hoofdcategorie.Naam, new {@class = "form-control", id = "input1"})
+                @Html.ValidationMessageFor(m => m.Product.Hoofdcategorie.Naam)
+            </div>
+            <div class="form-group input-field col-md-6">
+                @Html.LabelFor(m => m.Hoofdcategorie)
+                @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new {@class = "form-control", id="dropdown1"})
+                @Html.ValidationMessageFor(m => m.Hoofdcategorie)
+            </div>
+        </div>
+
+        <div id="bottomform">
+            <center>
+                <h4>Subcategorie</h4>
+            </center>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-12">
+                    <button class="btn btn-primary" id="disable2">Test2</button>
+                    @Html.LabelFor(m => m.Product.Subcategorie.Naam)
+                    @Html.TextBoxFor(m => m.Product.Subcategorie.Naam, new {@class = "form-control", id = "input2"})
+                    @Html.ValidationMessageFor(m => m.Product.Subcategorie.Naam)
+                </div>
+            </div>
+            <div class="row nomargin">
+
+                <div class="col-md-6">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function ()
+        {
+            $("#input1").prop("disabled", "true");
+            $("#input2").prop("disabled", "true");
+            $("#disable1").on("click",
+                function() {
+                    const toggle = $("#input1").prop("disabled");
+
+                    $("#input1").prop("disabled", !toggle );
+                    $("#dropdown1").prop("disabled", toggle);
+                });
+            $("#disable2").on("click",
+                function () {
+                    const toggle = $("#input2").prop("disabled");
+
+                    $("#input2").prop("disabled", !toggle);
+                });
+        });
+    </script>
+}
