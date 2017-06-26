@@ -184,55 +184,6 @@ h5 {
     font-size:20px;
 }
 
-/*Telefoon*/
-@media only screen and (max-width : 768px) {
-    h1 {
-        font-size: 45px;
-    }
-
-    #custom-search-input {
-        width: 95vw;
-    }
-
-    .gradient {
-        margin-top: -25vh;
-    }
-
-    .navbar-brand {
-        display: none;
-    }
-
-    .navbar-collapse {
-        background-color: white;
-        border: solid 2px black;
-    }
-
-    a {
-        color: black !important;
-    }
-    h5{
-        font-size:20px;
-    }
-    }
-@media only screen and (max-width : 992px) {
-    #custom-search-input{
-        width:80vw;
-    }
-    .parallax-container .section {
-        position: absolute;
-        top: 40%;
-    }
-    .links {
-        width:90%;
-        float: none;
-    }
-
-    .rechts {
-        width: 90%;
-        float: none;
-    }
-
-}
 /*Shared index*/
 .input {
     background-color: white !important;
@@ -317,4 +268,57 @@ h4 {
 }
 .smaller {
     min-height: 65vh;
+}
+
+/*Telefoon*/
+@media only screen and (max-width : 768px) {
+    h1 {
+        font-size: 45px;
+    }
+
+    #custom-search-input {
+        width: 95vw;
+    }
+
+    .gradient {
+        margin-top: -25vh;
+    }
+
+    .navbar-brand {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background-color: white;
+        border: solid 2px black;
+    }
+
+    a {
+        color: black !important;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width : 992px) {
+    #custom-search-input {
+        width: 80vw;
+    }
+
+    .parallax-container .section {
+        position: absolute;
+        top: 40%;
+    }
+
+    .links {
+        width: 90%;
+        float: none;
+    }
+
+    .rechts {
+        width: 90%;
+        float: none;
+    }
 }
