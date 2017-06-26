@@ -2,15 +2,29 @@
 @{
     ViewBag.Title = @Model.hoofdcategorie.Naam + "Subcategorieën";
 }
-
-<h2><a href="~/Winkel/Categorie/@Model.hoofdcategorie.Id">@Model.hoofdcategorie.Naam</a></h2>
-
-<div class="card links">
-    <center><h5>Subcategorieën:</h5></center>
-    @foreach (var c in Model.subcategories)
-    {
-        <div class="col-xs-4 col-centered clickable">
-            <h5 class="center"><a href="~/Winkel/SubCategorie/@c.Id">@c.Naam</a></h5>
-        </div>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<style>
+    body {
+        background-color: whitesmoke;
     }
+</style>
+
+<div class="navigatie">
+    <h5>@Model.hoofdcategorie.Naam</h5>
+</div>
+
+<div class="card card-producten">
+    <center><h5>Subcategorieën:</h5></center>
+    <div class="row row-centered">
+        @foreach (var c in Model.subcategories)
+        {
+            <a href="~/Winkel/SubCategorie/@c.Id">
+                <div class="col-xs-2 col-centered clickable categorie">
+                    <h5 class="center">
+                        @c.Naam
+                </h5>
+            </div>
+        </a>
+        }
+    </div>
 </div>
