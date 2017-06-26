@@ -13,6 +13,11 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (Session["Id"] == null) return RedirectToAction("Login");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
 
             using (P4PContext ctx = new P4PContext())
             {
@@ -25,7 +30,7 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(Gebruiker gebruiker)
         {
-            if (Auth.IsAuth()) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login");
 
             try
             {
@@ -36,19 +41,19 @@ namespace P4P.Controllers
                     if (gebruikerInDb == null) return HttpNotFound();
 
                     if (!Auth.VerifyHash(gebruiker.Wachtwoord, gebruikerInDb.Wachtwoord))
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Profiel", new { success="false", errormessage="Incorrect wachtwoord"});
 
                     gebruikerInDb.Voornaam = gebruiker.Voornaam;
                     gebruikerInDb.Achternaam = gebruiker.Achternaam;
                     gebruikerInDb.Telefoonnummer = gebruiker.Telefoonnummer;
 
                     ctx.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Profiel", new { success="true"});
                 }
             }
             catch
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Profiel", new { success="false", errormessage="Onbekende fout"});
             }
         }
 
@@ -123,10 +128,11 @@ namespace P4P.Controllers
                 {
                     var gebruikerInDb = ctx.Gebruikers.SingleOrDefault(m => m.Emailadres == gebruiker.Emailadres);
 
-                    if (gebruikerInDb == null) return RedirectToAction("Login");
+                    if (gebruikerInDb == null)
+                        return RedirectToAction("Login", new { success="false", errormessage="Deze combinatie is niet bij ons bekend!"});
 
                     if (!Auth.VerifyHash(gebruiker.Wachtwoord, gebruikerInDb.Wachtwoord))
-                        return RedirectToAction("Login");
+                        return RedirectToAction("Login", new { success = "false", errormessage = "Deze combinatie is niet bij ons bekend!" });
 
                     Session["Id"] = gebruikerInDb.Id;
                     return RedirectToAction("Index", "Winkel");
