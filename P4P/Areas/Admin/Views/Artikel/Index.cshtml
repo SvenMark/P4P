@@ -20,6 +20,8 @@
         <th>Prijs</th>
         <th>Hoofdcategorie</th>
         <th>Subcategorie</th>
+        <th>Aanpassen</th>
+        <th>Verwijderen</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +49,8 @@
                 {
                     <td>Geen Subcategorie</td>
                 }
+                <td>@Html.ActionLink("Aanpassen", "EditArtikel", "Artikel", new { id=product.Id}, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Verwijderen", "Delete", "Artikel", new { id = product.Id }, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan nie ongedaan worden gemaakt!');" })</td>
             </tr>
         }
     </tbody>

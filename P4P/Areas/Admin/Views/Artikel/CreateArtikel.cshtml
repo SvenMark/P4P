@@ -56,7 +56,7 @@
         </center>
         <div class="row nomargin">
             <div class="form-group input-field col-md-6">
-                <button class="btn btn-primary" id="disable1">Test1</button>
+                <button type="button" class="btn btn-primary" id="disable1">Test1</button>
                 @Html.LabelFor(m => m.Product.Hoofdcategorie.Naam)
                 @Html.TextBoxFor(m => m.Product.Hoofdcategorie.Naam, new {@class = "form-control", id = "input1"})
                 @Html.ValidationMessageFor(m => m.Product.Hoofdcategorie.Naam)
@@ -74,7 +74,7 @@
             </center>
             <div class="row nomargin">
                 <div class="form-group input-field col-md-12">
-                    <button class="btn btn-primary" id="disable2">Test2</button>
+                    <button type="button" class="btn btn-primary" id="disable2">Test2</button>
                     @Html.LabelFor(m => m.Product.Subcategorie.Naam)
                     @Html.TextBoxFor(m => m.Product.Subcategorie.Naam, new {@class = "form-control", id = "input2"})
                     @Html.ValidationMessageFor(m => m.Product.Subcategorie.Naam)
