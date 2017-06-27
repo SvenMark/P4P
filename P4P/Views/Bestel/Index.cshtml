@@ -16,7 +16,7 @@
     </center>
 </div>
 
-@using (Html.BeginForm("Index", "Bestel"))
+@if (Model.Any())
 {
     double totaalprijs = 0;
     <div class="table-responsive">
@@ -50,10 +50,15 @@
                 }
             }
         </table>
-        Totaal: €@totaalprijs
+        <h4><center>Totaal: €@totaalprijs</center></h4>
     </div>
     @Html.AntiForgeryToken()
     <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
+
+}
+else
+{
+    <h4 class="center">Geen producten in winkelwagen</h4>
 }
 
 @section scripts

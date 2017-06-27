@@ -5,9 +5,16 @@
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <link rel="stylesheet" type="text/css" href="~/Content/progress-wizard.min.css" media="screen" />
-<h2>Afgeronde bestelling Id: @Model.Bestelling.Id</h2>
 
 <div class="row">
+    <div class="col-sm-12">
+        <ul class="progress-indicator">
+            <li class="completed"> <span class="bubble"></span> Winkelwagen </li>
+            <li class="completed"> <span class="bubble"></span> Gegevens </li>
+            <li class="completed"> <span class="bubble"></span> Bevestiging </li>
+            <li class="completed"> <span class="bubble"></span> Afronding </li>
+        </ul>
+    </div>
     <div class="col-md-6">
         <div class="card profiel smaller">
             <h4>Bestellinggegevens</h4>
@@ -56,37 +63,41 @@
     @using (Html.BeginForm("Afgerond", "Bestel"))
     {
         <div class="col-md-6">
-            <h4>Producten in deze bestelling</h4>
-            <div class="table-responsive">
-                <table class="table-bordered">
-                    <tr>
-                        <th>Productcode</th>
-                        <th>Productnaam</th>
-                        <th>Aantal</th>
-                        <th>Prijs per stuk</th>
-                        <th>Totaal</th>
-                    </tr>
-                    @{
-                        foreach (var p in Model.BestellingProducts)
-                        {
-                            double producttotaal = p.Product.Prijs * p.Aantal;
+            <div class="card profiel smaller">
+                <h4>Producten in deze bestelling</h4>
+                <div class="table-responsive">
+                    <table class="table striped table-hover">
+                        <tr>
+                            <th>Productcode</th>
+                            <th>Productnaam</th>
+                            <th>Aantal</th>
+                            <th>Prijs per stuk</th>
+                            <th>Totaal</th>
+                        </tr>
+                        @{
+                            foreach (var p in Model.BestellingProducts)
+                            {
+                                double producttotaal = p.Product.Prijs * p.Aantal;
 
-                            <tr>
-                                <td>@p.Product.Code</td>
-                                <td>@p.Product.Naam</td>
-                                <td>@p.Aantal</td>
-                                <td>€@p.Product.Prijs</td>
-                                <td>€@producttotaal</td>
-                            </tr>
+                                <tr>
+                                    <td>@p.Product.Code</td>
+                                    <td>@p.Product.Naam</td>
+                                    <td>@p.Aantal</td>
+                                    <td>€@p.Product.Prijs</td>
+                                    <td>€@producttotaal</td>
+                                </tr>
+                            }
                         }
-                    }
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
         @Html.HiddenFor(m => m.Bestelling.Id)
-                        <a href="~/Bestel/AfgerondBestellingen" class="btn">Terug</a>
-                        @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-primary">Opnieuw bestellen</button>
-                        }
+                            <center>
+                                <a href="~/Bestel/AfgerondBestellingen" class="btn">Terug</a>
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary">Opnieuw bestellen</button>
+                            </center>
+                            }
 </div>
 

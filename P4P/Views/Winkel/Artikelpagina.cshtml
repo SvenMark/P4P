@@ -1,6 +1,7 @@
 ﻿@model P4P.ViewModel.NewWinkelmand
 @{
     ViewBag.Title = @Model.product.Naam;
+    string image = @Model.product.Code + ".jpg";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <style>
@@ -9,52 +10,66 @@
     }
 </style>
 
-<h4><a href="~/Winkel">Home > </a><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> 
+
+<div class="navigatie">
+    <h5><a href="~/Winkel">Home</a> > <a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > 
     @if (Model.product.Subcategorie != null)
     {
-        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">> @Model.product.Subcategorie.Naam</a>
-    }
-</h4>
-<h2>@Model.product.Naam</h2>
-<div class="navigatie">
-    <h5><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > @Model.product.Subcategorie.Naam</h5>
+        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a> <text>></text>
+    }@Model.product.Naam</h5>
 </div>
-
-@*<h4><a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a></h4>*@
-
 <div class="card card-producten">
-    <h2>@Model.product.Naam</h2>
+    <img src="~/Content/Images/@image" width="200px" height="200px"/>
+    <h4>@Model.product.Naam</h4>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-right"><b>Product code:</b>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-left">@Model.product.Code</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-right"><b>Prijs:</b>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-left">€@Model.product.Prijs</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-right"><b>Beschrijving:</b>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-left">@Model.product.Beschrijving</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p class="text-right"><b>Specs:</b>
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p class="text-left">@Model.product.Specificaties</p>
+        </div>
+    </div>
 
     @using (Html.BeginForm("Artikelpagina", "Winkel"))
     {
-        @Html.LabelFor(m => m.product.Code)
-        @Html.TextBoxFor(m => m.product.Code, new { disabled = "True" })
-        @Html.ValidationMessageFor(m => m.product.Code)
-
-        @Html.LabelFor(m => m.product.Prijs)
-        @Html.TextBoxFor(m => m.product.Prijs, new { disabled = "True" })
-        @Html.ValidationMessageFor(m => m.product.Prijs)
-
-        @Html.LabelFor(m => m.product.Beschrijving)
-        @Html.TextAreaFor(m => m.product.Beschrijving, new { disabled = "True" })
-        @Html.ValidationMessageFor(m => m.product.Beschrijving)
-        <p>@Model.product.Beschrijving</p>
-
-        @Html.LabelFor(m => m.product.Specificaties)
-        @Html.TextAreaFor(m => m.product.Specificaties, new { disabled = "True" })
-        @Html.ValidationMessageFor(m => m.product.Specificaties)
-
-
         <div class="form-group">
             @Html.LabelFor(m => m.winkelwagen.Aantal)
-            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", required = "True" })
+            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
             @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
         </div>
         @Html.HiddenFor(m => m.product.Id)
         @Html.AntiForgeryToken()
         <button type="submit" class="btn btn-primary">In winkelmand</button>
     }
-    </div>
+</div>
     @using (Html.BeginForm("AddFavoriet", "Favorieten"))
     {
 
