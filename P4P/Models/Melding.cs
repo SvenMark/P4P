@@ -12,6 +12,10 @@ namespace P4P.Models
 
         [Required]
         [StringLength(255)]
+        public string Naam { get; set; }
+
+        [Required]
+        [StringLength(255)]
         public string Message { get; set; }
     }
 }
