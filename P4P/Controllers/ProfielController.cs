@@ -220,7 +220,12 @@ namespace P4P.Controllers
 
         public ActionResult Wachtwoord()
         {
-            if (Auth.IsAuth()) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
 
             using (P4PContext ctx = new P4PContext())
             {
@@ -233,7 +238,7 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Wachtwoord(Gebruiker gebruiker)
         {
-            if (Auth.IsAuth()) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", new { success="false", errormessage="Uw sessie is verlopen"});
 
             try
             {
@@ -241,19 +246,21 @@ namespace P4P.Controllers
                 {
                     var gebruikerInDb = ctx.Gebruikers.Find(Session["Id"]);
 
-                    if (!Auth.VerifyHash(gebruiker.Token, gebruikerInDb.Wachtwoord))
-                        return RedirectToAction("Wachtwoord");
+                    if (gebruikerInDb == null) return HttpNotFound();
 
-                    if (gebruiker.Wachtwoord != gebruiker.ConfirmPassword) return RedirectToAction("Wachtwoord");
+                    if (!Auth.VerifyHash(gebruiker.Token, gebruikerInDb.Wachtwoord))
+                        return RedirectToAction("Wachtwoord", new { success = "false", errormessage = "Foutief wachtwoord" });
+
+                    if (gebruiker.Wachtwoord != gebruiker.ConfirmPassword) return RedirectToAction("Wachtwoord", new { success = "false", errormessage = "De wachtwoorden komen niet overeen" });
 
                     gebruikerInDb.Wachtwoord = Auth.Hash(gebruiker.Wachtwoord);
                     ctx.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", new { success = "true" });
                 }
             }
             catch
             {
-                return RedirectToAction("Wachtwoord");
+                return RedirectToAction("Wachtwoord", new { success = "false", errormessage = "Onbekende fout" });
             }
         }
 
