@@ -2,16 +2,16 @@
 @{
     ViewBag.Title = "AfgerondBestellingen";
 }
-
-<h2>Afgeronde bestellingen</h2>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<center><h4 style="font-size:25px;">Afgeronde bestellingen</h4></center>
 
 @if (!Model.Any())
 {
-    <h4>Geen afgeronde bestellingen</h4>
+    <h6>Geen afgeronde bestellingen</h6>
 }
 else
 {
-    <table id="bestellingen" class="table table-bordered table-hover">
+    <table id="bestellingen" class="table striped table-hover">
         <thead>
         <tr>
             <th>Bestelling nummer</th>
@@ -39,7 +39,7 @@ else
         }
         </tbody>
     </table>
-    <a href="~/Home/Index" class="btn">Terug</a>
+    <a href="~/Winkel" class="btn" style="margin-left:20px;">Terug</a>
 }
 
 @section scripts {

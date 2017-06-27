@@ -195,6 +195,15 @@ h5 {
     height: 36px !important;
     border-style: none !important;
 }
+.waves-light{
+    margin-top:10px;
+    width:90%;
+    color:white!important;
+}
+.btn:hover {
+    background-color:mediumseagreen !important;
+    color:white!important;
+}
 /*Create.cshtml*/
 #bottomform {
     margin-top: 20px;
@@ -333,7 +342,7 @@ h4 {
 
     .links {
         width: 90%;
-        float: none;
+        float: none!important;
     }
 
     .rechts {
