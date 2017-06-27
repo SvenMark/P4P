@@ -1,6 +1,7 @@
 ﻿@model P4P.ViewModel.NewWinkelmand
 @{
     ViewBag.Title = @Model.product.Naam;
+    string image = @Model.product.Code + ".jpg";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <style>
@@ -17,12 +18,13 @@
         <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id">@Model.product.Subcategorie.Naam</a> <text>></text>
     }@Model.product.Naam</h5>
 </div>
-
 <div class="card card-producten">
+    <img src="~/Content/Images/@image" width="200px" height="200px"/>
     <h4>@Model.product.Naam</h4>
     <div class="row">
         <div class="col-md-6">
-            <p class="text-right"><b>Product code:</b></p>
+            <p class="text-right"><b>Product code:</b>
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-left">@Model.product.Code</p>
@@ -30,7 +32,8 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <p class="text-right"><b>Prijs:</b></p>
+            <p class="text-right"><b>Prijs:</b>
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-left">€@Model.product.Prijs</p>
@@ -38,7 +41,8 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <p class="text-right"><b>Beschrijving:</b></p>
+            <p class="text-right"><b>Beschrijving:</b>
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-left">@Model.product.Beschrijving</p>
@@ -46,7 +50,8 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <p class="text-right"><b>Specs:</b></p>
+            <p class="text-right"><b>Specs:</b>
+            </p>
         </div>
         <div class="col-md-6">
             <p class="text-left">@Model.product.Specificaties</p>
@@ -57,7 +62,7 @@
     {
         <div class="form-group">
             @Html.LabelFor(m => m.winkelwagen.Aantal)
-            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", required = "True" })
+            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
             @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
         </div>
         @Html.HiddenFor(m => m.product.Id)
