@@ -82,6 +82,22 @@ namespace P4P.Controllers
             }
         }
 
+        public ActionResult Delete(int id)
+        {
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var product = ctx.Winkelwagens.Include(c => c.Gebruiker).Include(c => c.Product).SingleOrDefault(c => c.Product_Id == id && c.Gebruiker_id == user_id);
+                if (product != null)
+                {
+                    ctx.Winkelwagens.Remove(product);
+                    ctx.SaveChanges();
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Orderdetails(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");

@@ -19,21 +19,41 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
             {
                 var categorie = ctx.Hoofdcategories.ToList();
-                return View(categorie);
+                var gebruiker = ctx.Gebruikers.Find(user_id);
+                var meldingen = ctx.Meldingen.ToList();
+                var aanbiedingen = ctx.Aanbiedingen.ToList();
+
+                var getCategories = new IndexWinkel
+                {
+                    hoofdcategorie = categorie,
+                    gebruiker = gebruiker,
+                    meldingen = meldingen,
+                    aanbiedingen = aanbiedingen
+                };
+
+                return View(getCategories);
             }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Search(string search)
+        public ActionResult Search(FormCollection collection)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
-            return View();
+            string search = collection["search"];
+            ViewBag.zoek = search;
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var producten = ctx.Products.ToList().Where(c => c.Naam.Contains(search));
+                return View(producten);
+            }
         }
 
         public ActionResult Quickorder()
