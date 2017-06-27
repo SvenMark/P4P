@@ -349,4 +349,10 @@ h4 {
         width: 90%;
         float: none;
     }
+    .text-right{
+        text-align:center!important;
+    }
+    .text-left{
+        text-align:center!important;
+    }
 }
