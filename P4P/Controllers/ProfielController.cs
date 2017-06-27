@@ -271,7 +271,12 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth())
                 return RedirectToAction("Login", new {success = "false", errormessage = "Uw sessie is verlopen"});
-            if (Auth.getRole() != "Bedrijfsleider") return View("Bedrijf_read_only");
+            if (Auth.getRole() == "Werknemer") return View("Bedrijf_read_only");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
             using (var ctx = new P4PContext())
             {
@@ -286,9 +291,79 @@ namespace P4P.Controllers
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Bedrijf(Bedrijf bedrijf)
+        {
+            using (var ctx = new P4PContext())
+            {
+                var bedrijfInDb = ctx.Bedrijven.Find(bedrijf.Id);
+                if (bedrijfInDb == null) return HttpNotFound();
+                bedrijfInDb.Naam = bedrijf.Naam;
+                bedrijfInDb.Adres = bedrijf.Adres;
+                bedrijfInDb.Postcode = bedrijf.Postcode;
+                bedrijfInDb.Plaats = bedrijf.Plaats;
+                bedrijfInDb.Telefoonnummer = bedrijf.Telefoonnummer;
+
+                ctx.SaveChanges();
+                return RedirectToAction("Bedrijf", "Profiel");
+            }
+        }
+
         public ActionResult CreateWerknemer()
         {
-            return Content("ka");
+            if (!Auth.IsAuth())
+                return RedirectToAction("Login", new { success = "false", errormessage = "Uw sessie is verlopen" });
+            if (Auth.getRole() == "Werknemer") RedirectToAction("Bedrijf", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
+            int user_id = Convert.ToInt32(Session["Id"]);
+            using (var ctx = new P4PContext())
+            {
+                var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                if (gebruiker == null) return HttpNotFound();
+                var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
+                var viewModel = new BedrijfFormViewModel
+                {
+                    Bedrijf = bedrijf
+                };
+                return View(viewModel);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateWerknemer(Gebruiker gebruiker, Bedrijf bedrijf)
+        {
+            using (var ctx = new P4PContext())
+            {
+                //als de code hier ergens een error oplevert voert hij catch uit.
+                if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
+                    return RedirectToAction("Bedrijf", new {success = "false", errormessage = "Email already exists"});
+
+                gebruiker.Token = Auth.Getlogintoken();
+                gebruiker.BedrijfId = bedrijf.Id;
+                gebruiker.Rol = "Werknemer";
+                ctx.Gebruikers.Add(gebruiker);
+                ctx.SaveChanges();
+
+                GMailer.GmailUsername = "webshopjansma@gmail.com";
+                GMailer.GmailPassword = "Lemmesmash";
+
+                GMailer mailer = new GMailer();
+                mailer.ToEmail = gebruiker.Emailadres;
+                mailer.Subject = "Loginlink";
+                mailer.Body =
+                    "Hierbij de inloggegevens voor uw account<br> Login met behulp van deze link: http://localhost:60565/Profiel/Login/" +
+                    gebruiker.Token;
+                mailer.IsHtml = true;
+                mailer.Send();
+                return RedirectToAction("Bedrijf", new {success = "true"});
+            }
         }
 
         public ActionResult Contactpersonen()
