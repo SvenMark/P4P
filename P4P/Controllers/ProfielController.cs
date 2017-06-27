@@ -271,23 +271,37 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth())
                 return RedirectToAction("Login", new {success = "false", errormessage = "Uw sessie is verlopen"});
-            if (Auth.getRole() == "Werknemer") return View("Bedrijf_read_only");
-            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
-            {
-                ViewBag.Success = Request.QueryString["success"];
-                ViewBag.Errormessage = Request.QueryString["errormessage"];
-            }
             int user_id = Convert.ToInt32(Session["Id"]);
-            using (var ctx = new P4PContext())
+            if (Auth.getRole() == "Werknemer")
             {
-                var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
-                if (gebruiker == null) return HttpNotFound();
-                var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
-                var viewModel = new BedrijfFormViewModel
+                using (var ctx = new P4PContext())
                 {
-                    Bedrijf = bedrijf
-                };
-                return View(viewModel);
+                    var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                    if (gebruiker == null) return HttpNotFound();
+                    var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
+                    return View("Bedrijf_read_only", bedrijf);
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+                {
+                    ViewBag.Success = Request.QueryString["success"];
+                    ViewBag.Errormessage = Request.QueryString["errormessage"];
+                }
+                using (var ctx = new P4PContext())
+                {
+                    var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                    if (gebruiker == null) return HttpNotFound();
+                    var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
+                    var gebruikers = ctx.Gebruikers.ToList().Where(c => c.Bedrijf == bedrijf);
+                    var viewModel = new BedrijfDisplayViewModel()
+                    {
+                        Bedrijf = bedrijf,
+                        Gebruikers = gebruikers
+                    };
+                    return View(viewModel);
+                }
             }
         }
 
@@ -314,7 +328,7 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth())
                 return RedirectToAction("Login", new { success = "false", errormessage = "Uw sessie is verlopen" });
-            if (Auth.getRole() == "Werknemer") RedirectToAction("Bedrijf", "Profiel");
+            if (Auth.getRole() != "Bedrijfsleider" || Auth.getRole() != "Admin") return RedirectToAction("Bedrijf", "Profiel");
             if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
             {
                 ViewBag.Success = Request.QueryString["success"];
@@ -343,7 +357,7 @@ namespace P4P.Controllers
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
-                    return RedirectToAction("Bedrijf", new {success = "false", errormessage = "Email already exists"});
+                    return RedirectToAction("CreateWerknemer", new {success = "false", errormessage = "Email already exists"});
 
                 gebruiker.Token = Auth.Getlogintoken();
                 gebruiker.BedrijfId = bedrijf.Id;

@@ -1,10 +1,13 @@
-﻿@model P4P.ViewModel.BedrijfFormViewModel
+﻿@model P4P.ViewModel.BedrijfDisplayViewModel
 @{
     ViewBag.Title = "Bedrijf";
 }
 
 <h2>Bedrijf</h2>
 <h3>Beheer van bedrijf</h3>
+<p>
+    @Html.ActionLink("Werknemer toevoegen", "CreateWerknemer", "Profiel", null, new { @class="btn btn-primary"})
+</p>
 <div id="formcard" class="card horizontal">
     <div class="card-image" style="width: 8vw;">
     </div>
@@ -55,6 +58,42 @@
                     </div>
                 </div>
             }
+            <div class="bottomform">
+                <div class="row nomargin">
+                    <center>
+                        <h4>Werknemers</h4>
+                    </center>
+                    <table id="gebruikers" class="table striped table-hover tabel">
+                        <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Voornaam</th>
+                            <th>Achternaam</th>
+                            <th>Telefoonnummer</th>
+                            <th>Adres</th>
+                            <th>Postcode</th>
+                            <th>Woonplaats</th>
+                            <th>Rol</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var gebruiker in Model.Gebruikers)
+                        {
+                            <tr>
+                                <td>@gebruiker.Emailadres</td>
+                                <td>@gebruiker.Voornaam</td>
+                                <td>@gebruiker.Achternaam</td>
+                                <td>@gebruiker.Telefoonnummer</td>
+                                <td>@gebruiker.Adres</td>
+                                <td>@gebruiker.Postcode</td>
+                                <td>@gebruiker.Woonplaats</td>
+                                <td>@gebruiker.Rol</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    </div>
+            </div>
         </div>
     </div>
 </div>
@@ -75,4 +114,34 @@
             }
         });
     </script>
+    
+<script>
+        $(document).ready(function () {
+            $('#gebruikers').dataTable({
+                "language": {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        });
+</script>
 }

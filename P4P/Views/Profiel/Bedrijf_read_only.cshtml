@@ -1,0 +1,56 @@
+﻿@model P4P.Models.Bedrijf
+@{
+    ViewBag.Title = "Bedrijf_read_only";
+}
+
+<h2>Bedrijf_read_only</h2>
+<div id="formcard" class="card horizontal">
+    <div class="card-image" style="width: 8vw;">
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            @using (Html.BeginForm("Bedrijf", "Profiel"))
+            {
+                <div id="topform">
+
+                    <div class="row nomargin">
+                        <center>
+                            <h4>Bedrijf</h4>
+                        </center>
+                        <div class="row nomargin">
+                            <div class="form-group input-field col-md-6">
+                                @Html.LabelFor(m => m.Naam)
+                                @Html.TextBoxFor(m => m.Naam, new {@class = "form-control", disabled="true"})
+                                @Html.ValidationMessageFor(m => m.Naam)
+                            </div>
+                            <div class="form-group input-field col-md-6">
+                                @Html.LabelFor(m => m.Adres)
+                                @Html.TextBoxFor(m => m.Adres, new {@class = "form-control", disabled = "true" })
+                                @Html.ValidationMessageFor(m => m.Adres)
+                            </div>
+                        </div>
+                        <div class="row nomargin">
+                            <div class="form-group input-field col-md-6">
+                                @Html.LabelFor(m => m.Postcode)
+                                @Html.TextBoxFor(m => m.Postcode, new {@class = "form-control", disabled = "true" })
+                                @Html.ValidationMessageFor(m => m.Postcode)
+                            </div>
+                            <div class="form-group input-field col-md-6">
+                                @Html.LabelFor(m => m.Plaats)
+                                @Html.TextBoxFor(m => m.Plaats, new {@class = "form-control", disabled = "true" })
+                                @Html.ValidationMessageFor(m => m.Plaats)
+                            </div>
+                        </div>
+                        <div class="row nomargin">
+                            <div class="form-group input-field col-md-6">
+                                @Html.LabelFor(m => m.Telefoonnummer)
+                                @Html.TextBoxFor(m => m.Telefoonnummer, new {@class = "form-control", disabled = "true" })
+                                @Html.ValidationMessageFor(m => m.Telefoonnummer)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
