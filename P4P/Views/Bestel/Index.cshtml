@@ -18,45 +18,43 @@
 
 @if (Model.Any())
 {
-    using (Html.BeginForm("Index", "Bestel"))
-    {
-        double totaalprijs = 0;
-        <div class="table-responsive">
-            <table class="table striped table-hover tabel">
-                <tr>
-                    <th>Productcode</th>
-                    <th>Productnaam</th>
-                    <th>Aantal</th>
-                    <th>Prijs per stuk</th>
-                    <th>Totaal</th>
-                </tr>
-                @{
-                    foreach (var p in Model)
-                    {
-                        double producttotaal = p.Product.Prijs * p.Aantal;
-                        totaalprijs += producttotaal;
-                        <tr>
-                            <td>@p.Product.Code</td>
-                            <td>@p.Product.Naam</td>
-                            <td>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => p.Aantal)
-                                    @Html.TextBoxFor(m => p.Aantal, new {@type = "Number"})
-                                    @Html.ValidationMessageFor(m => p.Aantal)
-                                </div>
-                            </td>
-                            <td>€@p.Product.Prijs</td>
-                            <td>€@producttotaal</td>
-                            <td><a href="~/Bestel/Delete/@p.Product.Id" type="button" class="btn red"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                        </tr>
-                    }
+    double totaalprijs = 0;
+    <div class="table-responsive">
+        <table class="table striped table-hover tabel">
+            <tr>
+                <th>Productcode</th>
+                <th>Productnaam</th>
+                <th>Aantal</th>
+                <th>Prijs per stuk</th>
+                <th>Totaal</th>
+            </tr>
+            @{
+                foreach(var p in Model)
+                {
+                    double producttotaal = p.Product.Prijs * p.Aantal;
+                    totaalprijs += producttotaal;
+                    <tr>
+                        <td>@p.Product.Code</td>
+                        <td>@p.Product.Naam</td>
+                        <td>
+                            <div class="form-group">
+                                @Html.LabelFor(m => p.Aantal)
+                                @Html.TextBoxFor(m => p.Aantal, new { @type = "Number"})
+                                @Html.ValidationMessageFor(m => p.Aantal)
+                            </div>
+                        </td>
+                        <td>€@p.Product.Prijs</td>
+                        <td>€@producttotaal</td>
+                        <td><button type="button" class="btn red"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                    </tr>
                 }
-            </table>
-            Totaal: €@totaalprijs
-        </div>
-        @Html.AntiForgeryToken()
-        <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
-    }
+            }
+        </table>
+        <h4><center>Totaal: €@totaalprijs</center></h4>
+    </div>
+    @Html.AntiForgeryToken()
+    <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
+
 }
 else
 {
