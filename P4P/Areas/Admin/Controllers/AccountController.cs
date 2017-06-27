@@ -71,11 +71,5 @@ namespace P4P.Areas.Admin.Controllers
                 }
             }
         }
-
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            return RedirectToAction("Login", "Profiel");
-        }
     }
 }

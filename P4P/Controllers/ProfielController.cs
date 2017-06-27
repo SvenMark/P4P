@@ -384,5 +384,11 @@ namespace P4P.Controllers
         {
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Profiel");
+        }
     }
 }
