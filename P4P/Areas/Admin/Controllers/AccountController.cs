@@ -18,6 +18,7 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var gebruikers = ctx.Gebruikers.Include(c => c.Bedrijf).ToList();
@@ -28,6 +29,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
             ViewBag.Success = Request.QueryString["success"];
             ViewBag.Errormessage = Request.QueryString["errormessage"];
@@ -39,6 +41,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Gebruiker gebruiker, Bedrijf bedrijf)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.

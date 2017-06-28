@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Data.Entity;
 using System.Web.Mvc;
+using P4P.Helpers;
 using P4P.Models;
 using P4P.ViewModel;
 
@@ -12,9 +13,11 @@ namespace P4P.Areas.Admin.Controllers
 {
     public class ArtikelController : Controller
     {
+
         // GET: Admin/Artikel
         public ActionResult Index()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var producten = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).ToList();
@@ -26,6 +29,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult CreateArtikel()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.ToList();
@@ -43,6 +47,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateArtikel(Product product, FormCollection collection)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 product.Prijs = Convert.ToDouble(collection["Product.Prijs"].Replace('.', ','));
@@ -66,6 +71,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult EditArtikel(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var product = ctx.Products.Find(id);
@@ -85,6 +91,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditArtikel(Product product, FormCollection collection)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var productInDb = ctx.Products.Find(product.Id);
@@ -109,6 +116,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult SetSubcategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var product = ctx.Products.Find(id);
@@ -127,6 +135,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SetSubcategorie(Product product)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var productInDb = ctx.Products.SingleOrDefault(c => c.Id == product.Id);
@@ -141,6 +150,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var product = ctx.Products.Find(id);

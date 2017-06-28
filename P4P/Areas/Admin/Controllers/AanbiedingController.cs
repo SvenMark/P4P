@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
+using P4P.Helpers;
 using P4P.Models;
 
 namespace P4P.Areas.Admin.Controllers
@@ -14,6 +15,7 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Aanbieding
         public ActionResult Index()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var producten = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).ToList();
@@ -24,6 +26,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult New(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var producten = ctx.Products.Find(id);
@@ -35,6 +38,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult New(Product product, FormCollection collection)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var productInDb = ctx.Products.Find(product.Id);

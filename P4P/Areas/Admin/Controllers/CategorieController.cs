@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using P4P.ViewModel;
 using System.Data.Entity;
+using P4P.Helpers;
 using P4P.Models;
 
 namespace P4P.Areas.Admin.Controllers
@@ -14,6 +15,7 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Categorie
         public ActionResult Index()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.ToList();
@@ -28,6 +30,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
@@ -49,6 +52,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult CreateHoofdcategorie()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View();
             ViewBag.Success = Request.QueryString["success"];
             ViewBag.Errormessage = Request.QueryString["errormessage"];
@@ -59,6 +63,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateHoofdcategorie(Hoofdcategorie hoofdcategorie)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 ctx.Hoofdcategories.Add(hoofdcategorie);
@@ -69,6 +74,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult EditHoofdcategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
@@ -82,6 +88,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditHoofdCategorie(Hoofdcategorie hoofdcategorie)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.Find(hoofdcategorie.Id);
@@ -95,6 +102,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult DeleteHoofdCategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
@@ -128,6 +136,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult CreateSubCategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
             {
                 ViewBag.Success = Request.QueryString["success"];
@@ -150,6 +159,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateSubCategorie(Subcategorie subcategorie, int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.Find(id);
@@ -162,6 +172,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult EditSubCategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
@@ -175,6 +186,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditSubCategorie(Subcategorie subcategorie)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == subcategorie.Id);
@@ -188,6 +200,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult DeleteSubCategorie(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie)

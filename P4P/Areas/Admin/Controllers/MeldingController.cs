@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using P4P.Helpers;
 using P4P.Models;
 
 namespace P4P.Areas.Admin.Controllers
@@ -13,6 +14,7 @@ namespace P4P.Areas.Admin.Controllers
         // GET: Admin/Melding
         public ActionResult Index()
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var melding = ctx.Meldingen.ToList();
@@ -22,13 +24,15 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult New()
         {
-                return View();
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(Melding melding)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 ctx.Meldingen.Add(melding);
@@ -39,6 +43,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var melding = ctx.Meldingen.Find(id);
@@ -50,6 +55,7 @@ namespace P4P.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Melding melding)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var meldingInDb = ctx.Meldingen.Find(melding.Id);
@@ -63,6 +69,7 @@ namespace P4P.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
                 var melding = ctx.Meldingen.Find(id);
