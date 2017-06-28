@@ -16,6 +16,11 @@ namespace P4P.Areas.Admin.Controllers
         public ActionResult Index()
         {
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             using (var ctx = new P4PContext())
             {
                 var producten = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).ToList();
@@ -46,7 +51,7 @@ namespace P4P.Areas.Admin.Controllers
                 productInDb.Aanbiedingen = product.Aanbiedingen;
                 productInDb.Aanbiedingprijs = Convert.ToDouble(collection["Aanbiedingprijs"].Replace('.', ','));
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Aanbieding");
+                return RedirectToAction("Index", "Aanbieding", new { success="true"});
             }
         }
     }
