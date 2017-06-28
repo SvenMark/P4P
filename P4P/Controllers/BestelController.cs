@@ -20,6 +20,11 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -88,12 +93,12 @@ namespace P4P.Controllers
 
                             ctx.SaveChanges();
 
-                            return RedirectToAction("Orderdetails", new {id = bestelling.Id});
+                            return RedirectToAction("Orderdetails", new {id = bestelling.Id, success="true"});
                         }
                     }
                     catch
                     {
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Index", "Bestel", new { success="false", errormessage="Onbekende fout"});
                     }
                 case "update":
                     using (var ctx = new P4PContext())
@@ -107,34 +112,21 @@ namespace P4P.Controllers
                             i++;
                         }
                         ctx.SaveChanges();
-                        return RedirectToAction("Index", "Bestel");
+                        return RedirectToAction("Index", "Bestel", new { success="true"});
                     }
                 default:
-                    return RedirectToAction("Index", "Bestel");
-            }
-        }
-
-        public ActionResult UpdateAantal(int id, int aantal)
-        {
-            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
-            int user_id = Convert.ToInt32(Session["Id"]);
-
-            using (var ctx = new P4PContext())
-            {
-                var producten = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Product.Id == id && c.Gebruiker.Id == user_id);
-
-                foreach (var prod in producten)
-                {
-                    prod.Aantal = aantal;
-                    ctx.SaveChanges();
-                }
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Bestel", new { success = "false", errormessage = "Onbekende fout" });
             }
         }
 
         public ActionResult Delete(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
@@ -143,13 +135,18 @@ namespace P4P.Controllers
                 if (product == null) return HttpNotFound();
                 ctx.Winkelwagens.Remove(product);
                 ctx.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Bestel", new { success = "true" });
             }
         }
 
         public ActionResult Orderdetails(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -192,18 +189,23 @@ namespace P4P.Controllers
 
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Orderconfirmation", new { id = bestelling.Id });
+                    return RedirectToAction("Orderconfirmation", new { id = bestelling.Id, succes="true" });
                 }
             }
             catch
             {
-                return RedirectToAction("Orderdetails");
+                return RedirectToAction("Orderdetails", "Bestel", new { success="false", errormessage="Onbekende fout"});
             }
         }
 
         public ActionResult Orderconfirmation(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -246,18 +248,23 @@ namespace P4P.Controllers
 
                     ctx.SaveChanges();
 
-                    return RedirectToAction("Afgerond", "Bestel", new {id = bestelling.Id});
+                    return RedirectToAction("Afgerond", "Bestel", new {id = bestelling.Id, success="true"});
                 }
             }
             catch
             {
-                return RedirectToAction("Orderdetails");
+                return RedirectToAction("Orderdetails", "Bestel", new { success="false", errormessage="Onbekende fout"});
             }
         }
 
         public ActionResult AfgerondBestellingen()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -271,6 +278,11 @@ namespace P4P.Controllers
         public ActionResult Afgerond(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
@@ -322,7 +334,7 @@ namespace P4P.Controllers
                         ctx.SaveChanges();
                     }
 
-                    return RedirectToAction("Index", "Bestel");
+                    return RedirectToAction("Index", "Bestel", new { success="true"});
                 }
             }
             catch
@@ -361,7 +373,7 @@ namespace P4P.Controllers
                         ctx.SaveChanges();
                     }
 
-                    return RedirectToAction("Index", "Bestel");
+                    return RedirectToAction("Index", "Bestel", new { success="true"});
                 }
             }
             catch
