@@ -1,8 +1,48 @@
-﻿
+﻿@model P4P.Models.Melding
 @{
     ViewBag.Title = "New";
 }
 
 <h2>New</h2>
 <h3>Nieuwe melding</h3>
+<div id="formcard" class="card horizontal">
+    <div class="card-image" style="width: 8vw;">
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            @using (Html.BeginForm("New", "Melding", FormMethod.Post, new {id = "registerForm"}))
+            {
+                <div id="topform">
+                    <center>
+                        <h4>Melding</h4>
+                    </center>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.LabelFor(m => m.Naam)
+                            @Html.TextBoxFor(m => m.Naam, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Naam)
+                        </div>
+                    </div>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.LabelFor(m => m.Message)
+                            @Html.TextAreaFor(m => m.Message, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Message)
+                        </div>
+                    </div>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-primary">Aanmaken</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

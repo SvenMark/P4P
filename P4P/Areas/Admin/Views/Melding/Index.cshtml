@@ -1,8 +1,67 @@
-﻿
+﻿@model IEnumerable<P4P.Models.Melding>
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="melding-banner" class="parallax-container">
+    <div class="parallax">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2>Meldingen</h2>
+        <h4>Overzicht van meldingen</h4>
+        <p>
+            @Html.ActionLink("Nieuwe melding", "New", "Melding", null, new { @class = "btn btn-primary" })
+        </p>
+    </center>
+</div>
 
-<h2>Index</h2>
-<h3>Meldingen</h3>
+<table class="table striped table-hover tabel">
+    <thead>
+    <tr>
+        <th>Naam</th>
+        <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var melding in Model)
+    {
+        <tr>
+            <td>@melding.Naam</td>
+            <td>@melding.Message</td>
+        </tr>
+    }
+    </tbody>
+</table>
 
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $('#categorieen').dataTable({
+                "language": {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        });
+    </script>
+}
