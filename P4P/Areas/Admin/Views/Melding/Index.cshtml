@@ -21,6 +21,8 @@
     <tr>
         <th>Naam</th>
         <th>Message</th>
+        <th>Wijzigen</th>
+        <th>Verwijderen</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +31,8 @@
         <tr>
             <td>@melding.Naam</td>
             <td>@melding.Message</td>
+            <td>@Html.ActionLink("Wijzigen", "Edit", "Melding", new { id=melding.Id} , new { @class="btn btn-primary"})</td>
+            <td>@Html.ActionLink("Verwijderen", "Delete", "Melding", new { id = melding.Id }, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan niet ongedaan worden gemaakt!');" })</td>
         </tr>
     }
     </tbody>
