@@ -2,116 +2,127 @@
 @{
     ViewBag.Title = "New";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 
-<h2>New</h2>
-<h3>Nieuw artikel</h3>
-<p>
-    @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
+<h4 class="center">Artikel toevoegen</h4>
+<p class="center">
+    <button class="btn btn-primary" onclick="goBack()">Annuleren</button>
 </p>
-@using (Html.BeginForm("CreateArtikel", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
-{
-    <div id="topform">
-        <center>
-            <h4>Artikel</h4>
-        </center>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Code)
-                @Html.TextBoxFor(m => m.Product.Code, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Code)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Naam)
-                @Html.TextBoxFor(m => m.Product.Naam, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Naam)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Beschrijving)
-                @Html.TextBoxFor(m => m.Product.Beschrijving, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Beschrijving)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Specificaties)
-                @Html.TextBoxFor(m => m.Product.Specificaties, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Specificaties)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Verkoopeenheid)
-                @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Prijs)
-                @Html.TextBoxFor(m => m.Product.Prijs, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Product.Prijs)
-            </div>
-        </div>
-    </div>
-
-    <div id="middleform">
-        <center>
-            <h4>Hoofdcategorie</h4>
-        </center>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-6">
-                <button type="button" class="btn btn-primary" id="disable1">Test1</button>
-                @Html.LabelFor(m => m.Product.Hoofdcategorie.Naam)
-                @Html.TextBoxFor(m => m.Product.Hoofdcategorie.Naam, new {@class = "form-control", id = "input1"})
-                @Html.ValidationMessageFor(m => m.Product.Hoofdcategorie.Naam)
-            </div>
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Hoofdcategorie)
-                @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new {@class = "form-control", id="dropdown1"})
-                @Html.ValidationMessageFor(m => m.Hoofdcategorie)
-            </div>
-        </div>
-
-        <div id="bottomform">
+    @using (Html.BeginForm("CreateArtikel", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
+    {
+        <div id="topform" class="card card-producten card-centered">
             <center>
-                <h4>Subcategorie</h4>
+                <h4>Artikel</h4>
             </center>
             <div class="row nomargin">
-                <div class="form-group input-field col-md-12">
-                    <button type="button" class="btn btn-primary" id="disable2">Test2</button>
-                    @Html.LabelFor(m => m.Product.Subcategorie.Naam)
-                    @Html.TextBoxFor(m => m.Product.Subcategorie.Naam, new {@class = "form-control", id = "input2"})
-                    @Html.ValidationMessageFor(m => m.Product.Subcategorie.Naam)
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Code)
+                    @Html.TextBoxFor(m => m.Product.Code, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Code)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Naam)
+                    @Html.TextBoxFor(m => m.Product.Naam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Naam)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Beschrijving)
+                    @Html.TextBoxFor(m => m.Product.Beschrijving, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Beschrijving)
                 </div>
             </div>
             <div class="row nomargin">
-
-                <div class="col-md-6">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-primary">Opslaan</button>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Specificaties)
+                    @Html.TextBoxFor(m => m.Product.Specificaties, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Specificaties)
                 </div>
-
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Verkoopeenheid)
+                    @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Prijs)
+                    @Html.TextBoxFor(m => m.Product.Prijs, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Prijs)
+                </div>
             </div>
         </div>
-    </div>
-}
-@section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
 
-    <script>
-        $(document).ready(function ()
-        {
-            $("#input1").prop("disabled", "true");
-            $("#input2").prop("disabled", "true");
-            $("#disable1").on("click",
-                function() {
-                    const toggle = $("#input1").prop("disabled");
+        <div id="middleform" class="card card-producten card-centered">
+            <div class="row nomargin row-centered">
+                <div class="col-md-12 col-centered">
+                    <center>
+                        <h4>Hoofdcategorie</h4>
+                    </center>
+                </div>
+            </div>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Product.Hoofdcategorie.Naam)
+                    @Html.TextBoxFor(m => m.Product.Hoofdcategorie.Naam, new { @class = "form-control", id = "input1" })
+                    @Html.ValidationMessageFor(m => m.Product.Hoofdcategorie.Naam)
+                </div>
+                <div class="form-group input-field col-md-6">
+                    @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
+                    @Html.ValidationMessageFor(m => m.Hoofdcategorie)
 
-                    $("#input1").prop("disabled", !toggle );
-                    $("#dropdown1").prop("disabled", toggle);
-                });
-            $("#disable2").on("click",
-                function () {
-                    const toggle = $("#input2").prop("disabled");
+                </div>
+            </div>
+            <div class="row row-centered">
+                <div class="col-md-12 col-centered">
+                    <p><br />U kan hier kiezen of u het product aan een bestaande hoofdcategorie wil toevoegen, of dat u een nieuwe hoofdcategorie wil aanmaken.</p>
+                    <center><button type="button" class="btn btn-primary" id="disable1">Switch</button></center>
+                </div>
+            </div>
+        </div>
+            <div id="bottomform" class="card card-producten card-centered">
+                <center>
+                    <h4>Subcategorie</h4>
+                </center>
+                <div class="row">
+                    <div class="form-group input-field col-md-12">
+                        @Html.LabelFor(m => m.Product.Subcategorie.Naam)
+                        @Html.TextBoxFor(m => m.Product.Subcategorie.Naam, new { @class = "form-control", id = "input2" })
+                        @Html.ValidationMessageFor(m => m.Product.Subcategorie.Naam)
+                    </div>
+                    <div class="col-md-12">
+                        <p>U kan hier kiezen of u dit artikel aan een nieuwe subcategorie wil toevoegen.<br />Als u het artikel aan een bestaande subcategorie wil toevoegen, zet dit invoerveld dan uit. Het toevoegen aan een bestaande subcategorie gebeurt dan op de volgende pagina.</p>
+                        <center><button type="button" class="btn btn-primary" id="disable2">Switch</button></center>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    <center><button style="margin-left:1vw;" type="submit" class="btn btn-primary">Artikel toevoegen</button></center>
+                </div>
+            </div>
+    }
 
-                    $("#input2").prop("disabled", !toggle);
-                });
-        });
-    </script>
-}
+
+
+            @section scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+                
+                <script>
+                    $(document).ready(function () {
+                        $("#input1").prop("disabled", "true");
+                        $("#input2").prop("disabled", "true");
+                        $("#disable1").on("click",
+                            function () {
+                                const toggle = $("#input1").prop("disabled");
+
+                                $("#input1").prop("disabled", !toggle);
+                                $("#dropdown1").prop("disabled", toggle);
+                            });
+                        $("#disable2").on("click",
+                            function () {
+                                const toggle = $("#input2").prop("disabled");
+
+                                $("#input2").prop("disabled", !toggle);
+                            });
+                    });
+                </script>
+            }

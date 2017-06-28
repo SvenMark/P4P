@@ -51,6 +51,10 @@
     float: none;
     margin-right: -4px;
 }
+.col-md-12 p{
+    text-align:center;
+    color:dimgray;
+}
 /*Profiel*/
 .round {
     border-radius: 100%;
@@ -252,6 +256,9 @@ h5 {
 }
 /*Create.cshtml*/
 #bottomform {
+    margin-top: 20px;
+}
+#middleform {
     margin-top: 20px;
 }
 
