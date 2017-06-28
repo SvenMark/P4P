@@ -42,27 +42,10 @@
                             <td>
                                 <div class="form-group">
                                     @Html.LabelFor(m => p.Aantal)
-                                    @Html.TextBoxFor(m => p.Aantal, new {@type = "Number"})
+                                    <input type="number" name="aantal[]" value="@p.Aantal"/>
                                     @Html.ValidationMessageFor(m => p.Aantal)
                                 </div>
                                 @*@Html.ActionLink("Opslaan", "UpdateAantal", "Bestel", new {id = p.Product.Id, aantal = p.Aantal}, null)*@
-
-                                <!-- Modal Trigger -->
-                                <div class="col-xs-2">
-                                    <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
-                                </div>
-
-                                <!-- Modal Structure -->
-                                <div id="modal1" class="modal">
-                                    <div class="modal-content">
-                                        <h4>Modal Header</h4>
-                                        <p>A bunch of text</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-                                    </div>
-                                </div>
-
                             </td>
                             <td>€@p.Product.Prijs</td>
                             <td>€@producttotaal</td>
@@ -74,7 +57,8 @@
             <h4><center>Totaal: €@totaalprijs</center></h4>
         </div>
         @Html.AntiForgeryToken()
-        <center><button type="submit" class="btn btn-primary">Bestellen</button></center>
+        <center><button name="submit" type="submit" class="btn btn-primary" value="update">Update Aantallen</button></center><br />
+        <center><button name="submit" type="submit" class="btn btn-primary" value="submit">Bestellen</button></center>
     }
 }
 else

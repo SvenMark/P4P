@@ -31,54 +31,78 @@ namespace P4P.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(Winkelwagen winkelwagen)
+        public ActionResult Index(FormCollection collection, string submit)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
-
-            try
+            switch (submit)
             {
-                using (var ctx = new P4PContext())
-                {
-                    double totaalPrijs = 0;
-                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id))
+                case "submit":
+
+
+                    try
                     {
-                        totaalPrijs += (item.Aantal * item.Product.Prijs);
-                    }
-
-                    var gebruikerInDb = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
-                    if (gebruikerInDb == null) return HttpNotFound();
-
-                    Bestelling bestelling = new Bestelling
-                    {
-                        Prijs = totaalPrijs,
-                        Gebruiker = gebruikerInDb,
-                        Bedrijf = gebruikerInDb.Bedrijf,
-                        Afgerond = false
-                    };
-
-                    ctx.Bestellingen.Add(bestelling);
-                    ctx.SaveChanges();
-
-                    foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id))
-                    {
-                        BestellingProduct bestellingProduct = new BestellingProduct
+                        using (var ctx = new P4PContext())
                         {
-                            Bestelling_Id = bestelling.Id,
-                            Aantal = item.Aantal,
-                            Product_Id = item.Product_Id
-                        };
-                        if(bestellingProduct.Product_Id != null) ctx.BestellingProducts.Add(bestellingProduct);
+                            double totaalPrijs = 0;
+                            foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList()
+                                .Where(c => c.Gebruiker.Id == user_id))
+                            {
+                                totaalPrijs += (item.Aantal * item.Product.Prijs);
+                            }
+
+                            var gebruikerInDb = ctx.Gebruikers.Include(c => c.Bedrijf)
+                                .SingleOrDefault(c => c.Id == user_id);
+                            if (gebruikerInDb == null) return HttpNotFound();
+
+                            Bestelling bestelling = new Bestelling
+                            {
+                                Prijs = totaalPrijs,
+                                Gebruiker = gebruikerInDb,
+                                Bedrijf = gebruikerInDb.Bedrijf,
+                                Afgerond = false
+                            };
+
+                            ctx.Bestellingen.Add(bestelling);
+                            ctx.SaveChanges();
+
+                            foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList()
+                                .Where(c => c.Gebruiker.Id == user_id))
+                            {
+                                BestellingProduct bestellingProduct = new BestellingProduct
+                                {
+                                    Bestelling_Id = bestelling.Id,
+                                    Aantal = item.Aantal,
+                                    Product_Id = item.Product_Id
+                                };
+                                if (bestellingProduct.Product_Id != null) ctx.BestellingProducts.Add(bestellingProduct);
+                            }
+
+                            ctx.SaveChanges();
+
+                            return RedirectToAction("Orderdetails", new {id = bestelling.Id});
+                        }
                     }
-
-                    ctx.SaveChanges();
-
-                    return RedirectToAction("Orderdetails", new { id=bestelling.Id});
-                }
-            }
-            catch
-            {
-                return RedirectToAction("Index");
+                    catch
+                    {
+                        return RedirectToAction("Index");
+                    }
+                case "update":
+                    using (var ctx = new P4PContext())
+                    {
+                        var aantallen = collection["aantal[]"].Split(',');
+                        int i = 0;
+                        foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList()
+                            .Where(c => c.Gebruiker.Id == user_id))
+                        {
+                            item.Aantal = Convert.ToInt32(aantallen[i]);
+                            i++;
+                        }
+                        ctx.SaveChanges();
+                        return RedirectToAction("Index", "Bestel");
+                    }
+                default:
+                    return RedirectToAction("Index", "Bestel");
             }
         }
 
