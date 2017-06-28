@@ -18,11 +18,24 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script>
-        function goBack() {
-            window.history.back();
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        @if (ViewBag.Success == "true")
+        {
+            @:toastr.success("Opgeslagen");
         }
-    </script>
+        else if (ViewBag.Success == "false")
+        {
+            @:toastr.error("@ViewBag.Errormessage");      
+        }
+    });
+</script>
+}
 
 </body>
 </html>
