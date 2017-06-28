@@ -2,27 +2,34 @@
 @{
     ViewBag.Title = "Dashboard";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="gebruiker-banner" class="parallax-container">
+    <div class="parallax">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2>Artikelen</h2>
+        <h4>Overzicht van artikelen</h4>
 
-<h2>Dashboard</h2>
-<h3>Overzicht van gebruikers</h3>
-
-<p>
-    @Html.ActionLink("Nieuw Artikel", "CreateArtikel", "Artikel", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Nieuwe categorie", "CreateHoofdcategorie", "Categorie", null, new { @class = "btn btn-primary" })
-</p>
-<table id="artikelen" class="table table-bordered table-hover">
+        <p>
+            @Html.ActionLink("Nieuw Artikel", "CreateArtikel", "Artikel", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Nieuwe categorie", "CreateHoofdcategorie", "Categorie", null, new { @class = "btn btn-primary" })
+        </p>
+    </center>
+</div>
+<table id="artikelen" class="table striped table-hover">
     <thead>
-    <tr>
-        <th>Code</th>
-        <th>Naam</th>
-        <th>Verkoopeenheid</th>
-        <th>Beschrijving</th>
-        <th>Prijs</th>
-        <th>Hoofdcategorie</th>
-        <th>Subcategorie</th>
-        <th>Aanpassen</th>
-        <th>Verwijderen</th>
-    </tr>
+        <tr>
+            <th>Code</th>
+            <th>Naam</th>
+            <th>Verkoopeenheid</th>
+            <th>Beschrijving</th>
+            <th>Prijs</th>
+            <th>Hoofdcategorie</th>
+            <th>Subcategorie</th>
+            <th>Aanpassen</th>
+            <th>Verwijderen</th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var product in Model)
@@ -49,7 +56,7 @@
                 {
                     <td>Geen Subcategorie</td>
                 }
-                <td>@Html.ActionLink("Aanpassen", "EditArtikel", "Artikel", new { id=product.Id}, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Aanpassen", "EditArtikel", "Artikel", new { id = product.Id }, new { @class = "btn btn-primary" })</td>
                 <td>@Html.ActionLink("Verwijderen", "Delete", "Artikel", new { id = product.Id }, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan nie ongedaan worden gemaakt!');" })</td>
             </tr>
         }
@@ -85,5 +92,5 @@
                 }
             });
         });
-</script>
+    </script>
 }
