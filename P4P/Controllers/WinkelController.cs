@@ -72,12 +72,15 @@ namespace P4P.Controllers
                 string code = collection["search"];
                 if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
                 var product = ctx.Products.SingleOrDefault(c => c.Code == code);
-
-                var viewModel = new NewWinkelmand
+                if (product != null)
                 {
-                    product = product
-                };
-                return View(viewModel);
+                    var viewModel = new NewWinkelmand
+                    {
+                        product = product
+                    };
+                    return View(viewModel);
+                }
+                return View("Quickorder");
             }
 
         }
@@ -181,6 +184,10 @@ namespace P4P.Controllers
                     ctx.Winkelwagens.Add(AddWinkelwagen);
                     ctx.SaveChanges();
 
+                    if (collection["fav"] != null)
+                    {
+                        return RedirectToAction("Quickorder");
+                    }
                     if (collection["cat_id"] != null)
                     {
                         return RedirectToAction("Categorie", new { id = Convert.ToInt32(collection["cat_id"])});
