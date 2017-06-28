@@ -82,6 +82,24 @@ namespace P4P.Controllers
             }
         }
 
+        public ActionResult UpdateAantal(int id, int aantal)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (var ctx = new P4PContext())
+            {
+                var producten = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Product.Id == id && c.Gebruiker.Id == user_id);
+
+                foreach (var prod in producten)
+                {
+                    prod.Aantal = aantal;
+                    ctx.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+        }
+
         public ActionResult Delete(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
@@ -278,6 +296,45 @@ namespace P4P.Controllers
             catch
             {
                 return RedirectToAction("Afgerond", new {bestelling_id});
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BestelFavoriet(Favorietenlijst favorietenlijst)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+            int favorietenlijst_id = favorietenlijst.Id;
+
+            try
+            {
+                using (var ctx = new P4PContext())
+                {
+                    var favorietenlijstInDb = ctx.Favorietenlijsts.Include(c => c.Gebruiker).Include(c => c.Producten).SingleOrDefault(c => c.Id == favorietenlijst_id);
+                    if (favorietenlijstInDb.Gebruiker.Id == user_id)
+                    {
+                        var producten = favorietenlijstInDb.Producten.ToList();
+                        foreach (var p in producten)
+                        {
+                            var winkelwagen = new Winkelwagen
+                            {
+                                Gebruiker_id = user_id,
+                                Product_Id = p.Id,
+                                Aantal = 1
+                            };
+                            ctx.Winkelwagens.Add(winkelwagen);
+                        }
+
+                        ctx.SaveChanges();
+                    }
+
+                    return RedirectToAction("Index", "Bestel");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Favorieten", new { favorietenlijst_id });
             }
         }
     }

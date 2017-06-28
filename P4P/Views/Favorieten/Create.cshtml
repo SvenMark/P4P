@@ -1,0 +1,32 @@
+﻿@model P4P.Models.Favorietenlijst
+@{
+    ViewBag.Title = "Favorietenlijst aanmaken";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+
+<div class="card card-producten card-centered">
+    <h4>Nieuwe favorietenlijst</h4><br />
+
+    <p>
+        <button class="btn btn-primary" onclick="goBack()">Annuleren</button>
+    </p>
+    @using (Html.BeginForm("Create", "Favorieten"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Naam)
+            @Html.TextBoxFor(m => m.Naam, new { @class = "form-control", required="True"})
+            @Html.ValidationMessageFor(m => m.Naam)
+        </div>
+
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Aanmaken</button>
+    }
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using P4P.Models;
 using  P4P.Helpers;
+using System.Data.Entity;
 
 namespace P4P.Controllers
 {
@@ -14,7 +15,34 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (P4PContext ctx = new P4PContext())
+            {
+                var favorietenlijsts = ctx.Favorietenlijsts.Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id);
+
+                return View(favorietenlijsts);
+            }
+        }
+
+        public ActionResult Create()
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Favorietenlijst favorietenlijst)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+
+            using (var ctx = new P4PContext())
+            {
+                ctx.Favorietenlijsts.Add(favorietenlijst);
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
@@ -76,12 +104,44 @@ namespace P4P.Controllers
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             using (P4PContext ctx = new P4PContext())
             {
-                var favorietenlijst = ctx.Favorietenlijsts.SingleOrDefault(m => m.Id == id);
+                var favorietenlijst = ctx.Favorietenlijsts.Include(c => c.Producten).SingleOrDefault(c => c.Id == id);
 
                 if (favorietenlijst == null)
                     return HttpNotFound();
 
                 return View(favorietenlijst);
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (var ctx = new P4PContext())
+            {
+                var favorietenlijst = ctx.Favorietenlijsts.Find(id);
+                if (favorietenlijst == null) return HttpNotFound();
+                ctx.Favorietenlijsts.Remove(favorietenlijst);
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult RemoveProd(int id, int id2)
+        {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
+
+            using (var ctx = new P4PContext())
+            {
+                var favorietenlijst = ctx.Favorietenlijsts.Find(id2);
+                var product = ctx.Products.Find(id);
+                if(product == null) return HttpNotFound();
+                if (favorietenlijst == null) return HttpNotFound();
+                favorietenlijst.Producten.Remove(product);
+                ctx.SaveChanges();
+                return RedirectToAction("Details", new {id = id2});
             }
         }
     }
