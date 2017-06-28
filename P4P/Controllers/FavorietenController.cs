@@ -65,7 +65,6 @@ namespace P4P.Controllers
                 if (favorietenlijst != null && product != null)
                 {
                     favorietenlijst.Producten.Add(product);
-                    ctx.Favorietenlijsts.Add(favorietenlijst);
                     ctx.SaveChanges();
                 }
             }
@@ -88,9 +87,6 @@ namespace P4P.Controllers
                 if (favorietenlijst.Naam != null)
                 {
                     favorietenlijst.Gebruiker = gebruiker;
-
-                    ctx.Favorietenlijsts.Add(favorietenlijst);
-                    ctx.SaveChanges();
                 }
 
                 if (product != null)
