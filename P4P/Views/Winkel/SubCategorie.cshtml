@@ -30,7 +30,7 @@
     <center><h5>Producten in @Model.subcategorie.Naam:</h5></center>
     <div class="row row-centered">
                 @foreach (var c in Model.product)
-            {
+                {
                 string image = c.Code + ".jpg";
                     <a href="~/Winkel/Artikelpagina/@c.Id">
 
@@ -51,15 +51,26 @@
                                     <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
                                 </div>
                             </div>
-                            <div class="row nomargin">
-                                <div class="col-xs-6">
-                                    <a href="~/Winkel/Artikelpagina/@c.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                            @using (Html.BeginForm("Artikelpagina", "Winkel"))
+                            {
+                                <div class="row nomargin">
+                                    <div class="col-xs-4">
+                                        <a href="~/Winkel/Artikelpagina/@c.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", placeholder="Aantal",required = "True"})
+                                            @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        @Html.Hidden("prod_id", @c.Id)
+                                        @Html.Hidden("subcat_id", Model.subcategorie.Id)
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-primary">Bestel</button>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6">
-                                    <!--VUL HIER NOG DE GOEIE HREF IN (OOK IN ProductsInCategorie.CSHTML)-->
-                                    <a href="" class="waves-effect waves-light btn btn-primary green bestelknop">Bestel</a>
-                                </div>
-                            </div>
+                            }
                         </div>
 
                     </a>

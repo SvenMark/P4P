@@ -152,28 +152,32 @@ namespace P4P.Controllers
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
-            int prod;
+            int product_id;
+            if (product.Id == 0 && collection["prod_id"] != null) product_id = Convert.ToInt32(collection["prod_id"]);
+            else if (product.Id == 0) product_id = Convert.ToInt32(collection["mprod_id"]);
+            else product_id = product.Id;
 
             try
             {
                 using (var ctx = new P4PContext())
                 {
-                    if (product.Id == 0) prod = Convert.ToInt32(collection["id"]);
-                    else prod = product.Id;
-
                     var AddWinkelwagen = new Winkelwagen
                     {
                         Gebruiker_id = user_id,
-                        Product_Id = prod,
+                        Product_Id = product_id,
                         Aantal = winkelwagen.Aantal
                     };
 
                     ctx.Winkelwagens.Add(AddWinkelwagen);
                     ctx.SaveChanges();
 
-                    if (ctx.Hoofdcategories.Contains(collection["cat"]))
+                    if (collection["cat_id"] != null)
                     {
-                        
+                        return RedirectToAction("Categorie", new { id = Convert.ToInt32(collection["cat_id"])});
+                    }
+                    if (collection["subcat_id"] != null)
+                    {
+                        return RedirectToAction("SubCategorie", new { id = Convert.ToInt32(collection["subcat_id"])});
                     }
 
                     return RedirectToAction("Artikelpagina", new {product.Id});
