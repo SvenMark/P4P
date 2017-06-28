@@ -2,77 +2,82 @@
 @{
     ViewBag.Title = "EditArtikel";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 
-<h2>EditArtikel</h2>
-<p>
-    @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
-</p>
-@using (Html.BeginForm("EditArtikel", "Artikel", FormMethod.Post, new { id = "registerForm" }))
-{
-    if (ViewBag.message != null)
+<center>
+    <h4>Artikel bewerken</h4>
+    <p>
+        @Html.ActionLink("Terug", "Index", "Artikel", null, new { @class = "btn btn-primary" })
+    </p>
+</center>
+<div class="card card-producten card-centered">
+
+    
+    @using (Html.BeginForm("EditArtikel", "Artikel", FormMethod.Post, new { id = "registerForm" }))
     {
-        <h2>@ViewBag.message</h2>
-    }
-    <div id="topform">
-        <center>
-            <h4>Artikel</h4>
-        </center>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Code)
-                @Html.TextBoxFor(m => m.Product.Code, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Code)
+        if (ViewBag.message != null)
+        {
+            <h2>@ViewBag.message</h2>
+        }
+        <div id="topform">
+            <center>
+                <h4>Artikel</h4>
+            </center>
+            <div class="row">
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Code)
+                    @Html.TextBoxFor(m => m.Product.Code, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Code)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Naam)
+                    @Html.TextBoxFor(m => m.Product.Naam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Naam)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Beschrijving)
+                    @Html.TextBoxFor(m => m.Product.Beschrijving, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Beschrijving)
+                </div>
             </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Naam)
-                @Html.TextBoxFor(m => m.Product.Naam, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Naam)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Beschrijving)
-                @Html.TextBoxFor(m => m.Product.Beschrijving, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Beschrijving)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Specificaties)
-                @Html.TextBoxFor(m => m.Product.Specificaties, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Specificaties)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Verkoopeenheid)
-                @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
-            </div>
-            <div class="form-group input-field col-md-4">
-                @Html.LabelFor(m => m.Product.Prijs)
-                @Html.TextBoxFor(m => m.Product.Prijs, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Product.Prijs)
-                @Html.HiddenFor(m => m.Product.Id)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="col-md-12">
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn btn-primary">Opslaan</button>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Specificaties)
+                    @Html.TextBoxFor(m => m.Product.Specificaties, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Specificaties)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Verkoopeenheid)
+                    @Html.TextBoxFor(m => m.Product.Verkoopeenheid, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Verkoopeenheid)
+                </div>
+                <div class="form-group input-field col-md-4">
+                    @Html.LabelFor(m => m.Product.Prijs)
+                    @Html.TextBoxFor(m => m.Product.Prijs, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Product.Prijs)
+                    @Html.HiddenFor(m => m.Product.Id)
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="bottomform">
-        <center>
-            <h4>Hoofdcategorie</h4>
-        </center>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-12">
-                @Html.LabelFor(m => m.Hoofdcategorie)
-                @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
-                @Html.ValidationMessageFor(m => m.Hoofdcategorie)
+        <div id="bottomform">
+            <div class="row">
+                <h4>Hoofdcategorie</h4>
+                <div class="form-group input-field col-md-12">
+                    @Html.DropDownListFor(m => m.Product.Hoofdcategorie.Id, new SelectList(Model.Hoofdcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
+                    @Html.ValidationMessageFor(m => m.Hoofdcategorie)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    <center><button type="submit" class="btn btn-primary">Opslaan</button></center>
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>
+
 
 @section scripts
 {

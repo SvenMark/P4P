@@ -149,7 +149,17 @@ h6{
     overflow: hidden;
     margin-top:-15vh;
 }
-
+.scheeffix {
+    transform: skewY(0deg)!important;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:-10px;
+    margin-bottom:10px;
+}
+.scheeffix #zoeken{
+    margin-top:-18px;
+    margin-left:17px
+}
 .big{
     height:30vh;
 }
@@ -164,7 +174,12 @@ h1 {
 h5 {
     color: dimgrey;
 }
-
+#searchalt {
+    border-radius: 6px;
+    background-color: #fff;
+    height:38px;
+    text-align:center;
+}
 #custom-search-input {
     border-radius: 6px;
     background-color: #fff;
