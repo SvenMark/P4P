@@ -63,11 +63,21 @@ namespace P4P.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Quickorder(string q)
+        public ActionResult Quickorder(FormCollection collection)
         {
-            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            using (var ctx = new P4PContext())
+            {
+                string code = collection["search"];
+                if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+                var product = ctx.Products.SingleOrDefault(c => c.Code == code);
 
-            return View();
+                var viewModel = new NewWinkelmand
+                {
+                    product = product
+                };
+                return View(viewModel);
+            }
+
         }
 
         public ActionResult Categorie(int id)

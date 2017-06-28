@@ -1,8 +1,52 @@
-﻿
+﻿@model P4P.ViewModel.NewWinkelmand
 @{
     ViewBag.Title = "Quickorder";
 }
 
 <h2>Quickorder</h2>
-<h3>Snel zoeken en bestel</h3>
+<h3>Vul hier een artikelcode in</h3>
+<div class="big">
+    <header class="l-relative">
+        <!--Gradient-->
+        <div class="background-grass gradient">
+            <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    @using (Html.BeginForm("Quickorder", "Winkel"))
+                    {
+                        <input type="text" class="form-control input-lg" name="search" placeholder="Zoek naar productencode" />
+                        <span class="input-group-btn">
+                            @Html.AntiForgeryToken()
+                            <button id="zoeken" class="btn btn-info btn-lg" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+@if (Model != null)
+{
+    <h3>Uw gekozen product:</h3>
+    <h4>@Model.product.Code</h4>
+    <h4>@Model.product.Naam</h4>
+    using (Html.BeginForm("Artikelpagina", "Winkel"))
+     {
+         <div class="form-group">
+             @Html.LabelFor(m => m.winkelwagen.Aantal)
+             @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {type = "Number", @class = "form-control", required = "True"})
+             @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+         </div>
+         @Html.HiddenFor(m => m.product.Id)
+         @Html.AntiForgeryToken()
+         <button type="submit" class="btn btn-primary">In winkelmand</button>
+     }
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
