@@ -57,7 +57,7 @@
             <center><h5>Categoriën</h5></center>
             @foreach (var c in Model.hoofdcategorie)
             {
-                <a href="~/Winkel/Categorie/@c.Id"><div class="col-xs-4 col-centered clickable categorie">
+                <a href="~/Winkel/Categorie/@c.Id"><div class="col-xs-4 col-centered clickable categorie kleiner">
                     <h5 class="center" href="">@c.Naam</h5>
                 </div></a>
             }
@@ -112,20 +112,6 @@
             })
         });
     </script>
-
-    @*<script>
-        var options = [
-            { selector: '#categories', offset: 600, callback: 'unhidecat()' },
-        ];
-        Materialize.scrollFire(options);
-
-        function unhidecat() {
-            $('#categories').animate({
-                opacity: 1
-            }, 500);
-        };
-    </script>*@
-
     <script type="text/javascript">
 
         $(document).ready(function () {

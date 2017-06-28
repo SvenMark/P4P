@@ -2,75 +2,81 @@
 @{
     ViewBag.Title = "CreateWerknemer";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 
-<h2>CreateWerknemer</h2>
-<p>
-    @Html.ActionLink("Terug", "Bedrijf", "Profiel", null, new { @class="btn btn-primary"})
-</p>
-@using (Html.BeginForm("CreateWerknemer", "Profiel"))
-{
-    <div id="bottomform">
-        <center>
-            <h4>Persoonlijk</h4>
-        </center>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Voornaam)
-                @Html.TextBoxFor(m => m.Gebruiker.Voornaam, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Voornaam)
-            </div>
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Adres)
-                @Html.TextBoxFor(m => m.Gebruiker.Adres, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Adres)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Tussenvoegsel)
-                @Html.TextBoxFor(m => m.Gebruiker.Tussenvoegsel, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Tussenvoegsel)
-            </div>
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Postcode)
-                @Html.TextBoxFor(m => m.Gebruiker.Postcode, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Postcode)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Achternaam)
-                @Html.TextBoxFor(m => m.Gebruiker.Achternaam, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Achternaam)
-            </div>
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Woonplaats)
-                @Html.TextBoxFor(m => m.Gebruiker.Woonplaats, new {@class = "form-control"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Woonplaats)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Telefoonnummer)
-                @Html.TextBoxFor(m => m.Gebruiker.Telefoonnummer, new {@class = "form-control", type = "tel"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Telefoonnummer)
-            </div>
-            <div class="form-group input-field col-md-6">
-                @Html.LabelFor(m => m.Gebruiker.Emailadres)
-                @Html.TextBoxFor(m => m.Gebruiker.Emailadres, new {@class = "form-control", type = "email"})
-                @Html.ValidationMessageFor(m => m.Gebruiker.Emailadres)
-            </div>
-        </div>
-        <div class="row nomargin">
-            <div class="col-md-12">
-                @Html.AntiForgeryToken()
-                @Html.HiddenFor(m => m.Bedrijf.Id)
-                <button type="submit" class="btn btn-primary">Register</button>
-            </div>
+<center><h4>Werknemer toevoegen</h4>
+    <p>
+        <button class="btn btn-primary" onclick="goBack()">Annuleren</button>
+    </p>
+</center>
+<div class="card card-producten card-centered">
 
+    @using (Html.BeginForm("CreateWerknemer", "Profiel"))
+    {
+        <div id="bottomform">
+            <center>
+                <h4>Persoonlijk</h4>
+            </center>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Voornaam)
+                    @Html.TextBoxFor(m => m.Gebruiker.Voornaam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Voornaam)
+                </div>
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Adres)
+                    @Html.TextBoxFor(m => m.Gebruiker.Adres, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Adres)
+                </div>
+            </div>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Tussenvoegsel)
+                    @Html.TextBoxFor(m => m.Gebruiker.Tussenvoegsel, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Tussenvoegsel)
+                </div>
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Postcode)
+                    @Html.TextBoxFor(m => m.Gebruiker.Postcode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Postcode)
+                </div>
+            </div>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Achternaam)
+                    @Html.TextBoxFor(m => m.Gebruiker.Achternaam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Achternaam)
+                </div>
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Woonplaats)
+                    @Html.TextBoxFor(m => m.Gebruiker.Woonplaats, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Woonplaats)
+                </div>
+            </div>
+            <div class="row nomargin">
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Telefoonnummer)
+                    @Html.TextBoxFor(m => m.Gebruiker.Telefoonnummer, new { @class = "form-control", type = "tel" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Telefoonnummer)
+                </div>
+                <div class="form-group input-field col-md-6">
+                    @Html.LabelFor(m => m.Gebruiker.Emailadres)
+                    @Html.TextBoxFor(m => m.Gebruiker.Emailadres, new { @class = "form-control", type = "email" })
+                    @Html.ValidationMessageFor(m => m.Gebruiker.Emailadres)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Bedrijf.Id)
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
+
 
 @section scripts
 {

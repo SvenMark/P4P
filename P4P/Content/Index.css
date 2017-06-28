@@ -351,10 +351,10 @@ h4 {
     }
 /*Fix zoekbalk form*/
 .input-group-btn{
-    margin-left:-20px;
-    margin-top:-40px;
+    margin-left:80%;
+    margin-top:-42px;
     position:absolute;
-    width:100%;
+    width:auto;
 }
 .input-group{
     width:100%;
@@ -370,6 +370,10 @@ h4 {
 }
 
 /*Telefoon*/
+.kleiner h5{
+    font-size:17px;
+}
+
 @media only screen and (max-width : 768px) {
     h1 {
         font-size: 45px;
@@ -403,9 +407,12 @@ h4 {
     #custom-search-input {
         width: 80vw;
     }
+    .input-group-btn {
+        margin-top:-40px;
+    }
     #product-img {
-        width: 40%;
-        height: 40%;
+    width: 40%;
+    height: 40%;
     }
     .parallax-container .section {
         position: absolute;
