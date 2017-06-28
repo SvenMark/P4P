@@ -22,8 +22,15 @@ namespace P4P.Areas.Admin.Controllers
             }
             using (var ctx = new P4PContext())
             {
-                var melding = ctx.Meldingen.ToList();
-                return View(melding);
+                try
+                {
+                    var melding = ctx.Meldingen.ToList();
+                    return View(melding);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Melding", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -40,9 +47,16 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                ctx.Meldingen.Add(melding);
-                ctx.SaveChanges();
-                return RedirectToAction("Index", "Melding", new { success="true" });
+                try
+                {
+                    ctx.Meldingen.Add(melding);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Melding", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Melding", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -56,8 +70,15 @@ namespace P4P.Areas.Admin.Controllers
             }
             using (var ctx = new P4PContext())
             {
-                var melding = ctx.Meldingen.Find(id);
-                return View(melding);
+                try
+                {
+                    var melding = ctx.Meldingen.Find(id);
+                    return View(melding);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Melding", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -68,12 +89,19 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var meldingInDb = ctx.Meldingen.Find(melding.Id);
-                if (meldingInDb == null) return HttpNotFound();
-                meldingInDb.Naam = melding.Naam;
-                meldingInDb.Message = melding.Message;
-                ctx.SaveChanges();
-                return RedirectToAction("Edit", "Melding", new { success="true"});
+                try
+                {
+                    var meldingInDb = ctx.Meldingen.Find(melding.Id);
+                    if (meldingInDb == null) return HttpNotFound();
+                    meldingInDb.Naam = melding.Naam;
+                    meldingInDb.Message = melding.Message;
+                    ctx.SaveChanges();
+                    return RedirectToAction("Edit", "Melding", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Melding", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -82,11 +110,18 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var melding = ctx.Meldingen.Find(id);
-                if (melding == null) return HttpNotFound();
-                ctx.Meldingen.Remove(melding);
-                ctx.SaveChanges();
-                return RedirectToAction("Index", "Melding", new { success="true" });
+                try
+                {
+                    var melding = ctx.Meldingen.Find(id);
+                    if (melding == null) return HttpNotFound();
+                    ctx.Meldingen.Remove(melding);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Melding", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Melding", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
     }
