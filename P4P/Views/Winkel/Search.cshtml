@@ -3,7 +3,8 @@
     ViewBag.Title = "Zoeken";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
-<link rel="stylesheet" type="text/css" href="~/Content/customtwitter.css" media="screen" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <style> body {background-color: whitesmoke;}</style>
 
 <div class="big">
@@ -37,12 +38,37 @@
         <div class="row row-centered">
             @foreach (var product in Model)
             {
+                string image = product.Code + ".jpg";
                 <a href="~/Winkel/Artikelpagina/@product.Id">
-                    <div class="col-xs-2 col-centered clickable categorie">
-                        <h5 class="center">
-                            @product.Naam
-                        </h5>
+
+                    <div class="col-xs-3 col-centered clickable categorie cat-img">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <img src="~/Content/Images/@image" class="cat-image" />
+                            </div>
+                            <div class="col-xs-6">
+                                <!--VUL HIER NOG DE GOEIE FAVORIETEN HREF IN (OOK IN SUBCATEGORIE.CSHTML)-->
+                                <div class="col-md-12">
+                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+
+                                </div>
+                                <h4 class="center">
+                                    @product.Naam
+                                </h4>
+                                <h6 class="center">€@product.Prijs per @product.Verkoopeenheid stuks</h6>
+                            </div>
+                        </div>
+                        <div class="row nomargin">
+                            <div class="col-xs-6">
+                                <a href="~/Winkel/Artikelpagina/@product.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <!--VUL HIER NOG DE GOEIE HREF IN (OOK IN SUBCATEGORIE.CSHTML)-->
+                                <a href="" class="waves-effect waves-light btn btn-primary green bestelknop">Bestel</a>
+                            </div>
+                        </div>
                     </div>
+
                 </a>
             }
         </div>
