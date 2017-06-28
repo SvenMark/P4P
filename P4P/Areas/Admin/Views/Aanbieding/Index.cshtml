@@ -1,8 +1,100 @@
-﻿
+﻿@model IEnumerable<P4P.Models.Product>
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
-<h3>Overzicht van aanbiedingen en edit + delete</h3>
+<h3>Overzicht van aanbiedingen</h3>
+<table id="artikelen" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Naam</th>
+        <th>Verkoopeenheid</th>
+        <th>Beschrijving</th>
+        <th>Prijs</th>
+        <th>Aanbieding prijs</th>
+        <th>Hoofdcategorie</th>
+        <th>Subcategorie</th>
+        <th>Aanbieding</th>
+        <th>Maak aanbieding</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Code</td>
+            <td>@product.Naam</td>
+            <td>@product.Verkoopeenheid</td>
+            <td>@product.Beschrijving</td>
+            <td>€@product.Prijs</td>
+            @if (product.Aanbiedingprijs != 0)
+            {
+                <td>€@product.Aanbiedingprijs</td>
+            }
+            else
+            {
+                <td>Geen aanbieding</td>
+            }
+            @if (product.Hoofdcategorie != null)
+            {
+                <td>@product.Hoofdcategorie.Naam</td>
+            }
+            else
+            {
+                <td>Geen Hoofdcategorie</td>
+            }
+            @if (product.Subcategorie != null)
+            {
+                <td>@product.Subcategorie.Naam</td>
+            }
+            else
+            {
+                <td>Geen Subcategorie</td>
+            }
+            @if (product.Aanbiedingen)
+            {
+                <td>Aanbieding</td>
+            }
+            else
+            {
+                <td>Geen aanbieding</td>
+            }
+            <td>@Html.ActionLink("Aanbieding maken", "New", "Aanbieding", new { id=product.Id}, new { @class = "btn btn-primary" })</td>
+        </tr>
+    }
+    </tbody>
+</table>
 
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#artikelen').dataTable({
+                "language": {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        });
+    </script>
+}

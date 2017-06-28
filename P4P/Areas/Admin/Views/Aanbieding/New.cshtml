@@ -1,8 +1,66 @@
-﻿
+﻿@model P4P.Models.Product
 @{
     ViewBag.Title = "New";
 }
 
 <h2>New</h2>
 <h3>Nieuwe aanbieding</h3>
+<p>
+    @Html.ActionLink("Terug", "Index", "Aanbieding", null, new { @class = "btn btn-primary" })
+</p>
+<div id="formcard" class="card horizontal">
+    <div class="card-image" style="width: 8vw;">
+    </div>
+    <div class="card-stacked">
+        <div class="card-content">
+            @using (Html.BeginForm("New", "Aanbieding", FormMethod.Post, new { id = "registerForm" }))
+            {
+                <div id="topform">
+                    <center>
+                        <h4>Melding</h4>
+                    </center>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.LabelFor(m => m.Naam)
+                            @Html.TextBoxFor(m => m.Naam, new { @class = "form-control", disabled="true" })
+                            @Html.ValidationMessageFor(m => m.Naam)
+                        </div>
+                    </div>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.LabelFor(m => m.Aanbiedingprijs)
+                            @Html.TextBoxFor(m => m.Aanbiedingprijs, new { @class = "form-control", type="number" })
+                            @Html.ValidationMessageFor(m => m.Aanbiedingprijs)
+                        </div>
+                    </div>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.LabelFor(m => m.Aanbiedingen)
+                            @Html.DropDownListFor(m => m.Aanbiedingen,
+                                new List<SelectListItem>
+                                {
+                                    new SelectListItem {Value = "true", Text = "Ja"},
+                                    new SelectListItem {Value = "false", Text = "Nee"},
+                                },
+                                new {@class = "form-control"})
+                            @Html.ValidationMessageFor(m => m.Aanbiedingen)
+                        </div>
+                    </div>
+                    <div class="row nomargin">
+                        <div class="form-group input-field col-md-12">
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-primary">Aanmaken</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
