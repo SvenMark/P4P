@@ -23,12 +23,19 @@ namespace P4P.Areas.Admin.Controllers
             }
             using (var ctx = new P4PContext())
             {
-                var hoofdCategorie = ctx.Hoofdcategories.ToList();
+                try
+                {
+                    var hoofdCategorie = ctx.Hoofdcategories.ToList();
 
-                if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(hoofdCategorie);
-                ViewBag.Success = Request.QueryString["success"];
-                ViewBag.Errormessage = Request.QueryString["errormessage"];
-                return View(hoofdCategorie);
+                    if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(hoofdCategorie);
+                    ViewBag.Success = Request.QueryString["success"];
+                    ViewBag.Errormessage = Request.QueryString["errormessage"];
+                    return View(hoofdCategorie);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new {success = "false", errormessage = "Onbekende fout"});
+                }
             }
             
         }
@@ -38,20 +45,28 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList().Where(c => c.Hoofdcategorie.Id == id);
-                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
-
-                if (hoofdCategorie == null) return HttpNotFound();
-
-                var viewModel = new DetailsSubcategorie()
+                try
                 {
-                    Subcategorie = subCategorie,
-                    Hoofdcategorie = hoofdCategorie
-                };
-                if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(viewModel);
-                ViewBag.Success = Request.QueryString["success"];
-                ViewBag.Errormessage = Request.QueryString["errormessage"];
-                return View(viewModel);
+                    var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).ToList()
+                        .Where(c => c.Hoofdcategorie.Id == id);
+                    var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+
+                    if (hoofdCategorie == null) return HttpNotFound();
+
+                    var viewModel = new DetailsSubcategorie()
+                    {
+                        Subcategorie = subCategorie,
+                        Hoofdcategorie = hoofdCategorie
+                    };
+                    if (string.IsNullOrWhiteSpace(Request.QueryString["success"])) return View(viewModel);
+                    ViewBag.Success = Request.QueryString["success"];
+                    ViewBag.Errormessage = Request.QueryString["errormessage"];
+                    return View(viewModel);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -71,9 +86,16 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                ctx.Hoofdcategories.Add(hoofdcategorie);
-                ctx.SaveChanges();
-                return RedirectToAction("Index", new { success = "true"});
+                try
+                {
+                    ctx.Hoofdcategories.Add(hoofdcategorie);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -82,10 +104,17 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
-                if (hoofdCategorie == null) return HttpNotFound();
+                try
+                {
+                    var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+                    if (hoofdCategorie == null) return HttpNotFound();
 
-                return View(hoofdCategorie);
+                    return View(hoofdCategorie);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -96,12 +125,19 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var hoofdCategorie = ctx.Hoofdcategories.Find(hoofdcategorie.Id);
-                if (hoofdCategorie == null) return HttpNotFound();
-                hoofdCategorie.Naam = hoofdcategorie.Naam;
+                try
+                {
+                    var hoofdCategorie = ctx.Hoofdcategories.Find(hoofdcategorie.Id);
+                    if (hoofdCategorie == null) return HttpNotFound();
+                    hoofdCategorie.Naam = hoofdcategorie.Naam;
 
-                ctx.SaveChanges();
-                return RedirectToAction("Index", "Categorie", new { success = "true" });
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Categorie", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -150,12 +186,19 @@ namespace P4P.Areas.Admin.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
-                var viewModel = new NewSubcategorie()
+                try
                 {
-                    Hoofdcategorie = hoofdCategorie
-                };
-                return View(viewModel);
+                    var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+                    var viewModel = new NewSubcategorie()
+                    {
+                        Hoofdcategorie = hoofdCategorie
+                    };
+                    return View(viewModel);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
             
         }
@@ -167,12 +210,20 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var hoofdCategorie = ctx.Hoofdcategories.Find(id);
-                subcategorie.Hoofdcategorie = hoofdCategorie;
-                ctx.Subcategories.Add(subcategorie);
-                ctx.SaveChanges();
+                try
+                {
+                    var hoofdCategorie = ctx.Hoofdcategories.Find(id);
+                    subcategorie.Hoofdcategorie = hoofdCategorie;
+                    ctx.Subcategories.Add(subcategorie);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Details", new {id, success="true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
-            return RedirectToAction("Details", new {id, success="true"});
+            
         }
 
         public ActionResult EditSubCategorie(int id)
@@ -180,10 +231,18 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
-                if (subCategorie == null) return HttpNotFound();
+                try
+                {
+                    var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie)
+                        .SingleOrDefault(c => c.Id == id);
+                    if (subCategorie == null) return HttpNotFound();
 
-                return View(subCategorie);
+                    return View(subCategorie);
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
@@ -194,12 +253,21 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == subcategorie.Id);
-                if (subCategorie == null) return HttpNotFound();
-                subCategorie.Naam = subcategorie.Naam;
-                
-                ctx.SaveChanges();
-                return RedirectToAction("Details", "Categorie", new {id = subCategorie.Hoofdcategorie.Id, success = "true" });
+                try
+                {
+                    var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie)
+                        .SingleOrDefault(c => c.Id == subcategorie.Id);
+                    if (subCategorie == null) return HttpNotFound();
+                    subCategorie.Naam = subcategorie.Naam;
+
+                    ctx.SaveChanges();
+                    return RedirectToAction("Details", "Categorie",
+                        new {id = subCategorie.Hoofdcategorie.Id, success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage = "Onbekende fout" });
+                }
             }
         }
 
