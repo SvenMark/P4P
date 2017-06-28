@@ -54,16 +54,20 @@
                                 <h4 class="center">
                                     @product.Naam
                                 </h4>
-                                <h6 class="center">€@product.Prijs per @product.Verkoopeenheid stuks</h6>
+                                @if (product.Aanbiedingprijs != 0)
+                                {
+                                    <h6 class="center">€@product.Aanbiedingprijs per @product.Verkoopeenheid stuks</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="center">€@product.Prijs per @product.Verkoopeenheid stuks</h6>
+
+                                }
                             </div>
                         </div>
                         <div class="row nomargin">
                             <div class="col-xs-6">
                                 <a href="~/Winkel/Artikelpagina/@product.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
-                            </div>
-                            <div class="col-xs-6">
-                                <!--VUL HIER NOG DE GOEIE HREF IN (OOK IN SUBCATEGORIE.CSHTML)-->
-                                <a href="" class="waves-effect waves-light btn btn-primary green bestelknop">Bestel</a>
                             </div>
                         </div>
                     </div>
