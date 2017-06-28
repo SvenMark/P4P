@@ -15,6 +15,11 @@ namespace P4P.Areas.Admin.Controllers
         public ActionResult Index()
         {
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             using (var ctx = new P4PContext())
             {
                 var melding = ctx.Meldingen.ToList();
@@ -37,13 +42,18 @@ namespace P4P.Areas.Admin.Controllers
             {
                 ctx.Meldingen.Add(melding);
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Melding");
+                return RedirectToAction("Index", "Melding", new { success="true" });
             }
         }
 
         public ActionResult Edit(int id)
         {
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             using (var ctx = new P4PContext())
             {
                 var melding = ctx.Meldingen.Find(id);
@@ -63,7 +73,7 @@ namespace P4P.Areas.Admin.Controllers
                 meldingInDb.Naam = melding.Naam;
                 meldingInDb.Message = melding.Message;
                 ctx.SaveChanges();
-                return RedirectToAction("Edit", "Melding");
+                return RedirectToAction("Edit", "Melding", new { success="true"});
             }
         }
 
@@ -76,10 +86,8 @@ namespace P4P.Areas.Admin.Controllers
                 if (melding == null) return HttpNotFound();
                 ctx.Meldingen.Remove(melding);
                 ctx.SaveChanges();
-                return RedirectToAction("Index", "Melding");
+                return RedirectToAction("Index", "Melding", new { success="true" });
             }
         }
-
-        //edit, delete
     }
 }
