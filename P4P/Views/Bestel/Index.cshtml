@@ -45,7 +45,24 @@
                                     @Html.TextBoxFor(m => p.Aantal, new {@type = "Number"})
                                     @Html.ValidationMessageFor(m => p.Aantal)
                                 </div>
-                                @Html.ActionLink("Opslaan", "UpdateAantal", "Bestel", new {id = p.Product.Id, aantal = p.Aantal}, null)
+                                @*@Html.ActionLink("Opslaan", "UpdateAantal", "Bestel", new {id = p.Product.Id, aantal = p.Aantal}, null)*@
+
+                                <!-- Modal Trigger -->
+                                <div class="col-xs-2">
+                                    <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
+                                </div>
+
+                                <!-- Modal Structure -->
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content">
+                                        <h4>Modal Header</h4>
+                                        <p>A bunch of text</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                                    </div>
+                                </div>
+
                             </td>
                             <td>€@p.Product.Prijs</td>
                             <td>€@producttotaal</td>
@@ -67,6 +84,13 @@ else
 
 @section scripts
 {
+    <script>
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+
     @Scripts.Render("~/bundles/jqueryval")
 }
 
