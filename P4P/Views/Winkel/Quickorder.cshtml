@@ -2,13 +2,12 @@
 @{
     ViewBag.Title = "Quickorder";
 }
-
-<h2>Quickorder</h2>
-<h3>Vul hier een artikelcode in</h3>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <div class="big">
     <header class="l-relative">
         <!--Gradient-->
         <div class="background-grass gradient">
+            <h1>Snelzoeken</h1>
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
                     @using (Html.BeginForm("Quickorder", "Winkel"))
