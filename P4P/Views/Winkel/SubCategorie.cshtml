@@ -5,15 +5,26 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 <style>
     body {
         background-color: whitesmoke;
     }
 </style>
+
 <div class="navigatie">
     <h5><a href="~/Winkel">Home</a> > <a href="~/Winkel/Categorie/@Model.hoofdcategorie.Id">@Model.hoofdcategorie.Naam</a> > @Model.subcategorie.Naam</h5>
 </div>
+
+@using (Html.BeginForm("Search", "Winkel"))
+{
+    <input type="text" class="form-control input-lg" name="search" placeholder="Zoek naar producten" />
+    <span class="input-group-btn">
+        @Html.AntiForgeryToken()
+        <button id="zoeken" class="btn btn-info btn-lg" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+    </span>
+}
 
 <div class="card card-producten">
     <center><h5>Producten in @Model.subcategorie.Naam:</h5></center>

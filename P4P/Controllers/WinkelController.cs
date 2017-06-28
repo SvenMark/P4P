@@ -26,12 +26,14 @@ namespace P4P.Controllers
                 var categorie = ctx.Hoofdcategories.ToList();
                 var gebruiker = ctx.Gebruikers.Find(user_id);
                 var meldingen = ctx.Meldingen.ToList();
+                var producten = ctx.Products.ToList().Where(c => c.Aanbiedingen);
 
                 var getCategories = new IndexWinkel
                 {
                     hoofdcategorie = categorie,
                     gebruiker = gebruiker,
-                    meldingen = meldingen
+                    meldingen = meldingen,
+                    aanbiedingen = producten
                 };
 
                 return View(getCategories);
@@ -146,24 +148,33 @@ namespace P4P.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Artikelpagina(Winkelwagen winkelwagen, Product product)
+        public ActionResult Artikelpagina(Winkelwagen winkelwagen, Product product, FormCollection collection)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
+            int prod;
 
             try
             {
                 using (var ctx = new P4PContext())
                 {
+                    if (product.Id == 0) prod = Convert.ToInt32(collection["id"]);
+                    else prod = product.Id;
+
                     var AddWinkelwagen = new Winkelwagen
                     {
                         Gebruiker_id = user_id,
-                        Product_Id = product.Id,
+                        Product_Id = prod,
                         Aantal = winkelwagen.Aantal
                     };
 
                     ctx.Winkelwagens.Add(AddWinkelwagen);
                     ctx.SaveChanges();
+
+                    if (ctx.Hoofdcategories.Contains(collection["cat"]))
+                    {
+                        
+                    }
 
                     return RedirectToAction("Artikelpagina", new {product.Id});
                 }
