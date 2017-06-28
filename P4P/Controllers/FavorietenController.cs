@@ -36,9 +36,13 @@ namespace P4P.Controllers
         public ActionResult Create(Favorietenlijst favorietenlijst)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
             {
+                var gebruiker = ctx.Gebruikers.Find(user_id);
+                favorietenlijst.Gebruiker = gebruiker;
+
                 ctx.Favorietenlijsts.Add(favorietenlijst);
                 ctx.SaveChanges();
                 return RedirectToAction("Index");
