@@ -1,5 +1,4 @@
-﻿
-@model P4P.Models.Gebruiker
+﻿@model P4P.ViewModel.Profiel
 @{
     ViewBag.Title = "Mijn profiel";
 }
@@ -16,34 +15,35 @@
             @using (Html.BeginForm("Index", "Profiel"))
             {
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Voornaam)
-                    @Html.TextBoxFor(m => m.Voornaam, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Voornaam)
+                    @Html.LabelFor(m => m.gebruiker.Voornaam)
+                    @Html.TextBoxFor(m => m.gebruiker.Voornaam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gebruiker.Voornaam)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Achternaam)
-                    @Html.TextBoxFor(m => m.Achternaam, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Achternaam)
+                    @Html.LabelFor(m => m.gebruiker.Achternaam)
+                    @Html.TextBoxFor(m => m.gebruiker.Achternaam, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gebruiker.Achternaam)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Telefoonnummer)
-                    @Html.TextBoxFor(m => m.Telefoonnummer, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Telefoonnummer)
+                    @Html.LabelFor(m => m.gebruiker.Telefoonnummer)
+                    @Html.TextBoxFor(m => m.gebruiker.Telefoonnummer, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.gebruiker.Telefoonnummer)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Emailadres)
-                    @Html.TextBoxFor(m => m.Emailadres, new { @class = "form-control", disabled = "True" })
-                    @Html.ValidationMessageFor(m => m.Emailadres)
+                    @Html.LabelFor(m => m.gebruiker.Emailadres)
+                    @Html.TextBoxFor(m => m.gebruiker.Emailadres, new { @class = "form-control", disabled = "True" })
+                    @Html.ValidationMessageFor(m => m.gebruiker.Emailadres)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Wachtwoord, "Wachtwoord bevestigen")
-                    @Html.PasswordFor(m => m.Wachtwoord, new { @class = "form-control", required = "True" })
-                    @Html.ValidationMessageFor(m => m.Wachtwoord)
+                    @Html.LabelFor(m => m.gebruiker.Wachtwoord, "Wachtwoord bevestigen")
+                    @Html.PasswordFor(m => m.gebruiker.Wachtwoord, new { @class = "form-control", required = "True" })
+                    @Html.ValidationMessageFor(m => m.gebruiker.Wachtwoord)
                 </div>
                 @Html.AntiForgeryToken()
                 <button id="opslaan" type="submit" class="btn btn-primary">Opslaan</button>
             }
-            @Html.ActionLink("Wachtwoord wijzigen", "Wachtwoord", "Profiel", null, new { @class = "btn btn-primary" })
+            <div>@Html.ActionLink("Wachtwoord wijzigen", "Wachtwoord", "Profiel", null, new { @class = "btn btn-primary" })</div>
+            <br/><a href="~/Winkel" class="btn btn-primary">Terug</a>
         </div>
     </div>
     <div class="col-sm-6">
@@ -51,26 +51,19 @@
             <center>
                 <h3>Contacten</h3>
             </center>
-
-            <!--Tijdelijke dummy contacten, moet nog een foreach-->
             <ul class="collection">
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">account_circle</i>
-                    <span class="title">Brutus</span>
-                    <p style="color:#4caf50;">
-                        CEO of clown entertainment systems.
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
-
-                <li class="collection-item avatar">
-                    <i class="material-icons circle">account_circle</i>
-                    <span class="title">Sven Mark Hofstra</span>
-                    <p style="color:#4caf50;">
-                        Shitty programmer.
-                    </p>
-                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                </li>
+                @foreach (var contact in Model.contacts)
+                {
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle">account_circle</i>
+                        <span class="title">@contact.FirstName @contact.LastName</span>
+                        <p style="color: #4caf50;">
+                            @contact.Message
+                            <br/>@contact.Email
+                        </p>
+                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                    </li>
+                }
             </ul>
 
         </div>

@@ -232,6 +232,7 @@
     <Compile Include="ViewModel\NewSubcategorie.cs" />
     <Compile Include="ViewModel\NewOrderDetails.cs" />
     <Compile Include="ViewModel\NewWinkelmand.cs" />
+    <Compile Include="ViewModel\Profiel.cs" />
     <Compile Include="ViewModel\SubcategorieProducts.cs" />
   </ItemGroup>
   <ItemGroup>

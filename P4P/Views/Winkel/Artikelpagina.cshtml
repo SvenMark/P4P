@@ -37,7 +37,14 @@
                 </p>
             </div>
             <div class="col-md-6">
+                @if (Model.product.Aanbiedingprijs != 0)
+                {
+                    <p class="text-left">€@Model.product.Aanbiedingprijs</p>
+                }
+                else
+                {
                 <p class="text-left">€@Model.product.Prijs</p>
+                }            
             </div>
         </div>
         <div class="row">
@@ -99,18 +106,28 @@
     </div>
         @using (Html.BeginForm("Artikelpagina", "Winkel"))
         {
+            <div class="col-xs-3">
+                @if (Model.product.Subcategorie == null)
+                {
+                    <a href="~/Winkel/Categorie/@Model.product.Id" class="btn">Terug</a>
+                }
+                else
+                {
+                    <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id" class="btn">Terug</a>
+                }
+            </div>
             <!-- Modal Trigger -->
-            <div class="col-xs-2">
+            <div class="col-xs-3">
                 <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
             </div>
-            <div class="col-xs-2 nomargin-padding">
+            <div class="col-xs-3">
                 <div class="form-group">
                     @Html.LabelFor(m => m.winkelwagen.Aantal)
                     @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
                     @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
                 </div>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-3">
                 @Html.HiddenFor(m => m.product.Id)
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-primary center">In winkelmand</button>
