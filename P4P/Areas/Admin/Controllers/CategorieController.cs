@@ -16,6 +16,11 @@ namespace P4P.Areas.Admin.Controllers
         public ActionResult Index()
         {
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             using (var ctx = new P4PContext())
             {
                 var hoofdCategorie = ctx.Hoofdcategories.ToList();
@@ -167,7 +172,7 @@ namespace P4P.Areas.Admin.Controllers
                 ctx.Subcategories.Add(subcategorie);
                 ctx.SaveChanges();
             }
-            return RedirectToAction("Details", new {id});
+            return RedirectToAction("Details", new {id, success="true"});
         }
 
         public ActionResult EditSubCategorie(int id)
