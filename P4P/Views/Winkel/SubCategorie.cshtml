@@ -4,6 +4,8 @@
 }
 
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <style>
     body {
         background-color: whitesmoke;
@@ -14,17 +16,42 @@
 </div>
 
 <div class="card card-producten">
-    <center><h5>Producten:</h5></center>
+    <center><h5>Producten in @Model.subcategorie.Naam:</h5></center>
     <div class="row row-centered">
                 @foreach (var c in Model.product)
-                {
+            {
+                string image = c.Code + ".jpg";
                     <a href="~/Winkel/Artikelpagina/@c.Id">
-                        <div class="col-xs-2 col-centered clickable categorie">
-                            <h5 class="center">
-                                @c.Naam
-                        </h5>
-                    </div>
-                </a>
+
+                        <div class="col-xs-3 col-centered clickable categorie cat-img">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <img src="~/Content/Images/@image" class="cat-image" />
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--VUL HIER NOG DE GOEIE FAVORIETEN HREF IN (OOK IN ProductsInCategorie.CSHTML)-->
+                                    <div class="col-md-12">
+                                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+
+                                    </div>
+                                    <h4 class="center">
+                                        @c.Naam
+                                    </h4>
+                                    <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
+                                </div>
+                            </div>
+                            <div class="row nomargin">
+                                <div class="col-xs-6">
+                                    <a href="~/Winkel/Artikelpagina/@c.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <!--VUL HIER NOG DE GOEIE HREF IN (OOK IN ProductsInCategorie.CSHTML)-->
+                                    <a href="" class="waves-effect waves-light btn btn-primary green bestelknop">Bestel</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
                 }
     </div>
 </div>
