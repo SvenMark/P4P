@@ -53,9 +53,11 @@ namespace P4P.Areas.Admin.Controllers
                 }
                 if (product.Subcategorie != null)
                 {
+                    product.Subcategorie.Hoofdcategorie = product.Hoofdcategorie;
                     if (product.Subcategorie.Id != 0)
                         product.Subcategorie = ctx.Subcategories.Find(product.Subcategorie.Id);
                 }
+                
                 ctx.Products.Add(product);
                 ctx.SaveChanges();
                 return RedirectToAction("SetSubcategorie", "Artikel", new { id=product.Id});

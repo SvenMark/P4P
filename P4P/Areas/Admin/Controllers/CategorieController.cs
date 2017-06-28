@@ -111,9 +111,18 @@ namespace P4P.Areas.Admin.Controllers
                     }
                 }
 
-                ctx.Hoofdcategories.Remove(hoofdCategorie);
-                ctx.SaveChanges();
-                return RedirectToAction("Index", "Categorie", new { success = "true" });
+                try
+                {
+                    ctx.Hoofdcategories.Remove(hoofdCategorie);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Categorie", new { success = "true" });
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Categorie", new { success = "false", errormessage="Er zijn nog producten met deze hoofdcategorie" });
+                }
+
+
             }
         }
 
@@ -181,13 +190,21 @@ namespace P4P.Areas.Admin.Controllers
         {
             using (var ctx = new P4PContext())
             {
-                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie).SingleOrDefault(c => c.Id == id);
+                var subCategorie = ctx.Subcategories.Include(c => c.Hoofdcategorie)
+                    .SingleOrDefault(c => c.Id == id);
+                if (subCategorie == null) return HttpNotFound();
                 var hoofdCategorieId = subCategorie.Hoofdcategorie.Id;
 
-                if (subCategorie == null) return HttpNotFound();
-                ctx.Subcategories.Remove(subCategorie);
-                ctx.SaveChanges();
-                return RedirectToAction("Details", "Categorie", new { id = hoofdCategorieId, success = "true" });
+                try
+                {
+                    ctx.Subcategories.Remove(subCategorie);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Details", "Categorie", new {id = hoofdCategorieId, success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Details", "Categorie", new {id = hoofdCategorieId, success = "false", errormessage="Er zijn nog producten met deze subcategorie"});
+                }
             }
         }
     }
