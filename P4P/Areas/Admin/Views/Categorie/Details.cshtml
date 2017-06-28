@@ -2,39 +2,44 @@
 @{
     ViewBag.Title = "Details";
 }
-<h2>Details</h2>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 
-<p>
-    @Html.ActionLink("Terug", "Index", "Categorie", null, new {@class = "btn btn-primary"})
-    @Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new {id = Model.Hoofdcategorie.Id}, new {@class = "btn btn-primary"})
-</p>
+<div class="card card-producten card-centered">
+    <h4>Details</h4>
 
-@if (!Model.Subcategorie.Any())
-{
-    <p>Er zijn nog geen subcategorieën ingesteld op deze hoofdcategorie</p>
-}
-else
-{
-    <table id="categorieen" class="table table-bordered table-hover">
-        <thead>
-        <tr>
-            <th>Subcategorie</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var categorie in Model.Subcategorie)
-        {
-            <tr>
-                <td>@categorie.Naam</td>
-                <td>@Html.ActionLink("Edit", "EditSubCategorie", new { id=categorie.Id}, new { @class= "btn btn-primary"})</td>
-                <td>@Html.ActionLink("Delete", "DeleteSubCategorie", new { id=categorie.Id}, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan nie ongedaan worden gemaakt!');" })</td>
-            </tr>
-        }
-        </tbody>
-    </table>
-}
+    <p>
+        @Html.ActionLink("Terug", "Index", "Categorie", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Subcategorie toevoegen", "CreateSubCategorie", "Categorie", new { id = Model.Hoofdcategorie.Id }, new { @class = "btn btn-primary" })
+    </p>
+
+    @if (!Model.Subcategorie.Any())
+    {
+        <p>Er zijn nog geen subcategorieën ingesteld op deze hoofdcategorie</p>
+    }
+    else
+    {
+        <table id="categorieen" class="table striped table-hover">
+            <thead>
+                <tr>
+                    <th>Subcategorie</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var categorie in Model.Subcategorie)
+                {
+                    <tr>
+                        <td>@categorie.Naam</td>
+                        <td>@Html.ActionLink("Edit", "EditSubCategorie", new { id = categorie.Id }, new { @class = "btn btn-primary" })</td>
+                        <td>@Html.ActionLink("Delete", "DeleteSubCategorie", new { id = categorie.Id }, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan nie ongedaan worden gemaakt!');" })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
 
 @section scripts {
     <script>
