@@ -2,10 +2,19 @@
 @{
     ViewBag.Title = @Model.Naam;
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="gebruiker-banner" class="parallax-container">
+    <div class="parallax">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2>@Model.Naam</h2>
+        <h4>Overzicht van favorietenlijst</h4>
+    </center>
+</div>
     <div class="row">
         @using (Html.BeginForm("BestelFavoriet", "Bestel"))
         {
-                <h4>@Model.Naam</h4>
                 <div class="col-md-12">
                     <div class="card profiel smaller">
                         @if (Model.Producten.Any())
@@ -40,7 +49,7 @@
                         else
                         {
                             <h4 class="center">Geen producten in deze favorietenlijst</h4>
-                            <p class="center">Gaan naar een productpagina om producten toe te voegen.</p>
+                            <p class="center">Gaan naar een productpagina om producten toe te voegen.</p><br/>
                             <a href="~/Favorieten" class="btn">Terug</a>
                         }
                     </div>

@@ -7,7 +7,7 @@
     <header class="l-relative">
         <!--Gradient-->
         <div class="background-grass gradient">
-            <h1>Snelzoeken</h1>
+            <h1>Snel Zoek & Bestel</h1>
             <div id="custom-search-input">
                 <div class="input-group col-md-12">
                     @using (Html.BeginForm("Quickorder", "Winkel"))
@@ -45,6 +45,7 @@
                 @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
             </div>
             @Html.HiddenFor(m => m.product.Id)
+            @Html.Hidden("fav", Model.favorietenlijst)
             @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-primary">In winkelmand</button>
             }

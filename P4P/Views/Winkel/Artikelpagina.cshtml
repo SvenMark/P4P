@@ -14,10 +14,11 @@
     }@Model.product.Naam</h5>
 </div>
 <div class="card card-producten">
+    <div class="col-md-2"></div>
     <div class="col-md-3">
-        <img  id="product-img" src="~/Content/Images/@image" />
+        <img id="product-img" src="~/Content/Images/@image"/>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
         <h4>@Model.product.Naam</h4>
         <div class="row">
             <div class="col-md-6">
@@ -52,11 +53,11 @@
         <div class="row">
             <div class="col-md-6">
                 <p class="text-right">
-                    <b>Specs:</b>
+                    <b>Verkoopeeheid:</b>
                 </p>
             </div>
             <div class="col-md-6">
-                <p class="text-left">@Model.product.Specificaties</p>
+                <p class="text-left">@Model.product.Verkoopeenheid</p>
             </div>
         </div>
 
@@ -77,45 +78,44 @@
                     }
                 }
                 @using (Html.BeginForm("Nieuw", "Favorieten"))
-            {
+                {
                     <div id="spoiler" style="display: none">
                         <div class="form-group">
                             @Html.LabelFor(m => m.favorietenlijst.Naam)
-                            @Html.TextBoxFor(m => m.favorietenlijst.Naam, new { @class = "form-control", required = "True" })
+                            @Html.TextBoxFor(m => m.favorietenlijst.Naam, new {@class = "form-control", required = "True"})
                             @Html.ValidationMessageFor(m => m.favorietenlijst.Naam)
                         </div>
                         @Html.Hidden("prod_id", Model.product.Id)
                         @Html.AntiForgeryToken()
                         <button type="submit" class="btn btn-primary">Aanmaken & toevoegen</button>
                     </div>
-                    <button title="Nieuwe favorietenlijst" class="btn btn-primary" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Nieuwe favorietenlijst</button>
+                    <button title="Nieuwe favorietenlijst" class="btn btn-primary" type="button" onclick="if (document.getElementById('spoiler').style.display == 'none') { document.getElementById('spoiler').style.display = '' } else { document.getElementById('spoiler').style.display = 'none' }">Nieuwe favorietenlijst</button>
                 }
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sluiten</a>
             </div>
         </div>
-
+    </div>
         @using (Html.BeginForm("Artikelpagina", "Winkel"))
         {
-            <div class="form-group">
-                @Html.LabelFor(m => m.winkelwagen.Aantal)
-                @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", required = "True" })
-                @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
-            </div>
             <!-- Modal Trigger -->
-            <div class="col-md-6">
+            <div class="col-xs-2">
                 <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
             </div>
-            <div class="col-md-6">
+            <div class="col-xs-2 nomargin-padding">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.winkelwagen.Aantal)
+                    @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
+                    @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+                </div>
+            </div>
+            <div class="col-xs-2">
                 @Html.HiddenFor(m => m.product.Id)
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-primary center">In winkelmand</button>
             </div>
         }
-    </div>
-    
-    
 </div>
 
 @section scripts{
