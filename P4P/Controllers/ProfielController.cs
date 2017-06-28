@@ -138,12 +138,12 @@ namespace P4P.Controllers
                         return RedirectToAction("Login", new { success = "false", errormessage = "Deze combinatie is niet bij ons bekend!" });
 
                     Session["Id"] = gebruikerInDb.Id;
-                    return RedirectToAction("Index", "Winkel");
+                    return Auth.getRole() == "Admin" ? RedirectToAction("Index", "Home", new {area = "Admin"}) : RedirectToAction("Index", "Winkel");
                 }
             }
             catch
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", new { success = "false", errormessage = "Onbekende fout" });
             }
         }
 
