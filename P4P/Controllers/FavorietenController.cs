@@ -13,6 +13,7 @@ namespace P4P.Controllers
         // GET: Favorieten
         public ActionResult Index()
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             return View();
         }
 
@@ -72,6 +73,7 @@ namespace P4P.Controllers
 
         public ActionResult Details(int id)
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             using (P4PContext ctx = new P4PContext())
             {
                 var favorietenlijst = ctx.Favorietenlijsts.SingleOrDefault(m => m.Id == id);

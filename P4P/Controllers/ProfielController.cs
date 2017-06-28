@@ -15,7 +15,7 @@ namespace P4P.Controllers
         // GET: Profiel
         public ActionResult Index()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
             {
                 ViewBag.Success = Request.QueryString["success"];
@@ -124,7 +124,6 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Gebruiker gebruiker)
         {
-            if (Session["Id"] != null) return RedirectToAction("Index");
             try
             {
 
@@ -150,7 +149,7 @@ namespace P4P.Controllers
 
         public ActionResult Gegevenscontrole()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
             using (P4PContext ctx = new P4PContext())
             {
@@ -163,6 +162,7 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Gegevenscontrole(Gebruiker gebruiker)
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             try
             {
                 using (P4PContext ctx = new P4PContext())
@@ -187,7 +187,7 @@ namespace P4P.Controllers
 
         public ActionResult Setpassword()
         {
-            if (Session["Id"] == null) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
 
             using (P4PContext ctx = new P4PContext())
             {
@@ -200,6 +200,7 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Setpassword(Gebruiker gebruiker)
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             try
             {
                 using (P4PContext ctx = new P4PContext())
@@ -224,7 +225,7 @@ namespace P4P.Controllers
 
         public ActionResult Wachtwoord()
         {
-            if (!Auth.IsAuth()) return RedirectToAction("Login");
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
             {
                 ViewBag.Success = Request.QueryString["success"];
@@ -270,8 +271,7 @@ namespace P4P.Controllers
 
         public ActionResult Bedrijf()
         {
-            if (!Auth.IsAuth())
-                return RedirectToAction("Login", new {success = "false", errormessage = "Uw sessie is verlopen"});
+            if (!Auth.IsAuth()) return RedirectToAction("Login", new {success = "false", errormessage = "Uw sessie is verlopen"});
             int user_id = Convert.ToInt32(Session["Id"]);
             if (Auth.getRole() == "Werknemer")
             {
@@ -310,7 +310,8 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Bedrijf(Bedrijf bedrijf)
         {
-            using (var ctx = new P4PContext())
+            if (Auth.getRole() == "Werknemer") return HttpNotFound();
+                using (var ctx = new P4PContext())
             {
                 var bedrijfInDb = ctx.Bedrijven.Find(bedrijf.Id);
                 if (bedrijfInDb == null) return HttpNotFound();
@@ -327,26 +328,26 @@ namespace P4P.Controllers
 
         public ActionResult CreateWerknemer()
         {
-            if (!Auth.IsAuth())
-                return RedirectToAction("Login", new { success = "false", errormessage = "Uw sessie is verlopen" });
-            if (Auth.getRole() != "Bedrijfsleider" || Auth.getRole() != "Admin") return RedirectToAction("Bedrijf", "Profiel");
+            if (Auth.getRole() == "Bedrijfsleider" || Auth.getRole() == "Admin") { 
             if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
             {
                 ViewBag.Success = Request.QueryString["success"];
                 ViewBag.Errormessage = Request.QueryString["errormessage"];
             }
             int user_id = Convert.ToInt32(Session["Id"]);
-            using (var ctx = new P4PContext())
-            {
-                var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
-                if (gebruiker == null) return HttpNotFound();
-                var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
-                var viewModel = new BedrijfFormViewModel
+                using (var ctx = new P4PContext())
                 {
-                    Bedrijf = bedrijf
-                };
-                return View(viewModel);
+                    var gebruiker = ctx.Gebruikers.Include(c => c.Bedrijf).SingleOrDefault(c => c.Id == user_id);
+                    if (gebruiker == null) return HttpNotFound();
+                    var bedrijf = ctx.Bedrijven.Find(gebruiker.Bedrijf.Id);
+                    var viewModel = new BedrijfFormViewModel
+                    {
+                        Bedrijf = bedrijf
+                    };
+                    return View(viewModel);
+                }
             }
+            return RedirectToAction("Bedrijf", "Profiel");
         }
 
 
@@ -354,7 +355,8 @@ namespace P4P.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateWerknemer(Gebruiker gebruiker, Bedrijf bedrijf)
         {
-            using (var ctx = new P4PContext())
+            if (Auth.getRole() == "Werknemer") return HttpNotFound();
+                using (var ctx = new P4PContext())
             {
                 //als de code hier ergens een error oplevert voert hij catch uit.
                 if (ctx.Gebruikers.Any(m => m.Emailadres == gebruiker.Emailadres))
@@ -379,11 +381,6 @@ namespace P4P.Controllers
                 mailer.Send();
                 return RedirectToAction("Bedrijf", new {success = "true"});
             }
-        }
-
-        public ActionResult Contactpersonen()
-        {
-            return View();
         }
 
         public ActionResult Logout()
