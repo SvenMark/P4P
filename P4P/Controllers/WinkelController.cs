@@ -127,16 +127,19 @@ namespace P4P.Controllers
         public ActionResult Artikelpagina(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
             {
                 var product = ctx.Products.Include(c => c.Hoofdcategorie).Include(c => c.Subcategorie).SingleOrDefault(c => c.Id == id);
+                var favorietenlijsten = ctx.Favorietenlijsts.Include(c => c.Producten).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker.Id == user_id && !c.Producten.Contains(product));
 
                 if (product == null) return HttpNotFound();
 
                 var viewModel = new NewWinkelmand
                 {
-                     product = product
+                    favorietenlijsten = favorietenlijsten,
+                    product = product
                 };
 
                 return View(viewModel);
