@@ -46,12 +46,19 @@ namespace P4P.Areas.Admin.Controllers
             if (Auth.getRole() != "Admin") return RedirectToAction("Index", "Profiel", new { area = "" });
             using (var ctx = new P4PContext())
             {
-                var productInDb = ctx.Products.Find(product.Id);
-                if (productInDb == null) return HttpNotFound();
-                productInDb.Aanbiedingen = product.Aanbiedingen;
-                productInDb.Aanbiedingprijs = Convert.ToDouble(collection["Aanbiedingprijs"].Replace('.', ','));
-                ctx.SaveChanges();
-                return RedirectToAction("Index", "Aanbieding", new { success="true"});
+                try
+                {
+                    var productInDb = ctx.Products.Find(product.Id);
+                    if (productInDb == null) return HttpNotFound();
+                    productInDb.Aanbiedingen = product.Aanbiedingen;
+                    productInDb.Aanbiedingprijs = Convert.ToDouble(collection["Aanbiedingprijs"].Replace('.', ','));
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Aanbieding", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Aanbieding", new { success="false", errormessage="Onverwachte fout" });
+                }
             }
         }
     }
