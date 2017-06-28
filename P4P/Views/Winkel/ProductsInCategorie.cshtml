@@ -17,66 +17,67 @@
 
 @using (Html.BeginForm("Search", "Winkel"))
 {
-    <input type="text" class="form-control input-lg" name="search" placeholder="Zoek naar producten" />
-    <span class="input-group-btn">
-        @Html.AntiForgeryToken()
-        <button id="zoeken" class="btn btn-info btn-lg" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-        </button>
-    </span>
-}
+    <div id="custom-search-input" class="scheeffix">
+        <input type="text" class="form-control input-lg" name="search" placeholder="Zoek naar producten" />
+        <span class="input-group-btn">
+            @Html.AntiForgeryToken()
+            <button id="zoeken" class="btn btn-info btn-lg" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+        </span>
+        </div>
+        }
 
+        <div class="card card-producten">
+            <center><h5>Producten in @Model.hoofdcategorie.Naam:</h5></center><br />
+            <div class="row row-centered">
+                @foreach (var c in Model.product)
+                {
+                    string image = c.Code + ".jpg";
+                    <a href="~/Winkel/Artikelpagina/@c.Id">
 
-<div class="card card-producten">
-        <center><h5>Producten in @Model.hoofdcategorie.Naam:</h5></center><br />
-        <div class="row row-centered">
-            @foreach (var c in Model.product)
-            {
-                string image = c.Code + ".jpg";
-                <a href="~/Winkel/Artikelpagina/@c.Id">
-
-                    <div class="col-xs-3 col-centered clickable categorie cat-img">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <img src="~/Content/Images/@image" class="cat-image" />
-                            </div>
-                            <div class="col-xs-6">
-                                <!--VUL HIER NOG DE GOEIE FAVORIETEN HREF IN (OOK IN SUBCATEGORIE.CSHTML)-->
-                                <div class="col-md-12">
-                                    <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-
+                        <div class="col-xs-3 col-centered clickable categorie cat-img">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <img src="~/Content/Images/@image" class="cat-image" />
                                 </div>
-                                <h4 class="center">
-                                    @c.Naam
-                                </h4>
-                                <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
-                            </div>
-                        </div>
-                        @using (Html.BeginForm("Artikelpagina", "Winkel"))
-                        {
-                            <div class="row nomargin-padding">
-                                <div class="col-xs-4 nomargin-padding">
-                                    <a href="~/Winkel/Artikelpagina/@c.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                                <div class="col-xs-6">
+                                    <!--VUL HIER NOG DE GOEIE FAVORIETEN HREF IN (OOK IN SUBCATEGORIE.CSHTML)-->
+                                    <div class="col-md-12">
+                                        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+
+                                    </div>
+                                    <h4 class="center">
+                                        @c.Naam
+                                    </h4>
+                                    <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
                                 </div>
-                                <div class="col-xs-4 nomargin-padding">
-                                    <div class="form-group">
-                                        @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", placeholder="Aantal",required = "True"})
-                                        @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+                            </div>
+                            @using (Html.BeginForm("Artikelpagina", "Winkel"))
+                            {
+                                <div class="row nomargin-padding">
+                                    <div class="col-xs-4 nomargin-padding">
+                                        <a href="~/Winkel/Artikelpagina/@c.Id" class="waves-effect waves-light btn btn-primary blue bestelknop">Bekijk</a>
+                                    </div>
+                                    <div class="col-xs-4 nomargin-padding">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", placeholder = "Aantal", required = "True",id = "searchalt" })
+                                            @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 nomargin-padding">
+                                        @Html.Hidden("mprod_id", @c.Id)
+                                        @Html.Hidden("cat_id", Model.hoofdcategorie.Id)
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-primary">Bestel</button>
                                     </div>
                                 </div>
-                                <div class="col-xs-4 nomargin-padding">
-                                    @Html.Hidden("mprod_id", @c.Id)
-                                    @Html.Hidden("cat_id", Model.hoofdcategorie.Id)
-                                    @Html.AntiForgeryToken()
-                                    <button type="submit" class="btn btn-primary">Bestel</button>
-                                </div>
-                            </div>
-                        }
-                     </div>
-                        
-            </a>
-            }
+                            }
+                        </div>
+
+                    </a>
+                }
+            </div>
         </div>
-</div>
 
 
