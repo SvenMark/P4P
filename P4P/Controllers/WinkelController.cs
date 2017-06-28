@@ -26,14 +26,12 @@ namespace P4P.Controllers
                 var categorie = ctx.Hoofdcategories.ToList();
                 var gebruiker = ctx.Gebruikers.Find(user_id);
                 var meldingen = ctx.Meldingen.ToList();
-                var aanbiedingen = ctx.Aanbiedingen.ToList();
 
                 var getCategories = new IndexWinkel
                 {
                     hoofdcategorie = categorie,
                     gebruiker = gebruiker,
-                    meldingen = meldingen,
-                    aanbiedingen = aanbiedingen
+                    meldingen = meldingen
                 };
 
                 return View(getCategories);

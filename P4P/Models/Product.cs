@@ -41,5 +41,7 @@ namespace P4P.Models
 
         [Required]
         public bool Aanbiedingen { get; set; }
+
+        public double Aanbiedingprijs { get; set; }
     }
 }

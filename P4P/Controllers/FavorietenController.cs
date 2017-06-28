@@ -27,12 +27,12 @@ namespace P4P.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddFavoriet()
-        {
-            return View("", "Winkel");
-        }
+//        [HttpPost]
+//        [ValidateAntiForgeryToken]
+//        public ActionResult AddFavoriet()
+//        {
+//            return View("", "Winkel");
+//        }
         //New, Edit, Delete, Save(controller voor opslaan van voorgaande acties), Add_product, removeproduct, editproduct?
     }
 }

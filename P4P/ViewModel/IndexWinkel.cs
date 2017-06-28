@@ -10,7 +10,6 @@ namespace P4P.ViewModel
     {
         public Gebruiker gebruiker { get; set; }
         public IEnumerable<Hoofdcategorie> hoofdcategorie { get; set; }
-        public IEnumerable<Aanbiedingen> aanbiedingen { get; set; }
         public IEnumerable<Melding> meldingen { get; set; }
     }
 }

@@ -202,8 +202,15 @@
     <Compile Include="Migrations\201706270858590_Update_aanbiedingen1.Designer.cs">
       <DependentUpon>201706270858590_Update_aanbiedingen1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706280929196_AanbiedingPrijs.cs" />
+    <Compile Include="Migrations\201706280929196_AanbiedingPrijs.Designer.cs">
+      <DependentUpon>201706280929196_AanbiedingPrijs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706280931348_RemoveAanbieding.cs" />
+    <Compile Include="Migrations\201706280931348_RemoveAanbieding.Designer.cs">
+      <DependentUpon>201706280931348_RemoveAanbieding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Aanbiedingen.cs" />
     <Compile Include="Models\Bedrijf.cs" />
     <Compile Include="Models\Bestelling.cs" />
     <Compile Include="Models\BestellingProduct.cs" />
@@ -3326,6 +3333,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706270858590_Update_aanbiedingen1.resx">
       <DependentUpon>201706270858590_Update_aanbiedingen1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280929196_AanbiedingPrijs.resx">
+      <DependentUpon>201706280929196_AanbiedingPrijs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706280931348_RemoveAanbieding.resx">
+      <DependentUpon>201706280931348_RemoveAanbieding.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
