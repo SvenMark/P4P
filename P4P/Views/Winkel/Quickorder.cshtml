@@ -36,7 +36,15 @@
         <div class="col-xs-8">
             <h3>Uw gekozen product:</h3>
             <h4>@Model.product.Code</h4>
-            <h4>@Model.product.Naam</h4>
+            <h4>@Model.product.Naam €@if (Model.product.Aanbiedingen)
+                                    {
+                                        @Model.product.Aanbiedingprijs
+                                    }
+                                    else
+                                    {
+                                        @Model.product.Prijs
+                                    }
+            </h4>
             @using (Html.BeginForm("Artikelpagina", "Winkel"))
             {
             <div class="form-group">

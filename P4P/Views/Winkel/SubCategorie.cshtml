@@ -50,7 +50,15 @@
                                     <h4 class="center">
                                         @c.Naam
                                     </h4>
-                                    <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
+                                    @if (c.Aanbiedingprijs != 0)
+                                    {
+                                        <h6 class="center">€@c.Aanbiedingprijs per @c.Verkoopeenheid stuks</h6>
+                                    }
+                                    else
+                                    {
+                                        <h6 class="center">€@c.Prijs per @c.Verkoopeenheid stuks</h6>
+
+                                    }
                                 </div>
                             </div>
                             @using (Html.BeginForm("Artikelpagina", "Winkel"))

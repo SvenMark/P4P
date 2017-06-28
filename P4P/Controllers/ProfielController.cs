@@ -24,8 +24,12 @@ namespace P4P.Controllers
 
             using (P4PContext ctx = new P4PContext())
             {
-                var gebruiker = ctx.Gebruikers.Find(Session["Id"]);
-                return View(gebruiker);
+                var viewModel = new Profiel
+                {
+                    gebruiker = ctx.Gebruikers.Find(Session["Id"]),
+                    contacts = ctx.Contacten.ToList()
+                };
+                return View(viewModel);
             }
         }
 
