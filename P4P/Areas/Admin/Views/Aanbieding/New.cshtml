@@ -29,7 +29,7 @@
                     <div class="row nomargin">
                         <div class="form-group input-field col-md-12">
                             @Html.LabelFor(m => m.Aanbiedingprijs)
-                            @Html.TextBoxFor(m => m.Aanbiedingprijs, new { @class = "form-control", type="number" })
+                            @Html.TextBoxFor(m => m.Aanbiedingprijs, new { @class = "form-control", type="number", required="true", min="0.01" })
                             @Html.ValidationMessageFor(m => m.Aanbiedingprijs)
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                     new SelectListItem {Value = "true", Text = "Ja"},
                                     new SelectListItem {Value = "false", Text = "Nee"},
                                 },
-                                new {@class = "form-control"})
+                                new {@class = "form-control", required="true"})
                             @Html.ValidationMessageFor(m => m.Aanbiedingen)
                         </div>
                     </div>
