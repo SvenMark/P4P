@@ -4,12 +4,7 @@
     string image = @Model.product.Code + ".jpg";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
-<style>
-    body {
-        background-color: whitesmoke;
-    }
-</style>
-
+<style> body {background-color: whitesmoke;}</style>
 
 <div class="navigatie">
     <h5><a href="~/Winkel">Home</a> > <a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id">@Model.product.Hoofdcategorie.Naam</a> > 
@@ -58,6 +53,45 @@
         </div>
     </div>
 
+    <!-- Modal Trigger -->
+    <a class="waves-effect waves-light btn" href="#modal1">favorieten</a>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+                @if (Model.favorietenlijsten.Any())
+                {
+                    foreach (var f in Model.favorietenlijsten)
+                    {
+                        using (Html.BeginForm("Toevoegen", "Favorieten"))
+                        {
+                            <p>@f.Naam</p>
+                            @Html.Hidden("prod_id", Model.product.Id)
+                            @Html.Hidden("fav_id", f.Id)
+                            <button type="submit" class="btn btn-primary yellow"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                        }
+                    }
+                }
+            @using (Html.BeginForm("Nieuw", "Favorieten"))
+            {
+                <div id="spoiler" style="display: none">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.favorietenlijst.Naam)
+                        @Html.TextBoxFor(m => m.favorietenlijst.Naam, new {@class = "form-control", required = "True"})
+                        @Html.ValidationMessageFor(m => m.favorietenlijst.Naam)
+                    </div>
+                    @Html.Hidden("prod_id", Model.product.Id)
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary">Aanmaken & toevoegen</button>
+                </div>
+                <button title="Nieuwe favorietenlijst" class="btn btn-primary" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Nieuwe favorietenlijst</button>
+            }
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sluiten</a>
+        </div>
+    </div>
+
     @using (Html.BeginForm("Artikelpagina", "Winkel"))
     {
         <div class="form-group">
@@ -70,7 +104,13 @@
         <button type="submit" class="btn btn-primary">In winkelmand</button>
     }
 </div>
-    @using (Html.BeginForm("AddFavoriet", "Favorieten"))
-    {
 
-    }
+@section scripts{
+    <script>
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('.modal').modal();
+        });
+    </script>
+   
+}

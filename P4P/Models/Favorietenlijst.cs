@@ -7,6 +7,11 @@ namespace P4P.Models
 {
     public class Favorietenlijst
     {
+        public Favorietenlijst()
+        {
+            Producten = new List<Product>();
+        }
+
         public int Id { get; set; }
 
         public Gebruiker Gebruiker { get; set; }

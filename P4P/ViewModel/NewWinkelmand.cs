@@ -10,5 +10,7 @@ namespace P4P.ViewModel
     {
         public Product product { get; set; }
         public Winkelwagen winkelwagen { get; set; }
+        public IEnumerable<Favorietenlijst> favorietenlijsten { get; set; }
+        public Favorietenlijst favorietenlijst { get; set; }
     }
 }
