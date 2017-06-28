@@ -66,6 +66,8 @@ namespace P4P.Controllers
                             ctx.Bestellingen.Add(bestelling);
                             ctx.SaveChanges();
 
+                            int i = 0;
+                            var aantallen = collection["aantal[]"].Split(',');
                             foreach (var item in ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList()
                                 .Where(c => c.Gebruiker.Id == user_id))
                             {
@@ -75,7 +77,13 @@ namespace P4P.Controllers
                                     Aantal = item.Aantal,
                                     Product_Id = item.Product_Id
                                 };
-                                if (bestellingProduct.Product_Id != null) ctx.BestellingProducts.Add(bestellingProduct);
+                                //winkelwagenupdate
+                                item.Aantal = Convert.ToInt32(aantallen[i]);
+                                //tabelupdate
+                                bestellingProduct.Aantal = Convert.ToInt32(aantallen[i]);
+                                i++;
+                                if (bestellingProduct.Product_Id != 0) ctx.BestellingProducts.Add(bestellingProduct);
+
                             }
 
                             ctx.SaveChanges();
