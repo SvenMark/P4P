@@ -166,10 +166,6 @@
     </Compile>
     <Compile Include="Helpers\Auth.cs" />
     <Compile Include="Helpers\GMailer.cs" />
-    <Compile Include="Migrations\201706060843484_AddRolToGebruikers.cs" />
-    <Compile Include="Migrations\201706060843484_AddRolToGebruikers.Designer.cs">
-      <DependentUpon>201706060843484_AddRolToGebruikers.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201706200818070_All_tables.cs" />
     <Compile Include="Migrations\201706200818070_All_tables.Designer.cs">
       <DependentUpon>201706200818070_All_tables.cs</DependentUpon>
@@ -3303,9 +3299,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706060843484_AddRolToGebruikers.resx">
-      <DependentUpon>201706060843484_AddRolToGebruikers.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706200818070_All_tables.resx">
       <DependentUpon>201706200818070_All_tables.cs</DependentUpon>
     </EmbeddedResource>
