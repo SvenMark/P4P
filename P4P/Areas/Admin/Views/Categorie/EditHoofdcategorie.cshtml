@@ -2,30 +2,33 @@
 @{
     ViewBag.Title = "EditHoofdCategorie";
 }
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 
-<h2>EditSubCategorie</h2>
+<div class="card card-producten card-centered">
+    <h2>Hoofdcategorie Wijzigen</h2>
 
-<p>
-    @Html.ActionLink("Terug", "Index", "Categorie", null, new { @class = "btn btn-primary" })
-</p>
-@using (Html.BeginForm("EditHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
-{
-    if (ViewBag.message != null)
+    <p>
+        <button class="btn btn-primary" onclick="goBack()">Annuleren</button>
+    </p>
+    @using (Html.BeginForm("EditHoofdcategorie", "Categorie", FormMethod.Post, new { id = "registerForm" }))
     {
-        <h2>@ViewBag.message</h2>
+        if (ViewBag.message != null)
+        {
+            <h2>@ViewBag.message</h2>
+        }
+        <div class="form-group">
+            @Html.LabelFor(m => m.Naam)
+            @Html.TextBoxFor(m => m.Naam, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Naam)
+        </div>
+        @Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Wijzigen</button>
     }
-    <div class="form-group">
-        @Html.LabelFor(m => m.Naam)
-        @Html.TextBoxFor(m => m.Naam, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.Naam)
     </div>
-    @Html.HiddenFor(m => m.Id)
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Register</button>
-}
 
-@section scripts
+    @section scripts
 {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 
