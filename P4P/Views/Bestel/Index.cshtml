@@ -47,7 +47,7 @@
                             </td>
                             <td>€@p.Product.Prijs</td>
                             <td>€@producttotaal</td>
-                            <td><button type="button" class="btn red"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+                            <td><a type="button" class="btn btn-danger red" href="@Url.Action("Delete","Bestel", new { id = p.Product.Id })" onclick="return confirm('Deze actie is permanent en kan niet ongedaan worden gemaakt!');"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                         </tr>
                     }
                 }

@@ -26,12 +26,14 @@ namespace P4P.Controllers
                 var categorie = ctx.Hoofdcategories.ToList();
                 var gebruiker = ctx.Gebruikers.Find(user_id);
                 var meldingen = ctx.Meldingen.ToList();
+                var producten = ctx.Products.ToList().Where(c => c.Aanbiedingen);
 
                 var getCategories = new IndexWinkel
                 {
                     hoofdcategorie = categorie,
                     gebruiker = gebruiker,
-                    meldingen = meldingen
+                    meldingen = meldingen,
+                    aanbiedingen = producten
                 };
 
                 return View(getCategories);
@@ -156,10 +158,14 @@ namespace P4P.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Artikelpagina(Winkelwagen winkelwagen, Product product)
+        public ActionResult Artikelpagina(Winkelwagen winkelwagen, Product product, FormCollection collection)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
+            int product_id;
+            if (product.Id == 0 && collection["prod_id"] != null) product_id = Convert.ToInt32(collection["prod_id"]);
+            else if (product.Id == 0) product_id = Convert.ToInt32(collection["mprod_id"]);
+            else product_id = product.Id;
 
             try
             {
@@ -168,12 +174,21 @@ namespace P4P.Controllers
                     var AddWinkelwagen = new Winkelwagen
                     {
                         Gebruiker_id = user_id,
-                        Product_Id = product.Id,
+                        Product_Id = product_id,
                         Aantal = winkelwagen.Aantal
                     };
 
                     ctx.Winkelwagens.Add(AddWinkelwagen);
                     ctx.SaveChanges();
+
+                    if (collection["cat_id"] != null)
+                    {
+                        return RedirectToAction("Categorie", new { id = Convert.ToInt32(collection["cat_id"])});
+                    }
+                    if (collection["subcat_id"] != null)
+                    {
+                        return RedirectToAction("SubCategorie", new { id = Convert.ToInt32(collection["subcat_id"])});
+                    }
 
                     return RedirectToAction("Artikelpagina", new {product.Id});
                 }
