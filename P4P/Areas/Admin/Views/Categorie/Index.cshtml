@@ -2,36 +2,43 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-
-<h2>Dashboard</h2>
-<h3>Overzicht van gebruikers</h3>
-
-<p>
-    @Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "btn btn-primary"})
-    @Html.ActionLink("Nieuw Artikel", "CreateArtikel", "Artikel", null, new {@class = "btn btn-primary"})
-    @Html.ActionLink("Nieuwe hoofdcategorie", "CreateHoofdcategorie", "Categorie", null, new {@class = "btn btn-primary"})
-</p>
-<table id="categorieen" class="table table-bordered table-hover">
-    <thead>
-    <tr>
-        <th>Hoofdcategorie</th>
-        <th>Open</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var categorie in Model)
-    {
-        <tr>
-            <td>@categorie.Naam</td>
-            <td>@Html.ActionLink("Open", "Details", "Categorie", new { categorie.Id }, new { @class = "btn btn-primary" })</td>
-            <td>@Html.ActionLink("Edit", "EditHoofdcategorie", "Categorie", new { id=categorie.Id}, new { @class = "btn btn-primary"})</td>
-            <td>@Html.ActionLink("Delete", "DeleteHoofdCategorie", "Categorie", new { id = categorie.Id }, new { @class = "btn btn-primary", onclick = "return confirm('Deze actie is permanent en kan nie ongedaan worden gemaakt!');" })</td>
-        </tr>
-    }
-    </tbody>
-</table>
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div id="gebruiker-banner" class="parallax-container">
+    <div class="parallax">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Overzicht_van_de_molen%2C_gezien_vanaf_het_weiland_-_Fransum_-_20420708_-_RCE.jpg" alt="Unsplashed background img 1">
+    </div>
+    <center>
+        <h2>Categoriën</h2>
+        <h4>Overzicht van categoriën</h4>
+        <p>
+            @*@Html.ActionLink("Dashboard", "Index", "Home", null, new { @class = "btn btn-primary" })*@
+            @Html.ActionLink("Nieuw Artikel", "CreateArtikel", "Artikel", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Nieuwe hoofdcategorie", "CreateHoofdcategorie", "Categorie", null, new { @class = "btn btn-primary" })
+        </p>
+    </center>
+    
+</div>
+    <table id="categorieen" class="table striped table-hover">
+        <thead>
+            <tr>
+                <th>Hoofdcategorie</th>
+                <th>Open</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categorie in Model)
+            {
+                <tr>
+                    <td>@categorie.Naam</td>
+                    <td>@Html.ActionLink("Open", "Details", "Categorie", new { categorie.Id }, new { @class = "btn btn-primary" })</td>
+                    <td>@Html.ActionLink("Edit", "EditHoofdcategorie", "Categorie", new { id = categorie.Id }, new { @class = "btn btn-primary orange" })</td>
+                    <td>@Html.ActionLink("Delete", "DeleteHoofdCategorie", "Categorie", new { id = categorie.Id }, new { @class = "btn btn-primary red", onclick = "return confirm('Deze actie is permanent en kan niet ongedaan worden gemaakt!');" })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 @section scripts {
     <script>

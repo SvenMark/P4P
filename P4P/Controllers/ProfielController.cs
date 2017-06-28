@@ -105,6 +105,7 @@ namespace P4P.Controllers
                     {
                         var gebruiker = ctx.Gebruikers.Single(m => m.Token == token);
                         Session["Id"] = gebruiker.Id;
+                        Session["Rol"] = gebruiker.Rol;
                         ctx.SaveChanges();
                         ViewBag.Error = "";
                         return RedirectToAction("Gegevenscontrole");

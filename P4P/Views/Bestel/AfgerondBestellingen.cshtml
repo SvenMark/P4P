@@ -3,44 +3,47 @@
     ViewBag.Title = "AfgerondBestellingen";
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
-<center><h4 style="font-size:25px;">Afgeronde bestellingen</h4></center>
+<div class="card card-centered card-producten">
+    <center><h4 style="font-size:25px;">Afgeronde bestellingen</h4></center>
 
-@if (!Model.Any())
-{
-    <h6>Geen afgeronde bestellingen</h6>
-}
-else
-{
-    <table id="bestellingen" class="table striped table-hover">
-        <thead>
-        <tr>
-            <th>Bestelling nummer</th>
-            <th>Prijs</th>
-            <th>Afleverdatum</th>
-            <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var bestelling in Model)
-        {
-            <tr>
-                <td>@bestelling.Id</td>
-                <td>€@bestelling.Prijs</td>
-                @if (bestelling.Afleverdatum.HasValue)
+    @if (!Model.Any())
+    {
+        <h6>Geen afgeronde bestellingen</h6>
+    }
+    else
+    {
+        <table id="bestellingen" class="table striped table-hover">
+            <thead>
+                <tr>
+                    <th>Bestelling nummer</th>
+                    <th>Prijs</th>
+                    <th>Afleverdatum</th>
+                    <th> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bestelling in Model)
                 {
-                    <td>@bestelling.Afleverdatum.Value.ToString("dd/MM/yyyy")</td>
+                    <tr>
+                        <td>@bestelling.Id</td>
+                        <td>€@bestelling.Prijs</td>
+                        @if (bestelling.Afleverdatum.HasValue)
+                        {
+                            <td>@bestelling.Afleverdatum.Value.ToString("dd/MM/yyyy")</td>
+                        }
+                        else
+                        {
+                            <td>Geen afleverdatum</td>
+                        }
+                        <td>@Html.ActionLink("Openen", "Afgerond", "Bestel", new { bestelling.Id }, new { @class = "btn btn-primary" })</td>
+                    </tr>
                 }
-                else
-                {
-                    <td>Geen afleverdatum</td>
-                }
-                <td>@Html.ActionLink("Openen", "Afgerond", "Bestel", new { bestelling.Id }, new { @class = "btn btn-primary" })</td>    
-            </tr>
-        }
-        </tbody>
-    </table>
-    <a href="~/Winkel" class="btn" style="margin-left:20px;">Terug</a>
-}
+            </tbody>
+        </table>
+        <a href="~/Winkel" class="btn" style="margin-left:20px;">Terug</a>
+    }
+</div>
+
 
 @section scripts {
     <script>
