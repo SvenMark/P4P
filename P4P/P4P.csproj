@@ -3288,6 +3288,7 @@
     <Content Include="Views\Winkel\ProductsInCategorie.cshtml" />
     <Content Include="Views\Profiel\CreateWerknemer.cshtml" />
     <Content Include="Views\Profiel\Bedrijf_read_only.cshtml" />
+    <Content Include="Views\Favorieten\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

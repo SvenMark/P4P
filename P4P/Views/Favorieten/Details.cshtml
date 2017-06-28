@@ -1,8 +1,49 @@
 ﻿@model P4P.Models.Favorietenlijst
-
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.Naam;
 }
-
-<h2>Details</h2>
-<h3>Details van een lijst</h3>
+    <div class="row">
+        @using (Html.BeginForm("BestelFavoriet", "Bestel"))
+        {
+                <h4>@Model.Naam</h4>
+                <div class="col-md-12">
+                    <div class="card profiel smaller">
+                        @if (Model.Producten.Any())
+                        {
+                            <h4>Producten in deze favorietenlijst</h4>
+                            <div class="table-responsive">
+                                <table class="table striped table-hover">
+                                    <tr>
+                                        <th>Productcode</th>
+                                        <th>Productnaam</th>
+                                        <th>Prijs</th>
+                                        <th> </th>
+                                    </tr>
+                                    @foreach (var product in Model.Producten)
+                                    {
+                                        <tr>
+                                            <td>@product.Id</td>
+                                            <td>@product.Naam</td>
+                                            <td>@product.Prijs</td>
+                                            <td><a type="button" class="btn btn-danger red" href="@Url.Action("RemoveProd", "Favorieten", new {id = product.Id, id2 = Model.Id})" onclick="return confirm('Deze actie is permanent en kan niet ongedaan worden gemaakt!');"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                            @Html.HiddenFor(m => m.Id)
+                            <center>
+                                <a href="~/Favorieten" class="btn">Terug</a>
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-primary">Bestellen</button>
+                            </center>
+                        }
+                        else
+                        {
+                            <h4 class="center">Geen producten in deze favorietenlijst</h4>
+                            <p class="center">Gaan naar een productpagina om producten toe te voegen.</p>
+                            <a href="~/Favorieten" class="btn">Terug</a>
+                        }
+                    </div>
+                </div>  
+        }
+    </div>

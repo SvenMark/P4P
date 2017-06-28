@@ -29,6 +29,7 @@
                     <th>Aantal</th>
                     <th>Prijs per stuk</th>
                     <th>Totaal</th>
+                    <th> </th>
                 </tr>
                 @{
                     foreach (var p in Model)
@@ -44,6 +45,7 @@
                                     @Html.TextBoxFor(m => p.Aantal, new {@type = "Number"})
                                     @Html.ValidationMessageFor(m => p.Aantal)
                                 </div>
+                                @Html.ActionLink("Opslaan", "UpdateAantal", "Bestel", new {id = p.Product.Id, aantal = p.Aantal}, null)
                             </td>
                             <td>€@p.Product.Prijs</td>
                             <td>€@producttotaal</td>
