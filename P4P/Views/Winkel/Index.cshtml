@@ -64,19 +64,20 @@
         </div>
     </div>
     <div class="col-md-6">
-@*        <div class="card rechts">*@
-@*            <h5>Aanbiedingen</h5>*@
-@*            @foreach (var aanbieding in Model.aanbiedingen)*@
-@*            {*@
-@*                <div class="aanbieding clickable">*@
-@*                    <img src="~/Content/steak.png" class="aanbiedingimg col-md-4">*@
-@*                    <div class="aanbiedingtekst col-md-8">*@
-@*                        <h5>@aanbieding.Naam</h5>*@
-@*                        <h6>Nu voor maar €@aanbieding.Prijs</h6>*@
-@*                    </div>*@
-@*                </div>*@
-@*            }*@
-@*        </div>*@
+       <div class="card rechts">
+            <h5>Aanbiedingen</h5>
+            @foreach (var aanbieding in Model.aanbiedingen)
+            {
+                string image = aanbieding.Code + ".jpg";
+                <div class="aanbieding clickable">
+                    <img src="~/Content/Images/@image" class="aanbiedingimg col-md-4"/>
+                    <div class="aanbiedingtekst col-md-8">
+                        <h5>@aanbieding.Naam</h5>
+                        <h6>Nu voor maar €@aanbieding.Aanbiedingprijs</h6>
+                    </div>
+                </div>
+            }
+        </div>
         <div class="card rechts">
             <h5>Meldingen</h5>
             @foreach (var melding in Model.meldingen)

@@ -84,18 +84,17 @@ namespace P4P.Controllers
 
         public ActionResult Delete(int id)
         {
+            if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
             int user_id = Convert.ToInt32(Session["Id"]);
 
-            using (P4PContext ctx = new P4PContext())
+            using (var ctx = new P4PContext())
             {
-                var product = ctx.Winkelwagens.Include(c => c.Gebruiker).Include(c => c.Product).SingleOrDefault(c => c.Product_Id == id && c.Gebruiker_id == user_id);
-                if (product != null)
-                {
-                    ctx.Winkelwagens.Remove(product);
-                    ctx.SaveChanges();
-                }
+                var product = ctx.Winkelwagens.Include(c => c.Gebruiker).Include(c => c.Product).SingleOrDefault(c => c.Gebruiker.Id == user_id && c.Product.Id == id);
+                if (product == null) return HttpNotFound();
+                ctx.Winkelwagens.Remove(product);
+                ctx.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
         }
 
         public ActionResult Orderdetails(int id)
