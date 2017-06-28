@@ -14,51 +14,55 @@
     }@Model.product.Naam</h5>
 </div>
 <div class="card card-producten">
-    <img src="~/Content/Images/@image" style="width:200px; height:200px"/>
-    <h4>@Model.product.Naam</h4>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-right"><b>Product code:</b>
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p class="text-left">@Model.product.Code</p>
-        </div>
+    <div class="col-md-3">
+        <img  id="product-img" src="~/Content/Images/@image" />
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-right"><b>Prijs:</b>
-            </p>
+    <div class="col-md-9">
+        <h4>@Model.product.Naam</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <b>Product code:</b>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-left">@Model.product.Code</p>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p class="text-left">€@Model.product.Prijs</p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <b>Prijs:</b>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-left">€@Model.product.Prijs</p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-right"><b>Beschrijving:</b>
-            </p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <b>Beschrijving:</b>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-left">@Model.product.Beschrijving</p>
+            </div>
         </div>
-        <div class="col-md-6">
-            <p class="text-left">@Model.product.Beschrijving</p>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <b>Specs:</b>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-left">@Model.product.Specificaties</p>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <p class="text-right"><b>Specs:</b>
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p class="text-left">@Model.product.Specificaties</p>
-        </div>
-    </div>
 
-    <!-- Modal Trigger -->
-    <a class="waves-effect waves-light btn" href="#modal1">favorieten</a>
-
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
                 @if (Model.favorietenlijsten.Any())
                 {
                     foreach (var f in Model.favorietenlijsten)
@@ -72,37 +76,46 @@
                         }
                     }
                 }
-            @using (Html.BeginForm("Nieuw", "Favorieten"))
+                @using (Html.BeginForm("Nieuw", "Favorieten"))
             {
-                <div id="spoiler" style="display: none">
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.favorietenlijst.Naam)
-                        @Html.TextBoxFor(m => m.favorietenlijst.Naam, new {@class = "form-control", required = "True"})
-                        @Html.ValidationMessageFor(m => m.favorietenlijst.Naam)
+                    <div id="spoiler" style="display: none">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.favorietenlijst.Naam)
+                            @Html.TextBoxFor(m => m.favorietenlijst.Naam, new { @class = "form-control", required = "True" })
+                            @Html.ValidationMessageFor(m => m.favorietenlijst.Naam)
+                        </div>
+                        @Html.Hidden("prod_id", Model.product.Id)
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-primary">Aanmaken & toevoegen</button>
                     </div>
-                    @Html.Hidden("prod_id", Model.product.Id)
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-primary">Aanmaken & toevoegen</button>
-                </div>
-                <button title="Nieuwe favorietenlijst" class="btn btn-primary" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Nieuwe favorietenlijst</button>
-            }
+                    <button title="Nieuwe favorietenlijst" class="btn btn-primary" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Nieuwe favorietenlijst</button>
+                }
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sluiten</a>
+            </div>
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sluiten</a>
-        </div>
-    </div>
 
-    @using (Html.BeginForm("Artikelpagina", "Winkel"))
-    {
-        <div class="form-group">
-            @Html.LabelFor(m => m.winkelwagen.Aantal)
-            @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
-            @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
-        </div>
-        @Html.HiddenFor(m => m.product.Id)
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-primary">In winkelmand</button>
-    }
+        @using (Html.BeginForm("Artikelpagina", "Winkel"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.winkelwagen.Aantal)
+                @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", required = "True" })
+                @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+            </div>
+            <!-- Modal Trigger -->
+            <div class="col-md-6">
+                <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
+            </div>
+            <div class="col-md-6">
+                @Html.HiddenFor(m => m.product.Id)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary center">In winkelmand</button>
+            </div>
+        }
+    </div>
+    
+    
 </div>
 
 @section scripts{
