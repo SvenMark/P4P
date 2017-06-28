@@ -140,6 +140,11 @@ namespace P4P.Controllers
         public ActionResult Artikelpagina(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using P4P.Models;
 using  P4P.Helpers;
 using System.Data.Entity;
+using System.Web.Management;
 
 namespace P4P.Controllers
 {
@@ -15,6 +16,11 @@ namespace P4P.Controllers
         public ActionResult Index()
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            if (!string.IsNullOrWhiteSpace(Request.QueryString["success"]))
+            {
+                ViewBag.Success = Request.QueryString["success"];
+                ViewBag.Errormessage = Request.QueryString["errormessage"];
+            }
             int user_id = Convert.ToInt32(Session["Id"]);
 
             using (P4PContext ctx = new P4PContext())
@@ -40,12 +46,19 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var gebruiker = ctx.Gebruikers.Find(user_id);
-                favorietenlijst.Gebruiker = gebruiker;
+                try
+                {
+                    var gebruiker = ctx.Gebruikers.Find(user_id);
+                    favorietenlijst.Gebruiker = gebruiker;
 
-                ctx.Favorietenlijsts.Add(favorietenlijst);
-                ctx.SaveChanges();
-                return RedirectToAction("Index");
+                    ctx.Favorietenlijsts.Add(favorietenlijst);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Favorieten", new {success = "true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Favorieten", new { success = "false", errormessage="Onbekende fout" });
+                }
             }
         }
 
@@ -58,17 +71,24 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-
-                var favorietenlijst = ctx.Favorietenlijsts.Find(Convert.ToInt32(collection["fav_id"]));
-                var product = ctx.Products.Find(prod_id);
-
-                if (favorietenlijst != null && product != null)
+                try
                 {
-                    favorietenlijst.Producten.Add(product);
-                    ctx.SaveChanges();
+                    var favorietenlijst = ctx.Favorietenlijsts.Find(Convert.ToInt32(collection["fav_id"]));
+                    var product = ctx.Products.Find(prod_id);
+
+                    if (favorietenlijst != null && product != null)
+                    {
+                        favorietenlijst.Producten.Add(product);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction("Artikelpagina", "Winkel", new {id = prod_id, success="true"});
+                }
+
+                catch
+                {
+                    return RedirectToAction("Artikelpagina", "Winkel", new { success = "false", errormessage = "Onbekende fout" });
                 }
             }
-            return RedirectToAction("Artikelpagina", "Winkel", new { id = prod_id});
         }
 
         [HttpPost]
@@ -81,22 +101,30 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var product = ctx.Products.Find(prod_id);
-                var gebruiker = ctx.Gebruikers.Find(user_id);
-
-                if (favorietenlijst.Naam != null)
+                try
                 {
-                    favorietenlijst.Gebruiker = gebruiker;
+                    var product = ctx.Products.Find(prod_id);
+                    var gebruiker = ctx.Gebruikers.Find(user_id);
+
+                    if (favorietenlijst.Naam != null)
+                    {
+                        favorietenlijst.Gebruiker = gebruiker;
+                    }
+
+                    if (product != null)
+                    {
+                        favorietenlijst.Producten.Add(product);
+                        ctx.Favorietenlijsts.Add(favorietenlijst);
+                        ctx.SaveChanges();
+                    }
+                    return RedirectToAction("Artikelpagina", "Winkel", new {id = prod_id, success="true"});
                 }
-
-                if (product != null)
+                catch
                 {
-                    favorietenlijst.Producten.Add(product);
-                    ctx.Favorietenlijsts.Add(favorietenlijst);
-                    ctx.SaveChanges();
+                    return RedirectToAction("Artikelpagina", "Winkel", new {success = "false", errormessage = "Onbekende fout"});
                 }
             }
-            return RedirectToAction("Artikelpagina", "Winkel", new { id = prod_id });
+            
         }
 
         public ActionResult Details(int id)
@@ -120,11 +148,18 @@ namespace P4P.Controllers
 
             using (var ctx = new P4PContext())
             {
-                var favorietenlijst = ctx.Favorietenlijsts.Find(id);
-                if (favorietenlijst == null) return HttpNotFound();
-                ctx.Favorietenlijsts.Remove(favorietenlijst);
-                ctx.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    var favorietenlijst = ctx.Favorietenlijsts.Find(id);
+                    if (favorietenlijst == null) return HttpNotFound();
+                    ctx.Favorietenlijsts.Remove(favorietenlijst);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index", "Favorieten", new { success="true"});
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Favorieten", new { success = "false", errormessage="Onbekende fout" });
+                }
             }
         }
 
