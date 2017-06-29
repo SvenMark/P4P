@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = @Model.product.Naam;
     string image = @Model.product.Code + ".jpg";
+    string link = @Model.product.Code + ".pdf";
+
 }
 <link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
 <style> body {background-color: whitesmoke;}</style>
@@ -64,7 +66,9 @@
                 </p>
             </div>
             <div class="col-md-6">
-                <p class="text-left">@Model.product.Specificaties</p>
+                <p class="text-left"><a href="~/Content/Specs/@link" class="btn btn-primary" target="_blank"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Downloaden</a>
+                </p>
+
             </div>
         </div>
         <div class="row">
