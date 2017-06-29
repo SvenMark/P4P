@@ -5,7 +5,7 @@
    <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand pull-left" href="~/Winkel"><img id="logo" src="~/Content/jansma_logo2.png" style="max-height:25px; margin:0; padding:0; margin-right:20px;" />   Jansma Haule</a>
+            <a class="navbar-brand pull-left" href="~/Winkel"><img id="logo" src="~/Content/jansma_logo2.png" style="max-height: 25px; margin: 0; padding: 0; margin-right: 20px;"/> Jansma Haule</a>
             <!--3 streepjes mobiel-->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="icon-bar"></span>
@@ -13,33 +13,48 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-            <div class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav text-center">
-                    <li><a href="~/Bestel"><span class="badge green" style="color: white;">
-                        @using (P4PContext ctx = new P4PContext())
-                        {
-                            int user_id = Convert.ToInt32(Session["Id"]);
-                            var winkelmand = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker_id == user_id).Count();
-                            @winkelmand
-                        }
-                    </span>Winkelwagen</a></li>
-                    <li><a href="~/Profiel/Bedrijf">Bedrijf</a></li>
-                    <li class="dropdown">
-                        <a href="~/Profiel"  role="button" aria-haspopup="true" aria-expanded="false">
-                            Profiel</a>
-                        <!--Tijdelijk niet nodig<ul class="dropdown-menu nomobile">
-                            <li><a href="~/Profiel/Login">Uitloggen</a></li>
-                        
-                            <li><a href="#">Mijn gegevens</a></li>
-                            <li><a href="#">Bedrijf beheren</a></li>
-                            <li><a href="#">Mijn contactpersonen</a></li>-->
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
+        <div class="navbar-collapse collapse navbar-right">
+            <ul class="nav navbar-nav text-center">
+                <li>
+                    <a href="~/Bestel">
+                        <span class="badge green" style="color: white;">
+                            @using (P4PContext ctx = new P4PContext())
+                            {
+                                int user_id = Convert.ToInt32(Session["Id"]);
+                                var winkelmand = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker_id == user_id).Count();
+                                @winkelmand
+                            }
+                           </span>Winkelwagen
+                       </a>
+                   </li>
+                   <li>
+                       <a href="~/Profiel/Bedrijf">Bedrijf</a>
+                   </li>
+                   <li>
+                       <a href="~/Profiel/">Profiel</a>
+                   </li>
+                   <li>
+                       <a href="~/Profiel/Logout">Logout</a>
+                   </li>
+
+                   <!--Tijdelijk niet nodig<ul class="dropdown-menu nomobile">
+                   <li>
+                       <a href="~/Profiel/Login">Uitloggen</a>
+                   </li>
+
+                   <li>
+                       <a href="#">Mijn gegevens</a>
+                   </li>
+                   <li>
+                       <a href="#">Bedrijf beheren</a>
+                   </li>
+                   <li>
+                       <a href="#">Mijn contactpersonen</a>
+                   </li>-->
+               </ul>
+           </div>
+       </div>
 
 
-    </div>
+   </div>
 
