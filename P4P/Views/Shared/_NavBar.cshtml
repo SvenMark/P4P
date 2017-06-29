@@ -1,6 +1,7 @@
 ﻿@using System;
 @using System.Linq;
 @using System.Data.Entity;
+@using P4P.Helpers
 
    <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
@@ -24,18 +25,25 @@
                                 var winkelmand = ctx.Winkelwagens.Include(c => c.Product).Include(c => c.Gebruiker).ToList().Where(c => c.Gebruiker_id == user_id).Count();
                                 @winkelmand
                             }
-                           </span>Winkelwagen
-                       </a>
-                   </li>
-                   <li>
-                       <a href="~/Profiel/Bedrijf">Bedrijf</a>
-                   </li>
-                   <li>
-                       <a href="~/Profiel/">Profiel</a>
-                   </li>
-                   <li>
-                       <a href="~/Profiel/Logout">Uitloggen</a>
-                   </li>
+                        </span>Winkelwagen
+                    </a>
+                </li>
+                <li>
+                    <a href="~/Profiel/Bedrijf">Bedrijf</a>
+                </li>
+                <li>
+                    <a href="~/Profiel/">Profiel</a>
+                </li>
+                @if (Auth.getRole() == "Admin")
+                {
+                    <li>
+                        <a href="~/Admin/">Admin</a>
+                    </li>
+                }
+                <li>
+                    <a href="~/Profiel/Logout">Uitloggen</a>
+                </li>
+
 
                    <!--Tijdelijk niet nodig<ul class="dropdown-menu nomobile">
                    <li>
