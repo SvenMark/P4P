@@ -2,20 +2,20 @@
 @{
     ViewBag.Title = "SetSubcategorie";
 }
-
-<h2>SetSubcategorie</h2>
-@if (Model.Subcategorie.Any())
-{
-    using (Html.BeginForm("SetSubcategorie", "Artikel", FormMethod.Post, new {id = "artikelForm"}))
+<link rel="stylesheet" type="text/css" href="~/Content/Index.css" media="screen" />
+<div class="card card-centered" style="margin-top:5vh;">
+    @if (Model.Subcategorie.Any())
     {
-        <div id="bottomform">
+        using (Html.BeginForm("SetSubcategorie", "Artikel", FormMethod.Post, new { id = "artikelForm" }))
+        {
+
             <center>
                 <h4>Subcategorie</h4>
             </center>
             <div class="row nomargin">
                 <div class="form-group input-field col-md-12">
                     @Html.LabelFor(m => m.Subcategorie)
-                    @Html.DropDownListFor(m => m.Product.Subcategorie.Id, new SelectList(Model.Subcategorie, "Id", "Naam"), "", new {@class = "form-control", id = "dropdown1"})
+                    @Html.DropDownListFor(m => m.Product.Subcategorie.Id, new SelectList(Model.Subcategorie, "Id", "Naam"), "", new { @class = "form-control", id = "dropdown1" })
                     @Html.ValidationMessageFor(m => m.Subcategorie)
                 </div>
             </div>
@@ -28,14 +28,20 @@
                 </div>
 
             </div>
-        </div>
+
+        }
     }
-}
-else
-{
-    <p>Geen subcategorieën onder deze hoofdcategorie. Klik op overslaan om verder te gaan.</p>
-}
-@Html.ActionLink("Overslaan", "Index", "Artikel", new {@class = "btn btn-primary"})
+    else
+    {
+        <center>
+            <h4>Subcategorie</h4>
+        </center>
+        <p>Geen subcategorieën onder deze hoofdcategorie. Klik op overslaan om verder te gaan.</p>
+    }
+    @Html.ActionLink("Overslaan", "Index", "Artikel", new { @class = "btn btn-primary" })
+</div>
+
+
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

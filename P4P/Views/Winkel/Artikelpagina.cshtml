@@ -60,7 +60,17 @@
         <div class="row">
             <div class="col-md-6">
                 <p class="text-right">
-                    <b>Verkoopeeheid:</b>
+                    <b>Specificaties:</b>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <p class="text-left">@Model.product.Specificaties</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <p class="text-right">
+                    <b>Verkoopeenheid:</b>
                 </p>
             </div>
             <div class="col-md-6">
@@ -70,17 +80,25 @@
 
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
-            <div class="modal-content">
+            <div class="modal-content" style="box-shadow:none; margin-top:40px;">
                 @if (Model.favorietenlijsten.Any())
                 {
                     foreach (var f in Model.favorietenlijsten)
                     {
                         using (Html.BeginForm("Toevoegen", "Favorieten"))
                         {
-                            <p>@f.Naam</p>
-                            @Html.Hidden("prod_id", Model.product.Id)
-                            @Html.Hidden("fav_id", f.Id)
-                            <button type="submit" class="btn btn-primary yellow"><i class="fa fa-star-o" aria-hidden="true"></i></button>
+                            <div class="card card-centered" style="height:40px;">
+                                <div class="col-md-10">
+                                    <h4 style="margin:0;margin-left:7vw;padding:0;text-align:center;">@f.Naam</h4>
+                                    @Html.Hidden("prod_id", Model.product.Id)
+                                    @Html.Hidden("fav_id", f.Id)
+                                </div>
+                                <div style="margin-top:-10px;;padding:0;"class="col-md-2">
+                                    <button type="submit" class="btn btn-primary green"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+                                </div>
+                            </div>
+                            
                         }
                     }
                 }
@@ -104,35 +122,48 @@
             </div>
         </div>
     </div>
-        @using (Html.BeginForm("Artikelpagina", "Winkel"))
-        {
-            <div class="col-xs-3">
-                @if (Model.product.Subcategorie == null)
-                {
-                    <a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id" class="btn">Terug</a>
-                }
-                else
-                {
-                    <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id" class="btn">Terug</a>
-                }
+    <div class="row">
+        <div class="col-xs-7">
+
+        </div>
+        <div class="col-xs-5 nomargin" style="float:right; margin-right:4vw;">
+            <div class="form-group">
+                @Html.LabelFor(m => m.winkelwagen.Aantal)
+                @Html.TextBoxFor(m => m.winkelwagen.Aantal, new { @type = "Number", @class = "form-control", required = "True" })
+                @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
             </div>
-            <!-- Modal Trigger -->
-            <div class="col-xs-3">
-                <a class="btn btn-primary center" href="#modal1">Toevoegen aan favorieten</a>
-            </div>
-            <div class="col-xs-3">
-                <div class="form-group">
-                    @Html.LabelFor(m => m.winkelwagen.Aantal)
-                    @Html.TextBoxFor(m => m.winkelwagen.Aantal, new {@type = "Number", @class = "form-control", required = "True"})
-                    @Html.ValidationMessageFor(m => m.winkelwagen.Aantal)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+
+        </div>
+        <div class="col-xs-6 nomargin">
+            @using (Html.BeginForm("Artikelpagina", "Winkel"))
+            {
+                <div class="col-xs-4">
+                    @if (Model.product.Subcategorie == null)
+                {
+                        <a href="~/Winkel/Categorie/@Model.product.Hoofdcategorie.Id" class="btn">Terug</a>
+                    }
+                    else
+                    {
+                        <a href="~/Winkel/SubCategorie/@Model.product.Subcategorie.Id" class="btn">Terug</a>
+                    }
                 </div>
-            </div>
-            <div class="col-xs-3">
-                @Html.HiddenFor(m => m.product.Id)
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn btn-primary center">In winkelmand</button>
-            </div>
-        }
+            <!-- Modal Trigger -->
+                <div class="col-xs-4">
+                    <a class="btn btn-primary center" href="#modal1">Favorieten</a>
+                </div>
+                <div class="col-xs-4">
+                    @Html.HiddenFor(m => m.product.Id)
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-primary center">In winkelmand</button>
+                </div>
+            }
+        </div>
+    </div>
+        
 </div>
 
 @section scripts{
