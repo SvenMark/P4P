@@ -75,14 +75,4 @@
             });
         });
     </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            @if (ViewBag.Success == "true") {
-                @:toastr.success("Opgeslagen");
-            } else if (ViewBag.Success == "false") {
-                @:toastr.error("@ViewBag.Errormessage");
-            }
-        });
-    </script>
 } 
