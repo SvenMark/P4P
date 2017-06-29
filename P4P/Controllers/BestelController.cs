@@ -378,7 +378,7 @@ namespace P4P.Controllers
             }
             catch
             {
-                return RedirectToAction("Details", "Favorieten", new { favorietenlijst_id });
+                return RedirectToAction("Details", "Favorieten", new { id=favorietenlijst_id });
             }
         }
     }
