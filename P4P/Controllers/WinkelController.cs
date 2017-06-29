@@ -119,6 +119,7 @@ namespace P4P.Controllers
         public ActionResult SubCategorie(int id)
         {
             if (!Auth.IsAuth()) return RedirectToAction("Login", "Profiel");
+            int user_id = Convert.ToInt32(Session["Id"]);
 
             using (var ctx = new P4PContext())
             {

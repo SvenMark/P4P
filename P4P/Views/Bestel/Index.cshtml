@@ -38,7 +38,7 @@
                         totaalprijs += producttotaal;
                         <tr>
                             <td>@p.Product.Code</td>
-                            <td>@p.Product.Naam</td>
+                            <td><a href="~/Winkel/Artikelpagina/@p.Product.Id">@p.Product.Naam</a></td>
                             <td>
                                 <div class="form-group">
                                     @Html.LabelFor(m => p.Aantal)
