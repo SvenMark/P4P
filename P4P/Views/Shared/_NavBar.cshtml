@@ -31,15 +31,16 @@
                 <li>
                     <a href="~/Profiel/Bedrijf">Bedrijf</a>
                 </li>
-                <li>
-                    <a href="~/Profiel/">Profiel</a>
-                </li>
                 @if (Auth.getRole() == "Admin")
                 {
                     <li>
                         <a href="~/Admin/">Admin</a>
                     </li>
                 }
+                <li>
+                    <a href="~/Profiel/">Profiel</a>
+                </li>
+
                 <li>
                     <a href="~/Profiel/Logout">Uitloggen</a>
                 </li>
