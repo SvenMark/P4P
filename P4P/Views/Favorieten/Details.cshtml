@@ -33,7 +33,7 @@
                                         <tr>
                                             <td>@product.Id</td>
                                             <td><a href="~/Winkel/Artikelpagina/@product.Id">@product.Naam</a></td>
-                                            <td>@product.Prijs</td>
+                                            <td>€@product.Prijs</td>
                                             <td><a type="button" class="btn btn-danger red" href="@Url.Action("RemoveProd", "Favorieten", new {id = product.Id, id2 = Model.Id})" onclick="return confirm('Deze actie is permanent en kan niet ongedaan worden gemaakt!');"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                         </tr>
                                     }
