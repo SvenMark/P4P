@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using P4P.Helpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,15 +10,18 @@
     
 </head>
 <body>
-@Html.Partial("_NavBar")
+@if (Auth.IsAuth())
+{
+    @Html.Partial("_NavBar")   
+}
 <div class="container-fluid body-content">
     @RenderBody()
 </div>
 
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 <script>
     function goBack() {
         window.history.back();
